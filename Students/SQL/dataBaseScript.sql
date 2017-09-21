@@ -135,4 +135,4 @@ INSERT INTO Teachers (teacherId, name, passwrd) VALUES ("L00810000", "Juan Carlo
 
 INSERT INTO Groups (groupNumber, courseKey, teacher_id) VALUES ("3", "EM3004", 2), ("3", "EM3004", 2);
 
-
+INSERT INTO Students (studentId, name, bachelor, passwrd, academicEmail, personalEmail,cellphone, group_id, project_id) VALUES ("A00815645", "Arturo Najera Sorzano", "ITC", "A00815645", "A00815645@itesm.mx", "elartu.95@hotmail.com", "8115547860", 1, 1);
