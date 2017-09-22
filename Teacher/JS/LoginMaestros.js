@@ -19,7 +19,7 @@ $(document).ready(function(){
 			dataType : "json",
 			contentType : "application/x-www-form-urlencoded",
 			success: function(jsonResponse){
-                    window.location.replace("base.html");
+                    window.location.replace("Inicio.html");
 
                 },
                 error : function(errorMessage){
@@ -31,7 +31,7 @@ $(document).ready(function(){
 	});
 
 	$("#registerLink").on("click",function(){
-		window.location.replace("Register.html");
+		window.location.replace("RegistroMaestros.html");
 	});
 
 	var jsonCookie = {

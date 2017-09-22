@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#cancel").on("click",function(){
-		window.location.replace("Login.html");
+		window.location.replace("LoginMaestros.html");
 	});
 
 	$("#register").on("click",function(){
@@ -35,7 +35,7 @@ $(document).ready(function(){
             	contentType : "application/x-www-form-urlencoded",
             	success: function(jsonResponse){
             		alert("Registration succesfull");
-            		window.location.replace("base.html");
+            		window.location.replace("Inicio.html");
             	},
             	error : function(errorMessage){
             		alert(errorMessage.responseText);
