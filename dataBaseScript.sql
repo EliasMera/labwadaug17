@@ -3,7 +3,8 @@ CREATE TABLE Teachers (
 	teacherId VARCHAR(10) NOT NULL, /* número de nómmina (usada para logear)*/ 
 	name VARCHAR(50) NOT NULL,
 	passwrd VARCHAR(50) NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	UNIQUE (teacherid)
 );
 
 CREATE TABLE Groups (
@@ -43,6 +44,7 @@ CREATE TABLE Students (
     group_id INT NOT NULL, 
     project_id INT,
     PRIMARY KEY (id),
+    UNIQUE (studentId),
     FOREIGN KEY (group_id)
         REFERENCES Groups(id)
         ON DELETE CASCADE,
