@@ -32,11 +32,10 @@ $(document).ready(function() {
                 dataType : "json",
                 contentType : "application/x-www-form-urlencoded",
                 success: function(jsonResponse){
-                  alert("Succeed");
                     window.location.replace("base.html");
                 },
                 error : function(errorMessage){
-                  alert("Fail");
+                  alert("Wrong Credentials");
                 }
 
             });
