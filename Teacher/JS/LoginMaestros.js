@@ -13,13 +13,12 @@ $(document).ready(function(){
 		};
 
 		$.ajax({
-			url : "PHP/LoginApplicationLayer.php",
+			url : "PHP/applicationLayer.php",
 			type : "POST",
 			data : jsonToSend,
 			dataType : "json",
 			contentType : "application/x-www-form-urlencoded",
 			success: function(jsonResponse){
-                    //alert(jsonResponse.fName + " " + jsonResponse.lName);
                     window.location.replace("base.html");
 
                 },
@@ -40,7 +39,7 @@ $(document).ready(function(){
 	};
 
 	$.ajax({
-		url: "PHP/LoginApplicationLayer.php",
+		url: "PHP/applicationLayer.php",
 		type: "POST",
 		data : jsonCookie,
 		dataType: "json",

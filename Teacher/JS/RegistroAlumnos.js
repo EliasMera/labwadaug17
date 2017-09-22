@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#cancel").on("click",function(){
+	$("#btnCancelar").on("click",function(){
 		window.location.replace("Login.html");
 	});
 
@@ -20,7 +20,7 @@ $(document).ready(function(){
 		}
 		else{	
         	var jsonToSend = {
-        		"action" : "TREGISTER",
+        		"action" : "REGISTER",
         		"teacherId" : $("#teacherId").val(),
         		"name" : $("#name").val(),
         		"passwrd" : $("#passwrd").val(),
@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 
             $.ajax({
-            	url : "PHP/applicationLayer.php",
+            	url : "PHP/RegistroApplicationLayer.php",
             	type : "POST",
             	data : jsonToSend,
             	dataType : "json",
@@ -51,7 +51,7 @@ $(document).ready(function(){
 		};
 
 	$.ajax({
-    	url: "PHP/applicationLayer.php",
+    	url: "PHP/RegistroApplicationLayer.php",
     	type: "POST",
     	data : jsonCookie,
     	dataType: "json",
