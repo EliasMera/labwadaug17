@@ -49,6 +49,7 @@
 
                 $_SESSION['name'] = $name;
                 $_SESSION['studentId'] = $studentId;
+                $_SESSION['password'] = $password;
                 $_SESSION['groupId'] =  $groupId;
                 $_SESSION['projectId'] = $projectId;	
 
@@ -111,6 +112,38 @@
 		}
 
 	}
+
+		function attemptchPassword($userPassword,$newEncrPassword){
+
+		$conn = connectionToDataBase();
+
+		$currentUser = $_SESSION['studentId'];
+		$sql = "UPDATE Students set passwrd = '$newEncrPassword' WHERE studentId = '$currentUser'";
+		$result = $conn->query($sql);
+
+		if($result->num_rows > 0){
+
+			while($row = $result->fetch_assoc()){
+				$response = array('username' => $row['username'], 'fName' => $row['fName'], 'lName' => $row['lName'], 'email' => $row['email'], 'gender' => $row['gender'], 'country' => $row['country']);
+			}
+
+			echo json_encode($response);
+		}
+		else{
+
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+
+		return array("status" => "SESSIONEXP");
+	}
+
+
+
+
+
+
+
 	
 	function attemptGetCookie(){
 		if(isset($_COOKIE["studentId"])){

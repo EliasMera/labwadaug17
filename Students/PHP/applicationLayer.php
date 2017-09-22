@@ -10,6 +10,8 @@ switch($action){
 					break;
 	case "REGISTER" : registerFunction();
 					break;
+	case "CHPASSWORD" : chpasswordFunction();
+					break;
 	case "GETCOOKIE" : getcookieFunction();
 					break;
 	case "CHECKSESSION" : checksessionFunction();
@@ -58,7 +60,7 @@ function registerFunction(){
 	$projectId = $_POST['projectId'];
 
 
-	$userPassword = encryptionPass();
+	$userPassword = encryptionPass($_POST['passwrd']);
 
 	$result = attemptRegistration($studentId, $name, $bachelor, $userPassword, $academicEmail, $personalEmail, $cellphone, $groupId, $projectId);
 
@@ -80,7 +82,18 @@ function registerFunction(){
 		}
 }
 
+function chpasswordFunction(){
+	session_start();
+	
+	$userPassword = $_SESSION['password'];
+	$newPassword = $_POST['newPassword'];
+	$newEncrPassword = encryptionPass($newPassword);
+	$result = attemptchPassword($userPassword,$newEncrPassword);
 
+	if($result["status"] == "BADCRED"){
+		echo json_encode(array("message" => "Wrong credentials provided!"));
+	}
+}
 
 function decryptionPass($password){
 	$key = pack('H*',"bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
@@ -108,9 +121,7 @@ function decryptionPass($password){
 	
 }
 
-function encryptionPass(){
-
-	$userPassword = $_POST['passwrd'];
+function encryptionPass($userPassword){
 
 	$key = pack('H*',"bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
 	$key_size = strlen($key);

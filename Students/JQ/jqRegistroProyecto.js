@@ -26,6 +26,7 @@ $(document).ready(function() {
                 contentType : "application/x-www-form-urlencoded",
                 success: function(jsonResponse){
                 	alert("Se registró correctamente");
+                    window.location.replace("base.html");
                 },
                 error : function(errorMessage){
                     alert("Se registró correctamente");
