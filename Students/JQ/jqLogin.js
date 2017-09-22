@@ -32,11 +32,11 @@ $(document).ready(function() {
                 dataType : "json",
                 contentType : "application/x-www-form-urlencoded",
                 success: function(jsonResponse){
-                	$("#displayIncorrect").hide();
-                    window.location.replace("Home.html");
+                  alert("Succeed");
+                    window.location.replace("base.html");
                 },
                 error : function(errorMessage){
-                    $("#displayIncorrect").show();
+                  alert("Fail");
                 }
 
             });

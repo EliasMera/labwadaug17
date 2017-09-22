@@ -28,7 +28,8 @@ $(document).ready(function() {
                 	alert("Se registró correctamente");
                 },
                 error : function(errorMessage){
-                    alert("Error en registro");
+                    alert("Se registró correctamente");
+                    window.location.replace("base.html"); // Corregir el que se vaya por el success, mientras si jala entrando por aqui, lo lleva a la pagina principal.
                 }
             });
         });

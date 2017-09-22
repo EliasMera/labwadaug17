@@ -34,6 +34,7 @@
                     $studentId = $row["studentId"];
                     $groupId = $row["group_id"];
                     $projectId = $row['project_id'];
+                    $password = $row['passwrd'];
 				}
                 
                 setcookie("save", $save, time()+2000, "/","", 0);
@@ -52,7 +53,7 @@
                 $_SESSION['projectId'] = $projectId;	
 
                 $conn -> close();
-				return array("status" => "COMPLETE" , "password" => $psswrd);
+				return array("status" => "COMPLETE" , "password" => $password);
 			}
 			else
 			{

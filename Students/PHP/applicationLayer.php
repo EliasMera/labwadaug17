@@ -179,5 +179,6 @@ function registerProject(){
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
 }
+}
 
 ?>
