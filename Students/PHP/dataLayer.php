@@ -127,4 +127,24 @@
 		}
 	}
 
+	function attemptRegister($name, $company, $description, $classification, $business, $semester){
+
+		$conn = connectionToDataBase();
+        
+        if ($conn != null)
+        {
+        	$sql = "INSERT INTO Projects(name, company, description, classification, business, semester) 
+        			VALUES ('$name', '$company','$description','$classification', '$business', '$semester')";
+        }
+
+        $result = $conn-> query($sql);
+        
+        if($conn->affected_rows > 0)
+        {
+            $response = array();
+            echo json_encode($response);
+            return array("status" => "SUCCESS");
+        }
+	}
+
 ?>
