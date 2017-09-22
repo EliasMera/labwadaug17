@@ -21,6 +21,7 @@ ul#tabBar{
     background-color: #CCC;
     overflow:hidden;
 }
+
 ul#tabBar li{
     float: left;
     padding: 0px;
@@ -33,6 +34,21 @@ ul#tabBar li{
 }
 
 #tabBar li > input[type=submit]{
+    padding: 20px;
+    font-size: 1.3em;
+    color: #003399;
+    margin: 0;
+    border: 1px 2px 1px 1px;
+    cursor:pointer;
+}
+
+#tabBar li > button:hover{
+    background-color: #999;
+    color : white;
+    cursor: pointer;
+}
+
+#tabBar li > button{
     padding: 20px;
     font-size: 1.3em;
     color: #003399;
