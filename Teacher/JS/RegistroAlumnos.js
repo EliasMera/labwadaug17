@@ -1,58 +1,62 @@
 $(document).ready(function(){
 	$("#btnCancelar").on("click",function(){
 		window.location.replace("base.html");
-        //alert("hola");
 	});
 
-	$("#register").on("click",function(){
-		var $teacherId = $("#teacherId")
-		var $name = $("#name")
-		var $passwrd = $("#passwrd");
-		var $passConf = $("#passwordconfirmation");
+	$("#btnRegAlumno").on("click",function(){
+        var mat = $("#matricula").val();
+        var nom = $("#nombre").val();
+        var carrera = $("#carrera").val();
+        var passwrd = $("#passwrd").val();
+        var passwrd2 = $("#passwrdC").val();
+        var correoTec = $("#correoTec").val();
+        var correoX = $("#correoX").val();
+        var celular = $("#celular").val();
 
-		if($teacherId.val() == "" || $name.val() == "" || $passwrd.val() == "" || $passwrd.val() != $passConf.val()){
-			if($passwrd.val() != $passConf.val()){
-				console.log($passwrd.val());
-				alert("Error,la contrasenas no son iguales");
-			}
-			else{
-				alert("Error,porfavor llene toda la informacion necesaria");
-			}
-		}
-		else{	
-        	var jsonToSend = {
-        		"action" : "REGISTER",
-        		"teacherId" : $("#teacherId").val(),
-        		"name" : $("#name").val(),
-        		"passwrd" : $("#passwrd").val(),
+        if(mat == "" || nom == "" || carrera == "" || passwrd == "" || correoX == "" || correoTec == ""){
+            if(passwrd != passwrd2){
+                alert("Error, no coinciden las contraseñas");
+            }
+            else{
+                alert("Error, llenar todos los campos");
+            }
+        }
+        else{
+            var jsonToSend = {
+                "action"    : "REGISTERA",
+                "mat"       : mat,
+                "nom"       : nom,
+                "carrera"   : carrera,
+                "passwrd"   : passwrd,
+                "correoTec" : correoTec,
+                "correoX"   : correoX,
+                "celular"   : celular
             };
 
-
             $.ajax({
-            	url : "PHP/RegistroApplicationLayer.php",
-            	type : "POST",
-            	data : jsonToSend,
-            	dataType : "json",
-            	contentType : "application/x-www-form-urlencoded",
-            	success: function(jsonResponse){
-            		alert("Registration succesfull");
-            		window.location.replace("base.html");
-            	},
-            	error : function(errorMessage){
-            		alert(errorMessage.responseText);
-            	}
+                url : "PHP/applicationLayer.php",
+                type : "POST",
+                data : jsonToSend,
+                dataType : "json",
+                contentType : "application/x-www-form-urlencoded",
+                success: function(jsonResponse){
+                    alert("Alumno Registrado");
+                    window.location.replace("base.html");
+                },
+                error : function(errorMessage){
+                    alert(errorMessage.responseText);
+                }
 
             });
-		}
-
+        }
 	});
 
 	var jsonCookie = {
     	"action" : "GETCOOKIE"
-		};
+	};
 
 	$.ajax({
-    	url: "PHP/RegistroApplicationLayer.php",
+    	url: "PHP/applicationLayer.php",
     	type: "POST",
     	data : jsonCookie,
     	dataType: "json",

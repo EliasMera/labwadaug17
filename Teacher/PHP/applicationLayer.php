@@ -14,7 +14,8 @@
 			break;
 		case "CHECKSESSION"	: checksessionFunction();
 			break;
-
+		case "AREGISTER"	: alumniRegisterFunc();
+			break;
 	}
 
 	function teacherRegisterFunc(){
@@ -28,15 +29,17 @@
 			header('HTTP/1.1 409 Conflict, Username already in use');
 			echo json_encode(array("message" => "Ese numero de nomina ya existe"));
 		}	
-		else
+		else{
 			if ($result["status"] == "BADCONN"){
-			header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
-			echo json_encode(array("message" => "Error, de conexion"));
-		}
-		else
-			if ($result["status"] == "SUCCESS"){
-				echo json_encode(array("message" => "Registro exitoso"));
+				header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
+				echo json_encode(array("message" => "Error, de conexion"));
 			}
+			else{
+				if ($result["status"] == "SUCCESS"){
+					echo json_encode(array("message" => "Registro exitoso"));
+				}
+			}
+		}
 	}
 
 	function teacherLoginFunc(){
