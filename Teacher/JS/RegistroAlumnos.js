@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	$("#btnCancelar").on("click",function(){
-		window.location.replace("Login.html");
+		window.location.replace("base.html");
+        //alert("hola");
 	});
 
 	$("#register").on("click",function(){
