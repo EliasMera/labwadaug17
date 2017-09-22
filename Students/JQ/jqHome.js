@@ -25,4 +25,49 @@ $(document).ready(function() {
             }
 
     });
+
+
+    $("#regisBtn").on("click",function(){
+        window.location.replace("RegistroProyecto.html");
+    });
+
+    $("#changePassw").on("click",function(){
+        window.location.replace("changePassw.html");
+    });
+
+    $("#homeBtn").on("click",function(){
+        window.location.replace("base.html");
+    });
+////////////////// Change Password
+    $("#changePasswBtn").on("click",function(){
+    
+    if($("#newPassw").val() != $("#newPasswConfirm").val()){
+        alert("Las contraseñas nuevas no coinciden");
+    }
+    else{
+
+    var jsonToSend = {
+        "action" : "CHPASSWORD",
+        "newPassword" : $("#newPassw").val()
+    }
+
+    $.ajax({
+            url: "PHP/applicationLayer.php",
+            type: "POST",
+            data: jsonToSend,
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(jsonResponse){
+                alert("Contraseña ha sido cambiada exitosamente");
+                window.location.replace("base.html")
+
+            },
+            error: function(errorMessage){
+                alert("No se pudo cambiar la contraseña");
+            }
+
+    });
+}
+    });
+
 });
