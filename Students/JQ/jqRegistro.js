@@ -7,11 +7,16 @@ $(document).ready(function(){
 		var $studentId = $("#studentId");
 		var $name = $("#name");
 		var $bachelor = $("bachelor");
-		var $passwrd = $("#passwrd");
-		var $passConf = $("#passwordconfirmation");
+		var $passwrd = $("#password");
+		var $passConf = $("#passwordConfirm");
+		var $academicEmail = $("#academicEmail");
+		var $personalEmail = $("#personalEmail");
+		var $cellphone = $("#cellphone");
+		var $groupId = $("groupId");
+		var $projectId = $("projectId");
 
 
-		if($teacherId.val() == "" || $name.val() == "" || $passwrd.val() == "" || $passwrd.val() != $passConf.val()){
+		if($studentId.val() == "" || $name.val() == "" || $bachelor.val() == "" || $academicEmail.val() == "" || $personalEmail.val() == "" || $cellphone.val() == "" || $groupId.val() == "" || $projectId.val() == "" || $passwrd.val() == "" || $passwrd.val() != $passConf.val()){
 
 			if($passwrd.val() != $passConf.val()){
 				console.log($passwrd.val());
@@ -20,39 +25,41 @@ $(document).ready(function(){
 		else{
 		alert("Error,porfavor llene toda la informacion necesaria");
 		}
-
-
 	}
-
 
 		else{
 	                	
-	                	var jsonToSend = {
-	                		"action" : "REGISTER",
-	                		"teacherId" : $("#teacherId").val(),
-	                		"name" : $("#name").val(),
-	                		"passwrd" : $("#passwrd").val(),
+	        var jsonToSend = {
+	                "action" : "REGISTER",
+	                "studentId" : $("#studentId").val(),
+	                "name" : $("#name").val(),
+	                "passwrd" : $("#password").val(),
+	                "academicEmail" : $("#academicEmail").val(),
+	                "personalEmail" : $("#personalEmail").val(),
+	                "cellphone" : $("#cellphone").val(),
+	                "groupId" : $("grupdId").val(),
+	                "projectId" : $("projectId").val()
 
-	                };
+	    };
 
 
-	                $.ajax({
-	                	url : "PHP/RegistroApplicationLayer.php",
-	                	type : "POST",
-	                	data : jsonToSend,
-	                	dataType : "json",
-	                	contentType : "application/x-www-form-urlencoded",
-	                	success: function(jsonResponse){
+	        $.ajax({
+	                url : "PHP/applicationLayer.php",
+	                type : "POST",
+	                data : jsonToSend,
+	                dataType : "json",
+	                contentType : "application/x-www-form-urlencoded",
+	                success: function(jsonResponse){
 	                		alert("Registration succesfull");
 	                		window.location.replace("base.html");
-	                	},
-	                	error : function(errorMessage){
+	                },
+	                error : function(errorMessage){
 	                		alert(errorMessage.responseText);
-	                	}
+	                }
 
-	                });
+	            });
 
-		        }
+		    }
 
 
 	});

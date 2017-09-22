@@ -43,6 +43,43 @@ function loginFunction(){
 
 }
 
+function registerFunction(){
+
+	$studentId = $_POST['studentId'];
+	$name = $_POST['name'];
+	$bachelor = $_POST['bachelor'];
+	$passwrd = $_POST['passwrd'];
+	$academicEmail = $_POST['academicEmail'];
+	$personalEmail = $_POST['personalEmail'];
+	$cellphone = $_POST['cellphone'];
+	$groupId = $_POST['groupId'];
+	$projectId = $_POST['projectId'];
+
+
+	$userPassword = encryptionPass();
+
+	$result = attemptRegistration($studentId, $name, $bachelor, $userPassword, $academicEmail, $personalEmail, $cellphone, $groupId, $projectId);
+
+	if ($result["status"] == "NAMEINUSE"){
+		//echo json_encode(array("message" => "Login Successful"));
+		header('HTTP/1.1 409 Conflict, Username already in use');
+		echo json_encode(array("message" => "Ese numero de nomina ya existe"));
+			
+	}	
+	else
+		if ($result["status"] == "BADCONN"){
+
+		header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
+		echo json_encode(array("message" => "Error, de conexion"));
+	}
+	else
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Registro exitoso"));
+		}
+}
+
+
+
 function decryptionPass($password){
 	$key = pack('H*',"bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
 
@@ -71,7 +108,7 @@ function decryptionPass($password){
 
 function encryptionPass(){
 
-	$userPassword = $_POST['userPassword'];
+	$userPassword = $_POST['passwrd'];
 
 	$key = pack('H*',"bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
 	$key_size = strlen($key);
