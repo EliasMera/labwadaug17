@@ -16,7 +16,9 @@
 			break;
 		case "GETGROUPS" 	: getgroupsFunction();
 			break;	
-		case "AREGISTER"	: alumniRegisterFunc();
+		case "REGISTERA"	: alumniRegisterFunc();
+			break;
+		case "GETGROUPID"	: getgroupIdFunc();
 			break;
 	}
 
@@ -114,5 +116,36 @@
 			echo json_encode(array("message" => "Wrong credentials provided"));
 
 		}
+	}
+
+	function getgroupIdFunc(){
+		$curso = $_POST["curso"];
+		$grupo = $_POST["grupo"];
+
+		$result = getGroupId($curso,$grupo);
+
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+
+		}
+	}
+
+	function alumniRegisterFunc(){
+		$mat = $_POST["mat"];
+		$userPassword = encryptPassword();
+		$grupo = $_POST["grupo"];
+
+		$result = registerAlum($mat, $userPassword, $grupo);
+
+		if ($result["status"] == "NAMEINUSE"){
+			header('HTTP/1.1 409 Conflict, Username already in use');
+			echo json_encode(array("message" => "Ese alumno ya existe"));
+		}	
+		else
+			if ($result["status"] == "BADCRED"){
+				echo json_encode(array("message" => "Wrong credentials provided"));
+
+			}
+
 	}
 ?>

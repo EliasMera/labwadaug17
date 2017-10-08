@@ -50,6 +50,26 @@
 
 	}
 
+	function registerAlum($mat, $userPassword, $grupo){
+
+		$conn = connectionToDataBase();
+		$sql = "SELECT studentId FROM Students WHERE studentId = '$mat'";
+		$result = $conn->query($sql);
+		
+		if($result->num_rows > 0){
+			$conn -> close();
+			return array("status" => "NAMEINUSE");
+		}
+
+		else{
+
+			$sql = "INSERT INTO Students (studentId, group_id, passwrd) VALUES ('$mat', '$grupo', '$userPassword')";
+
+		}
+
+	}
+
+
 	function loginTeacher($teacherId, $save){
 
 		$conn = connectionToDataBase();
@@ -134,4 +154,44 @@
 		}
 
 	}
+
+	function getGroupId($curso, $grupo){
+		$conn = connectionToDataBase();
+		$results = array();
+
+		if ($conn != null){
+
+			$sql = "SELECT id FROM Groups WHERE courseKey = '$curso' and groupNumber = '$grupo'";
+			
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+
+				while($row = $result -> fetch_assoc()){
+
+					$response = array('id' => $row['id']);
+
+					array_push($results,$response);
+
+
+				}
+				echo json_encode($results);
+
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "BADCRED");
+		    	//header('HTTP/1.1 406 User not found');
+		        //die("Wrong credentials provided!");
+			}
+			
+
+		return array("status" => "SESSIONEXP");
+
+
+		}
+
+	}
+
 ?>

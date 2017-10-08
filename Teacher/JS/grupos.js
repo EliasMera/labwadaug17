@@ -21,7 +21,6 @@ $(document).ready(function(){
 				"action" : "GETGROUPS",
 				"teacherId" : id
 				};	    		
-				debugger;	
 	    		$.ajax({
 					url: "PHP/applicationLayer.php",
 					type: "POST",
@@ -29,12 +28,13 @@ $(document).ready(function(){
 					dataType: "json",
 					contentType: "application/x-www-form-urlencoded",
 					success: function(jsonResponse){
-						debugger;
 						var newHtml = "";
-						for(i = 0; i < jsonResponse.length; i++){
 						newHtml += "<table>" + "<tr>" + "<th>" + "Course Key" + "</th>" +
-						"<th>" + "group Number" + "</th>" + "</tr>" + "<tr>" + "<td>" + 
-						jsonResponse[i].courseKey + "</td>" + "<td>"+ jsonResponse[i].groupNumber +
+						"<th>" + "group Number" + "</th>" + "</tr>";
+						for(i = 0; i < jsonResponse.length; i++){
+						newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' name='" +
+						jsonResponse[i].courseKey + "'>" + "</a>" + "</td>" +
+						 "<td>"+ jsonResponse[i].groupNumber +
 						 "</td>" + "</tr>";
 						}
 						newHtml += "</table>";
@@ -54,6 +54,21 @@ $(document).ready(function(){
 			console.log(errorMessage);
 		}
 	});
+
+	$("#resDiv").on("click",".grupoBtn", function(){
+		
+		//sacar nombre de curso
+		var curso = $(this).attr("name");
+		//saco numero de grupo
+		var grupo = $(this).closest('td').next().text();
+
+		sessionStorage.setItem('curso', $(this).attr("name"));
+		sessionStorage.setItem('grupo', $(this).closest('td').next().text());
+		window.location.replace("Grupo.html");
+		
+
+	});
+
 
 
 

@@ -13,25 +13,66 @@ $(document).ready(function(){
         var correoX = $("#correoX").val();
         var celular = $("#celular").val();
 
-        if(mat == "" || nom == "" || carrera == "" || passwrd == "" || correoX == "" || correoTec == ""){
+        if( passwrd == "" ){
             if(passwrd != passwrd2){
                 alert("Error, no coinciden las contraseñas");
             }
             else{
-                alert("Error, llenar todos los campos");
+                alert("Error, llenar los campos de matricula y contraseña usando la matricula del alumno");
             }
         }
         else{
-            var jsonToSend = {
-                "action"    : "REGISTERA",
-                "mat"       : mat,
-                "nom"       : nom,
-                "carrera"   : carrera,
-                "passwrd"   : passwrd,
-                "correoTec" : correoTec,
-                "correoX"   : correoX,
-                "celular"   : celular
-            };
+
+
+            var curso = sessionStorage.getItem("curso");
+            var grupo = sessionStorage.getItem("grupo");
+
+            var jsonGetGroupId = {
+                "action"    : "GETGROUPID",
+                "curso"     : curso,
+                "grupo"     : grupo
+            }
+            var jsonToSend = {}
+
+            $.ajax({
+                url : "PHP/applicationLayer.php",
+                type : "POST",
+                data : jsonGetGroupId,
+                dataType : "json",
+                contentType : "application/x-www-form-urlencoded",
+                success: function(jsonResponse){
+                        jsonToSend = {
+                        "action"    : "REGISTERA",
+                        "mat"       : mat,
+                        "passwrd"   : passwrd,
+                        "grupo"   : jsonResponse[0].id
+                    }
+                    debugger;
+                        $.ajax({
+                            url : "PHP/applicationLayer.php",
+                            type : "POST",
+                            data : jsonToSend,
+                            dataType : "json",
+                            contentType : "application/x-www-form-urlencoded",
+                            success: function(jsonResponse){
+                                alert("Alumno Registrado");
+                                debugger
+                            },
+                            error : function(errorMessage){
+                                debugger;
+                                alert(errorMessage.responseText);
+                            }
+
+                        });
+
+                        
+                },
+                error : function(errorMessage){
+                    debugger;
+                    alert(errorMessage.responseText);
+                }
+
+            });
 
             $.ajax({
                 url : "PHP/applicationLayer.php",
