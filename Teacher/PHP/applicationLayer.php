@@ -14,6 +14,8 @@
 			break;
 		case "CHECKSESSION"	: checksessionFunction();
 			break;
+		case "GETGROUPS" 	: getgroupsFunction();
+			break;	
 		case "AREGISTER"	: alumniRegisterFunc();
 			break;
 	}
@@ -80,7 +82,7 @@
 	function getCookieFunction(){
 		$result = attemptGetCookie();
 		if($result["status"] == "SUCCCOOKIE"){
-			echo json_encode(array("teacherId" =>  $_COOKIE["teacherId"]));
+			echo json_encode(array("id" =>  $_COOKIE["id"]));
 		}
 	}
 
@@ -101,5 +103,16 @@
 		}
 		$password = substr($password, 0,  $length - $count); 
 		return $password;
+	}
+
+	function getgroupsFunction(){
+
+		$teacherId = $_POST["teacherId"];
+		$result = getGroups($teacherId);
+
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+
+		}
 	}
 ?>

@@ -63,9 +63,6 @@
 			{
 				setcookie("save", $save, time()+86400*30, "/","", 0);
 
-				if($save == "true"){
-					setcookie("teacherId", $teacherId, time()+86400*30, "/","", 0);
-				}
 
 				session_start();
 				session_destroy();
@@ -73,7 +70,11 @@
 
 				$row = $result->fetch_assoc();
 
-				$_SESSION["teacherId"] = $teacherId;
+				if($save == "true"){
+					setcookie("id", $row['id'], time()+86400*30, "/","", 0);
+				}
+
+				$_SESSION["id"] = $row['id'];
 				$_SESSION["name"] = $row['name'];
 				$passwrd = $row['passwrd'];
 	                	$conn -> close();
@@ -90,8 +91,47 @@
 	}
 
 	function attemptGetCookie(){
-		if (isset($_COOKIE["teacherId"])){
+		if (isset($_COOKIE["id"])){
 	    	return array("status" => "SUCCCOOKIE");
 		}
+	}
+
+	function getGroups($teacherId){
+		$results = array();
+		$conn = connectionToDataBase();
+
+		if ($conn != null){
+
+			$sql = "SELECT groupNumber, courseKey FROM Groups WHERE teacher_Id = '$teacherId'";
+			
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+
+				while($row = $result -> fetch_assoc()){
+
+					$response = array('groupNumber' => $row['groupNumber'], 'courseKey' => $row['courseKey']);
+
+					array_push($results,$response);
+
+
+				}
+				echo json_encode($results);
+
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "BADCRED");
+		    	//header('HTTP/1.1 406 User not found');
+		        //die("Wrong credentials provided!");
+			}
+			
+
+		return array("status" => "SESSIONEXP");
+
+
+		}
+
 	}
 ?>

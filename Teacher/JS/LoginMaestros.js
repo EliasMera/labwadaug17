@@ -45,6 +45,7 @@ $(document).ready(function(){
 		dataType: "json",
 		contentType: "application/x-www-form-urlencoded",
 		success: function(jsonResponse){
+			console.log(jsonResponse.teacherId);
 	    	$("#teacherId").val(jsonResponse.teacherId);
 	    
 		},
