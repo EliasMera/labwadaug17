@@ -20,6 +20,8 @@
 			break;
 		case "GETGROUPID"	: getgroupIdFunc();
 			break;
+		case "LOADPROJECTS"	: loadprojectFunc();
+			break;
 	}
 
 	function teacherRegisterFunc(){
@@ -146,6 +148,24 @@
 				echo json_encode(array("message" => "Wrong credentials provided"));
 
 			}
+			else{
 
+				if ($result["status"] == "SUCCESS"){
+					echo json_encode(array("message" => "Registro exitoso"));
+				}
+
+			}
+		}
+
+	function loadprojectFunc(){
+
+		$result = loadProjects();
+
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+
+		}
 	}
+
+
 ?>

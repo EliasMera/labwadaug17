@@ -65,6 +65,13 @@
 
 			$sql = "INSERT INTO Students (studentId, group_id, passwrd) VALUES ('$mat', '$grupo', '$userPassword')";
 
+			if(mysqli_query($conn, $sql)){
+
+				return array("status" => "SUCCESS");
+			}
+
+			
+
 		}
 
 	}
@@ -188,6 +195,52 @@
 			
 
 		return array("status" => "SESSIONEXP");
+
+
+		}
+
+	}
+
+	function loadProjects(){
+		$results = array();
+		$conn = connectionToDataBase();
+
+		 
+		if ($conn != null){
+
+
+			$sql = "SELECT name, rank FROM Projects";
+
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					 //echo $row['name'];
+
+					$response = array('name' => $row['name'], 'rank' => $row['rank']);
+
+					array_push($results,$response);
+
+
+				}
+				
+				echo json_encode($results);
+
+
+
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "BADCRED");
+		    	//header('HTTP/1.1 406 User not found');
+		        //die("Wrong credentials provided!");
+			}
+			
+
+		return array("status" => "SESSIONEXP");
+
 
 
 		}

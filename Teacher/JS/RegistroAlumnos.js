@@ -1,17 +1,43 @@
 $(document).ready(function(){
+    var curso = sessionStorage.getItem("curso");
+    var grupo = sessionStorage.getItem("grupo");
+    window.grupoRes = ""
+
+    var jsonGetGroupId = {
+        "action"    : "GETGROUPID",
+        "curso"     : curso,
+        "grupo"     : grupo
+    }
+    
+    $.ajax({
+        url : "PHP/applicationLayer.php",
+        type : "POST",
+        data : jsonGetGroupId,
+        dataType : "json",
+        async: false,
+        contentType : "application/x-www-form-urlencoded",
+        success: function(jsonResponse){
+                
+                debugger;
+                window.grupoRes = jsonResponse[0].id;
+                
+        },
+        error : function(errorMessage){
+           
+            alert(errorMessage.responseText);
+        }
+
+    });
+
+
 	$("#btnCancelar").on("click",function(){
 		window.location.replace("base.html");
 	});
 
 	$("#btnRegAlumno").on("click",function(){
         var mat = $("#matricula").val();
-        var nom = $("#nombre").val();
-        var carrera = $("#carrera").val();
         var passwrd = $("#passwrd").val();
         var passwrd2 = $("#passwrdC").val();
-        var correoTec = $("#correoTec").val();
-        var correoX = $("#correoX").val();
-        var celular = $("#celular").val();
 
         if( passwrd == "" ){
             if(passwrd != passwrd2){
@@ -21,31 +47,11 @@ $(document).ready(function(){
                 alert("Error, llenar los campos de matricula y contraseña usando la matricula del alumno");
             }
         }
-        else{
-
-
-            var curso = sessionStorage.getItem("curso");
-            var grupo = sessionStorage.getItem("grupo");
-
-            var jsonGetGroupId = {
-                "action"    : "GETGROUPID",
-                "curso"     : curso,
-                "grupo"     : grupo
-            }
-            var jsonToSend = {}
-
-            $.ajax({
-                url : "PHP/applicationLayer.php",
-                type : "POST",
-                data : jsonGetGroupId,
-                dataType : "json",
-                contentType : "application/x-www-form-urlencoded",
-                success: function(jsonResponse){
-                        jsonToSend = {
+                    var jsonToSend = {
                         "action"    : "REGISTERA",
                         "mat"       : mat,
                         "passwrd"   : passwrd,
-                        "grupo"   : jsonResponse[0].id
+                        "grupo"     : window.grupoRes
                     }
                     debugger;
                         $.ajax({
@@ -53,6 +59,7 @@ $(document).ready(function(){
                             type : "POST",
                             data : jsonToSend,
                             dataType : "json",
+                            async: false,
                             contentType : "application/x-www-form-urlencoded",
                             success: function(jsonResponse){
                                 alert("Alumno Registrado");
@@ -65,32 +72,12 @@ $(document).ready(function(){
 
                         });
 
-                        
-                },
-                error : function(errorMessage){
-                    debugger;
-                    alert(errorMessage.responseText);
-                }
 
-            });
 
-            $.ajax({
-                url : "PHP/applicationLayer.php",
-                type : "POST",
-                data : jsonToSend,
-                dataType : "json",
-                contentType : "application/x-www-form-urlencoded",
-                success: function(jsonResponse){
-                    alert("Alumno Registrado");
-                    window.location.replace("base.html");
-                },
-                error : function(errorMessage){
-                    alert(errorMessage.responseText);
-                }
 
-            });
-        }
+        
 	});
+
 
 	var jsonCookie = {
     	"action" : "GETCOOKIE"
