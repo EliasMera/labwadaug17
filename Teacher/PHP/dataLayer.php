@@ -129,7 +129,7 @@
 
 		if ($conn != null){
 
-			$sql = "SELECT groupNumber, courseKey FROM Groups WHERE teacher_Id = '$teacherId'";
+			$sql = "SELECT groupNumber, courseKey, id FROM Groups WHERE teacher_Id = '$teacherId'";
 			
 			$result = $conn->query($sql);
 
@@ -137,7 +137,7 @@
 
 				while($row = $result -> fetch_assoc()){
 
-					$response = array('groupNumber' => $row['groupNumber'], 'courseKey' => $row['courseKey']);
+					$response = array('groupNumber' => $row['groupNumber'], 'courseKey' => $row['courseKey'], 'id' => $row['id']);
 
 					array_push($results,$response);
 
@@ -209,7 +209,7 @@
 		if ($conn != null){
 
 
-			$sql = "SELECT name, rank FROM Projects";
+			$sql = "SELECT name, rank, id FROM Projects";
 
 			$result = $conn->query($sql);
 
@@ -218,7 +218,100 @@
 				while($row = $result -> fetch_assoc()){
 					 //echo $row['name'];
 
-					$response = array('name' => $row['name'], 'rank' => $row['rank']);
+					$response = array('name' => $row['name'], 'rank' => $row['rank'], 'id' => $row['id']);
+
+					array_push($results,$response);
+
+
+				}
+				
+				echo json_encode($results);
+
+
+
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "BADCRED");
+		    	//header('HTTP/1.1 406 User not found');
+		        //die("Wrong credentials provided!");
+			}
+			
+
+		return array("status" => "SESSIONEXP");
+
+
+
+		}
+
+	}
+
+	function loadespProject($projectId){
+		$results = array();
+		$conn = connectionToDataBase();
+
+		if ($conn != null){
+
+
+			$sql = "SELECT * FROM Projects WHERE id = '$projectId' ";
+
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					 //echo $row['name'];
+
+					$response = array('name' => $row['name'], 'company' => $row['company'], 'description' => $row['description'],
+					 'classification' => $row['classifcation'], 'business' => $row['business'],
+					 'semester' => $row['semester'], 'recomended' => $row['recomended'],'rank' => $row['rank'], 'active' => $row['active']);
+
+					array_push($results,$response);
+
+
+				}
+				
+				echo json_encode($results);
+
+
+
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "BADCRED");
+		    	//header('HTTP/1.1 406 User not found');
+		        //die("Wrong credentials provided!");
+			}
+			
+
+		return array("status" => "SESSIONEXP");
+
+
+
+		}
+
+	}
+
+	function loadStudents($projectId,$grupoId){
+		$results = array();
+		$conn = connectionToDataBase();
+
+		if ($conn != null){
+
+
+			$sql = "SELECT * FROM Students WHERE project_id = '$projectId' AND group_id = '$grupoId' ";
+
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					 //echo $row['name'];
+
+					$response = array('studentId' => $row['studentId'],
+					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
 
 					array_push($results,$response);
 

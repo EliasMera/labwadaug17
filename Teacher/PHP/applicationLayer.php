@@ -22,6 +22,10 @@
 			break;
 		case "LOADPROJECTS"	: loadprojectFunc();
 			break;
+		case "LOADESPPROJECT": loadespprojectFunc();
+			break;
+		case "LOADSTUDENTS"	: loadstudentsFunc();
+			break;
 	}
 
 	function teacherRegisterFunc(){
@@ -165,6 +169,32 @@
 			echo json_encode(array("message" => "Wrong credentials provided"));
 
 		}
+	}
+
+	function loadespprojectFunc(){
+
+		$projectId = $_POST["projectId"];
+
+		$result = loadespProject($projectId);
+
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+
+		}
+	}
+
+	function loadstudentsFunc(){
+
+		$projectId = $_POST["projectId"];
+		$grupoId = $_POST["grupoId"];
+
+		$result = loadStudents($projectId,$grupoId);
+		
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+
+		}
+
 	}
 
 

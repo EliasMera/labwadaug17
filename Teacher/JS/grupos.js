@@ -35,8 +35,10 @@ $(document).ready(function(){
 						newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' name='" +
 						jsonResponse[i].courseKey + "'>" + "</a>" + "</td>" +
 						 "<td>"+ jsonResponse[i].groupNumber +
-						 "</td>" + "</tr>";
+						 "</td>" + "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
 						}
+
+						
 						newHtml += "</table>";
 
 						$("#resDiv").append(newHtml);
@@ -62,8 +64,11 @@ $(document).ready(function(){
 		//saco numero de grupo
 		var grupo = $(this).closest('td').next().text();
 
+		var grupoId = $(this).closest('td').next().next().text();
+
 		sessionStorage.setItem('curso', $(this).attr("name"));
 		sessionStorage.setItem('grupo', $(this).closest('td').next().text());
+		sessionStorage.setItem('grupoId', $(this).closest('td').next().next().text());
 		window.location.replace("Grupo.html");
 		
 
