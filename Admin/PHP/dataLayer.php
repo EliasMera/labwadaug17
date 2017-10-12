@@ -92,4 +92,91 @@ function attemptRegister($encPasswd) {
 
 }
 
+function attemptLogin($userId) {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT * FROM Administrador WHERE adminId = '$userId'";
+		$result = $conn->query($sql);
+		if ($result->num_rows == 1) {
+			$row = $result->fetch_assoc();
+			session_start();
+			session_destroy();
+			session_start();
+			$_SESSION["userId"] = $row["adminId"];
+			$_SESSION["name"] = $row["name"];
+			$conn -> close();
+			return array("status" => "SUCCESS",	"passwrd" => $row["passwrd"]);
+		}
+		else {
+			$conn -> close();
+			return array("status" => "NOT FOUND");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptGetAllProjects() {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT DISTINCT p.*, g.courseKey, g.groupNumber, r.name AS 'profesor' FROM projects p, groups g, students a, teachers r WHERE p.active = 1 AND g.id = a.group_id AND p.id = a.project_id AND r.id = g.teacher_id ORDER BY 'profesor'";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			$response = array("status" => "SUCCESS");
+			$resp = array();
+			while ($row = $result->fetch_assoc()) {
+				$project = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'id' => $row['id'], 
+		    		'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'courseKey' => $row['courseKey'], 'groupNumber' => $row['groupNumber'], 'teacher' => utf8_encode($row['profesor']), 'recomended' => $row['recomended'], 'rank' => $row['rank']);
+		    	array_push($resp, $project);
+			}
+			array_push($response, $resp);
+			$conn -> close();
+		    return $response;
+		}
+		else {
+			$conn -> close();
+			return array("status" => "NOT FOUND");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptViewProjectDetails($id) {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT p.*, s.studentId, s.name as 'studentname' FROM projects p JOIN students s ON p.id = s.project_id WHERE p.id = '$id'";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			$response = array("status" => "SUCCESS");
+			$resp = array();
+			$studentArr = array();
+			$firstFlag = 0;
+			while ($row = $result->fetch_assoc()) {
+				if ($firstFlag == 0) {
+					$project = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'id' => $row['id'], 
+		    		'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'courseKey' => $row['courseKey'], 'groupNumber' => $row['groupNumber'], 'recomended' => $row['recomended'], 'rank' => $row['rank']);
+		    		array_push($resp, $project);
+		    		$firstFlag = 1;
+				}
+				
+		    	$student = array('studentId' => $row['studentId'], 'name' => utf8_encode($row['studentname']));
+		    	array_push($studentArr, $student);
+			}
+			array_push($resp, $studentArr);
+			array_push($response, $resp);
+			$conn -> close();
+		    return $response;
+		}
+	}
+}
+
+
 ?>

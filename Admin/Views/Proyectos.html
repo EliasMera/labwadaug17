@@ -1,0 +1,53 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Muestra Empresarial</title>
+  <meta charset="UTF-8">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="../JS/jquery.js"></script>
+  <script type="text/javascript" src="../JS/Proyectos.js"></script>
+</head>
+<body>
+<h1>Muestra Empresarial</h1>
+<ul id="tabBar">
+	<li><input id="homeBtn" type="submit" value="Inicio"></li>
+  <li><input id="configureBtn" type="submit" value="Configurar Semestre"></li>
+  <li><input id="projectsBtn" type="submit" value="Proyectos"></li>
+  <li><input id="logoutBtn" type="submit" value="Cerrar sesión"></li>
+</ul>
+<div id="mainBody">
+  <div id="index">
+  	<fieldset>
+  		<legend>Proyectos registrados en el semestre</legend>
+  		<table id="projectsList">
+        <thead>
+          <tr>
+            <th>Profesor</th>
+            <th>Grupo</th>
+            <th>Nombre</th>
+            <th>Empresa</th>
+            <th>Clasificación Sectorial</th>
+            <th>Giro del Negocio</th>
+            <th>Apto</th>
+            <th>Rank</th>
+          </tr>
+        </thead>  
+      </table>
+  	</fieldset>
+  </div>
+  <div id="viewDetails" style="display: none;">
+    <fieldset>
+      <div id="projectDiv" style="display: inline-block;">
+        <table id="project">
+        </table>
+      </div>
+      <div id="team" style="display: inline-block;">
+        Equipo
+        <table id="teamList"></table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+</body>
+</html>

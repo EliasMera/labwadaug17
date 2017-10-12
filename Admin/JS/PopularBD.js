@@ -2,6 +2,10 @@ $(document).ready(function(){
 
   $("#fileUp").change(handleFile);
 
+    $('#projectsBtn').on("click", function() {
+        window.location.replace("Proyectos.html");
+    });
+
 });
 
 function handleFile(e) {
