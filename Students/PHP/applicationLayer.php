@@ -18,6 +18,8 @@ switch($action){
 					break;
 	case "REGISTERPROJECT" : registerProject();
 					break;
+	case "LOADPROJECTS"	: loadprojectFunc();
+					break;
 	case "EDITPROJECT" : editProject();
 					break;
 
@@ -193,5 +195,20 @@ function registerProject(){
 		die($result["status"]);
 }
 }
+
+	function loadprojectFunc(){
+
+		$result = loadProjects();
+
+		if($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Projects"));
+		}
+		
+		if ($result["status"] == "DISCONNECTION"){
+			echo json_encode(array("message" => "Error in DB"));
+
+		}
+
+	}
 
 ?>

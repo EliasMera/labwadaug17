@@ -26,18 +26,26 @@ $(document).ready(function() {
 
     });
 
+    $("#homeBtn").on("click",function(){
+        window.location.replace("base.html");
+    });
+
+    $("#historialBtn").on("click",function(){
+        window.location.replace("HistorialProyectos.html");
+    });
 
     $("#regisBtn").on("click",function(){
         window.location.replace("RegistroProyecto.html");
+    });
+
+    $("#editProj").on("click",function(){
+        window.location.replace("EditarProyecto.html");
     });
 
     $("#changePassw").on("click",function(){
         window.location.replace("changePassw.html");
     });
 
-    $("#homeBtn").on("click",function(){
-        window.location.replace("base.html");
-    });
 ////////////////// Change Password
     $("#changePasswBtn").on("click",function(){
     
