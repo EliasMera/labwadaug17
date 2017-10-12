@@ -167,7 +167,6 @@
 
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
-
 		}
 	}
 
@@ -179,7 +178,6 @@
 
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
-
 		}
 	}
 

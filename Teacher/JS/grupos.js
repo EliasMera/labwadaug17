@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var jsonCookie = {
-	"action" : "GETCOOKIE"
+		"action" : "GETCOOKIE"
 	};
 
 	$.ajax({
@@ -15,42 +15,41 @@ $(document).ready(function(){
 
 
 			id = jsonResponse.id;
-	    	console.log(id);
-
-				var jsonGroups = {
+			var jsonGroups = {
 				"action" : "GETGROUPS",
 				"teacherId" : id
-				};	    		
-	    		$.ajax({
-					url: "PHP/applicationLayer.php",
-					type: "POST",
-					data : jsonGroups,
-					dataType: "json",
-					contentType: "application/x-www-form-urlencoded",
-					success: function(jsonResponse){
-						var newHtml = "";
-						newHtml += "<table>" + "<tr>" + "<th>" + "Course Key" + "</th>" +
-						"<th>" + "group Number" + "</th>" + "</tr>";
-						for(i = 0; i < jsonResponse.length; i++){
-						newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' name='" +
-						jsonResponse[i].courseKey + "'>" + "</a>" + "</td>" +
-						 "<td>"+ jsonResponse[i].groupNumber +
-						 "</td>" + "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
-						}
-
-						
-						newHtml += "</table>";
-
-						$("#resDiv").append(newHtml);
-
-
-					},
-					error: function(errorMessage){
-						console.log(errorMessage)
+			};	    		
+			$.ajax({
+				url: "PHP/applicationLayer.php",
+				type: "POST",
+				data : jsonGroups,
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded",
+				success: function(jsonResponse){
+					var newHtml = "";
+					newHtml += "<table>" + "<tr>" + "<th>" + "Course Key" + "</th>" +
+					"<th>" + "group Number" + "</th>" + "</tr>";
+					for(i = 0; i < jsonResponse.length; i++){
+						var key = jsonResponse[i].courseKey;
+						newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' value='" +
+						key + "' name = '" + key + "'>" + "</a>" + "</td>" +
+						"<td>"+ jsonResponse[i].groupNumber +
+						"</td>" + "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
 					}
 
-	    		});
-	    
+
+					newHtml += "</table>";
+
+					$("#resDiv").append(newHtml);
+
+
+				},
+				error: function(errorMessage){
+					console.log(errorMessage)
+				}
+
+			});
+
 		},
 		error: function(errorMessage) {
 			console.log(errorMessage);
