@@ -9,7 +9,7 @@ $(document).ready(function() {
             var $semester = $("#semester");
 
             var jsonToSend = {
-            	"action" : "REGISTERPROJECT",
+            	"action" : "ASSIGNPROJECT",
                 "name" : $("#name").val(),
                 "company" : $("#company").val(),
                 "description" : $("#description").val(),
@@ -29,8 +29,8 @@ $(document).ready(function() {
                     window.location.replace("base.html");
                 },
                 error : function(errorMessage){
-                    alert("No se pudo registrar");
-                    window.location.replace("base.html");
+                    alert("No se asignó");
+                    window.location.replace("base.html"); // Corregir el que se vaya por el success, mientras si jala entrando por aqui, lo lleva a la pagina principal.
                 }
             });
         });

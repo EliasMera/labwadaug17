@@ -18,6 +18,8 @@ switch($action){
 					break;
 	case "REGISTERPROJECT" : registerProject();
 					break;
+	case "EDITPROJECT" : editProject();
+					break;
 
 }
 
