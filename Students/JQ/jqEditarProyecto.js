@@ -9,7 +9,7 @@ $(document).ready(function() {
             var $semester = $("#semester");
 
             var jsonToSend = {
-            	"action" : "ASSIGNPROJECT",
+            	"action" : "EDITPROJECT",
                 "name" : $("#name").val(),
                 "company" : $("#company").val(),
                 "description" : $("#description").val(),
@@ -25,12 +25,12 @@ $(document).ready(function() {
                 dataType : "json",
                 contentType : "application/x-www-form-urlencoded",
                 success: function(jsonResponse){
-                	alert("Se registró correctamente");
+                	alert("Se Guardo correctamente");
                     window.location.replace("base.html");
                 },
                 error : function(errorMessage){
                     alert("No se asignó");
-                    window.location.replace("base.html"); // Corregir el que se vaya por el success, mientras si jala entrando por aqui, lo lleva a la pagina principal.
+                    window.location.replace("base.html");
                 }
             });
         });

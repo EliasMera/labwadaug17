@@ -180,7 +180,27 @@ function registerProject(){
 	else{
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
+	}
 }
+
+function editProject(){
+
+	$name = $_POST["name"];
+	$company = $_POST["company"];
+	$description = $_POST["description"];
+	$classification = $_POST["classification"];
+    $business = $_POST["business"];
+    $semester = $_POST["semester"];
+    
+	$result = attemptEditProject($name, $company, $description, $classification, $business, $semester);
+
+    if($result["status"] == "SUCCESS"){
+		echo json_encode(array("message" => "Edit Succesfully!"));
+	}
+	else{
+		header('HTTP/1.1 500' . $result["status"]);
+		die($result["status"]);
+	}
 }
 
 	function loadprojectFunc(){
