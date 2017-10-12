@@ -182,42 +182,30 @@
 	}
 
 	function loadProjects(){
-		$results = array();
+
 		$conn = connectionToDataBase();
+		$results = array();
 
-		 
-		if ($conn != null){
+		$sql = "SELECT company, rank, id FROM Projects";
 
-
-			$sql = "SELECT name, rank, id FROM Projects";
-
-			$result = $conn->query($sql);
+		$result = $conn->query($sql);
 
 			if ($result->num_rows > 0){
 				 
 				while($row = $result -> fetch_assoc()){
-
-					$response = array('name' => $row['name'], 'rank' => $row['rank'], 'id' => $row['id']);
-
+					$response = array('name' => $row['company'], 'rank' => $row['rank'], 'id' => $row['id']);
 					array_push($results,$response);
 
 
 				}
 				
-				echo json_encode($results);
-
+					echo json_encode($results);
 			}
 			else
 			{
 				$conn -> close();
 				return array("status" => "DISCONNECTION");
-		    	//header('HTTP/1.1 406 User not found');
-		        //die("Wrong credentials provided!");
 			}
-			
-		return array("status" => "SUCCESS");
-
-		}
 
 	}
 
