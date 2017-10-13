@@ -65,11 +65,26 @@ function registerAlum($mat, $userPassword, $grupo, $project, $nom, $carr, $acama
 	}
 }
 
+function updateRecommend($project, $recommend){
+	$conn = connectionToDataBase();
+	if ($conn != null){
+		$sql = "UPDATE Projects SET recomended = '$recommend' WHERE id = '$project'";
+
+		if ($conn->query($sql) === TRUE) {
+			return array("status" => "SUCCESS");
+		    echo "Record updated successfully";
+		} else {
+		    echo "Error updating record: " . $conn->error;
+		}
+	}else{
+		$conn -> close();
+		return array("status" => "Conexion fallida con base de datos");
+	}
+}
+
 function editAlumni($mat, $grupo, $project, $nom, $carr, $acamail, $permail, $cell){
 	$conn = connectionToDataBase();
 	if ($conn != null){
-		$sql = "SELECT * FROM Teachers WHERE teacherId = '$teacherId'";
-
 		$sql = "UPDATE Students SET name = '$nom', bachelor = '$carr', academicEmail = '$acamail', personalEmail = '$permail', cellphone = '$cell' WHERE studentId = '$mat'";
 
 		if ($conn->query($sql) === TRUE) {
@@ -162,13 +177,13 @@ function loadProjects(){
 
 	if ($conn != null){
 
-		$sql = "SELECT name, rank, id FROM Projects";
+		$sql = "SELECT name, rank, id, recomended FROM Projects";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0){
 
 			while($row = $result -> fetch_assoc()){
-				$response = array('name' => $row['name'], 'rank' => $row['rank'], 'id' => $row['id']);
+				$response = array('name' => $row['name'], 'rank' => $row['rank'], 'id' => $row['id'], 'recomended' => $row['recomended']);
 				array_push($results,$response);
 			}
 

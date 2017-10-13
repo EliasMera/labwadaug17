@@ -30,10 +30,19 @@
 			break;
 		case "GETALUMNI"		: getAlumniFunc();
 			break;
+		case "UPDATERECOMMEND"	: updateRecommendFunc();
+			break;
+	}
+
+	function debug_to_console( $data ) {
+	    $output = $data;
+	    if ( is_array( $output ) )
+	        $output = implode( ',', $output);
+
+	    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 	}
 
 	function teacherRegisterFunc(){
-
 		$teacherId = $_POST['teacherId'];
 		$name = $_POST['name'];
 		$userPassword = encryptPassword();
@@ -124,6 +133,22 @@
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
 
+		}
+	}
+
+	function updateRecommendFunc(){
+		$recommend = $_POST["recommend"];
+		$project = $_POST["projectId"];
+
+		$result = updateRecommend($project, $recommend);
+
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+		else{
+			if ($result["status"] == "SUCCESS"){
+				echo json_encode(array("message" => "Update exitoso"));
+			}
 		}
 	}
 
@@ -230,6 +255,5 @@
 			echo json_encode(array("message" => "Login Successful"));
 		}
 	}
-
 
 ?>
