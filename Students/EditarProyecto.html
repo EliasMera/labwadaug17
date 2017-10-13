@@ -2,17 +2,25 @@
 	<html>
 	<title>Editar Proyecto</title>
 	<body>
-	<meta charset="UTF-8">
+  	<meta charset="UTF-8">
+  	<link href="CSS/style.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="JQ/jquery.js"></script>
 	<script type="text/javascript" src="JQ/jqEditarProyecto.js"></script>
 	<script type="text/javascript" src="JQ/jqHome.js"></script>
 
-	<h1 align="center">Editar Proyecto</h1>
-
+	<h1>Muestra Empresarial</h1>
+	<ul id="tabBar">
+		<li><input id="homeBtn" type="submit" value="Inicio"> </li>
+		<li><input id="historialBtn" type="submit" value="Historial de Proyectos"> </li>
+		<li><input id="regisBtn" type="submit" value="Registrar Proyecto"> </li>
+		<li><input id="editProj" type="submit" value="Editar Proyecto"> </li>
+		<li><input id="changePassw" type="submit" value="Cambiar Contraseña"> </li>
+	</ul>
+	<br>
 	<div align="center">
 			<fieldset align="center" style="width:270px">
 
-			<legend>Proyecto</legend>
+			<legend><font size="3"> <b>Modificación de Proyecto</b> </font></legend>
 
 			<div style="color:#0000FF">
 			Nombre: <br><input type="text" size="30" id="name"> <span id="errorLabelUserName"></span> <br><br>

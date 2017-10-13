@@ -91,10 +91,9 @@ function registerFunction(){
 function chpasswordFunction(){
 	session_start();
 	
-	$userPassword = $_SESSION['password'];
 	$newPassword = $_POST['newPassword'];
 	$newEncrPassword = encryptionPass($newPassword);
-	$result = attemptchPassword($userPassword,$newEncrPassword);
+	$result = attemptchPassword($newEncrPassword);
 
 	if($result["status"] == "BADCRED"){
 		echo json_encode(array("message" => "Wrong credentials provided!"));

@@ -8,14 +8,23 @@
     <script type="text/javascript" src="JQ/jqHome.js"></script>
 </head>
 <body>
-<h1>Cambio de Contraseña</h1>
-Contraseña Actual: <br><input type="password" size="30" id="actualPassw"> <br><br>
-Contraseña Nueva: <br><input type="password" size="30" id="newPassw"> <br><br>
-Confirmación Nueva Contraseña: <br><input type="password" size="30" id="newPasswConfirm"> <br><br>
-<input id="changePasswBtn" type="submit" value="Cambiar Contraseña">
-<input id="homeBtn" type="submit" value="Regresar al Menu">
+	<h1>Muestra Empresarial</h1>
+	<ul id="tabBar">
+		<li><input id="homeBtn" type="submit" value="Inicio"> </li>
+		<li><input id="historialBtn" type="submit" value="Historial de Proyectos"> </li>
+		<li><input id="regisBtn" type="submit" value="Registrar Proyecto"> </li>
+		<li><input id="editProj" type="submit" value="Editar Proyecto"> </li>
+		<li><input id="changePassw" type="submit" value="Cambiar Contraseña"> </li>
+	</ul>
+	<div id="resDiv">
+	</div>
+	<br>
+	<div id="mainBody" style="margin-left:45px; font-size: 20px;" >
+		
+		Contraseña Nueva: <br><input type="password" size="30" id="newPassw"> <br><br>
+		Confirmación Nueva Contraseña: <br><input type="password" size="30" id="newPasswConfirm"> <br><br>
+		<input id="changePasswBtn" type="submit" value="Cambiar Contraseña">
 
-<div id="mainBody">
-</div>
+	</div>
 </body>
 </html>

@@ -113,7 +113,7 @@
 
 	}
 
-		function attemptchPassword($userPassword,$newEncrPassword){
+		function attemptchPassword($newEncrPassword){
 
 		$conn = connectionToDataBase();
 
@@ -137,12 +137,6 @@
 
 		return array("status" => "SESSIONEXP");
 	}
-
-
-
-
-
-
 
 	
 	function attemptGetCookie(){
