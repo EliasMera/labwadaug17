@@ -32,6 +32,8 @@
 			break;
 		case "UPDATERECOMMEND"	: updateRecommendFunc();
 			break;
+		case "UPDATEPRIORITY"	: updatePriorityFunc();
+			break;
 	}
 
 	function debug_to_console( $data ) {
@@ -134,6 +136,22 @@
 			echo json_encode(array("message" => "Wrong credentials provided"));
 
 		}
+	}
+
+	function updatePriorityFunc(){
+		$project = $_POST["projId"];
+		$prio = $_POST["prio"];
+
+		$result = updatePriority($project, $prio);
+
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+		else{
+			if ($result["status"] == "SUCCESS"){
+				echo json_encode(array("message" => "Update exitoso"));
+			}
+		}		
 	}
 
 	function updateRecommendFunc(){

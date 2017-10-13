@@ -65,6 +65,23 @@ function registerAlum($mat, $userPassword, $grupo, $project, $nom, $carr, $acama
 	}
 }
 
+function updatePriority($project, $prio){
+	$conn = connectionToDataBase();
+	if ($conn != null){
+		$sql = "UPDATE Projects SET rank = '$prio' WHERE id = '$project'";
+
+		if ($conn->query($sql) === TRUE) {
+			return array("status" => "SUCCESS");
+		    echo "Record updated successfully";
+		} else {
+		    echo "Error updating record: " . $conn->error;
+		}
+	}else{
+		$conn -> close();
+		return array("status" => "Conexion fallida con base de datos");
+	}
+}
+
 function updateRecommend($project, $recommend){
 	$conn = connectionToDataBase();
 	if ($conn != null){
