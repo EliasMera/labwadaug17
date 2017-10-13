@@ -33,9 +33,6 @@ $(document).ready(function(){
 
 			newHtml += "</table>";
 			$("#resDiv").append(newHtml);
-
-
-
 		},
 		error: function(errorMessage){
 			alert(errorMessage);

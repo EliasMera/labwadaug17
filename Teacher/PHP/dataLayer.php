@@ -17,7 +17,6 @@ function connectionToDataBase(){
 }
 
 function registerTeacher($teacherId, $userPassword, $name){
-
 	$conn = connectionToDataBase();
 	$sql = "SELECT teacherId FROM Teachers WHERE teacherId = '$teacherId'";
 	$result = $conn->query($sql);
@@ -26,8 +25,7 @@ function registerTeacher($teacherId, $userPassword, $name){
 		$conn -> close();
 		return array("status" => "NAMEINUSE");
 	}
-	else
-	{
+	else{
 		$sql = "INSERT INTO Teachers (teacherId, name, passwrd) VALUES ('$teacherId', '$name', '$userPassword')";
 
 		if (mysqli_query($conn, $sql)) {
@@ -50,8 +48,7 @@ function registerTeacher($teacherId, $userPassword, $name){
 
 }
 
-function registerAlum($mat, $userPassword, $grupo){
-
+function registerAlum($mat, $userPassword, $grupo, $project){
 	$conn = connectionToDataBase();
 	$sql = "SELECT studentId FROM Students WHERE studentId = '$mat'";
 	$result = $conn->query($sql);
@@ -60,20 +57,12 @@ function registerAlum($mat, $userPassword, $grupo){
 		$conn -> close();
 		return array("status" => "NAMEINUSE");
 	}
-
 	else{
-
-		$sql = "INSERT INTO Students (studentId, group_id, passwrd) VALUES ('$mat', '$grupo', '$userPassword')";
-
+		$sql = "INSERT INTO Students (studentId, group_id, passwrd, project_id) VALUES ('$mat', '$grupo', '$userPassword', '$project')";
 		if(mysqli_query($conn, $sql)){
-
 			return array("status" => "SUCCESS");
 		}
-
-
-
 	}
-
 }
 
 
@@ -134,111 +123,45 @@ function getGroups($teacherId){
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0){
-
 			while($row = $result -> fetch_assoc()){
-
 				$response = array('groupNumber' => $row['groupNumber'], 'courseKey' => $row['courseKey'], 'id' => $row['id']);
-
 				array_push($results,$response);
-
-
 			}
 			echo json_encode($results);
-
 		}
-		else
-		{
+		else{
 			$conn -> close();
 			return array("status" => "BADCRED");
-		    	//header('HTTP/1.1 406 User not found');
-		        //die("Wrong credentials provided!");
 		}
-
-
 		return array("status" => "SESSIONEXP");
-
-
 	}
-
-}
-
-function getGroupId($curso, $grupo){
-	$conn = connectionToDataBase();
-	$results = array();
-
-	if ($conn != null){
-
-		$sql = "SELECT id FROM Groups WHERE courseKey = '$curso' and groupNumber = '$grupo'";
-
-		$result = $conn->query($sql);
-
-		if ($result->num_rows > 0){
-
-			while($row = $result -> fetch_assoc()){
-
-				$response = array('id' => $row['id']);
-
-				array_push($results,$response);
-
-
-			}
-			echo json_encode($results);
-
-		}
-		else
-		{
-			$conn -> close();
-			return array("status" => "BADCRED");
-		    	//header('HTTP/1.1 406 User not found');
-		        //die("Wrong credentials provided!");
-		}
-
-
-		return array("status" => "SESSIONEXP");
-
-
-	}
-
 }
 
 function loadProjects(){
 	$results = array();
 	$conn = connectionToDataBase();
 
-
 	if ($conn != null){
 
-
 		$sql = "SELECT name, rank, id FROM Projects";
-
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0){
 
 			while($row = $result -> fetch_assoc()){
-					 //echo $row['name'];
-
 				$response = array('name' => $row['name'], 'rank' => $row['rank'], 'id' => $row['id']);
-
 				array_push($results,$response);
-
-
 			}
 
 			echo json_encode($results);
 			return array("status" => "OK");
 		}
-		else
-		{
+		else{
 			$conn -> close();
 			return array("status" => "BADCRED");
 		}
-
-
 		return array("status" => "SESSIONEXP");
-
 	}
-
 }
 
 function loadespProject($projectId){
@@ -246,44 +169,25 @@ function loadespProject($projectId){
 	$conn = connectionToDataBase();
 
 	if ($conn != null){
-
-
 		$sql = "SELECT * FROM Projects WHERE id = '$projectId' ";
-
 		$result = $conn->query($sql);
-
 		if ($result->num_rows > 0){
-
 			while($row = $result -> fetch_assoc()){
-					 //echo $row['name'];
-
 				$response = array('name' => $row['name'], 'company' => $row['company'], 'description' => $row['description'],
 					'classification' => $row['classifcation'], 'business' => $row['business'],
 					'semester' => $row['semester'], 'recomended' => $row['recomended'],'rank' => $row['rank'], 'active' => $row['active']);
 
 				array_push($results,$response);
-
-
 			}
-
 			echo json_encode($results);
-
-
-
 		}
-		else
-		{
+		else{
 			$conn -> close();
 			return array("status" => "BADCRED");
 		    	//header('HTTP/1.1 406 User not found');
 		        //die("Wrong credentials provided!");
 		}
-
-
 		return array("status" => "SESSIONEXP");
-
-
-
 	}
 
 }
@@ -303,19 +207,12 @@ function loadStudents($projectId,$grupoId){
 
 			while($row = $result -> fetch_assoc()){
 					 //echo $row['name'];
-
 				$response = array('studentId' => $row['studentId'],
 					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
 
 				array_push($results,$response);
-
-
 			}
-
 			echo json_encode($results);
-
-
-
 		}
 		else
 		{
@@ -325,13 +222,8 @@ function loadStudents($projectId,$grupoId){
 		        //die("Wrong credentials provided!");
 		}
 
-
 		return array("status" => "SESSIONEXP");
-
-
-
 	}
-
 }
 
 ?>

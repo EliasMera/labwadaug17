@@ -18,8 +18,6 @@
 			break;	
 		case "REGISTERA"	: alumniRegisterFunc();
 			break;
-		case "GETGROUPID"	: getgroupIdFunc();
-			break;
 		case "LOADPROJECTS"	: loadprojectFunc();
 			break;
 		case "LOADESPPROJECT": loadespprojectFunc();
@@ -124,24 +122,13 @@
 		}
 	}
 
-	function getgroupIdFunc(){
-		$curso = $_POST["curso"];
-		$grupo = $_POST["grupo"];
-
-		$result = getGroupId($curso,$grupo);
-
-		if ($result["status"] == "BADCRED"){
-			echo json_encode(array("message" => "Wrong credentials provided"));
-
-		}
-	}
-
 	function alumniRegisterFunc(){
 		$mat = $_POST["mat"];
 		$userPassword = encryptPassword();
-		$grupo = $_POST["grupo"];
+		$grupo = $_POST["grupoId"];
+		$project = $_POST["projectId"];
 
-		$result = registerAlum($mat, $userPassword, $grupo);
+		$result = registerAlum($mat, $userPassword, $grupo, $project);
 
 		if ($result["status"] == "NAMEINUSE"){
 			header('HTTP/1.1 409 Conflict, Username already in use');
