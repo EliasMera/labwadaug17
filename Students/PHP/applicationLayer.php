@@ -163,19 +163,6 @@ function getcookieFunction(){
 	}
 }
 
-function checkSessionFunction(){
-
-	$result = attemptCheckSession();
-
-	if($result["status"] == "SUCCESS"){
-		echo json_encode(array("message" => "Session established!"));
-	}
-	else{
-		header('HTTP/1.1 500' . $result["status"]);
-		die($result["status"]);
-	}
-}
-
 function registerProject(){
 
 	$name = $_POST["name"];
@@ -193,7 +180,27 @@ function registerProject(){
 	else{
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
+	}
 }
+
+function editProject(){
+
+	$name = $_POST["name"];
+	$company = $_POST["company"];
+	$description = $_POST["description"];
+	$classification = $_POST["classification"];
+    $business = $_POST["business"];
+    $semester = $_POST["semester"];
+    
+	$result = attemptEditProject($name, $company, $description, $classification, $business, $semester);
+
+    if($result["status"] == "SUCCESS"){
+		echo json_encode(array("message" => "Edit Succesfully!"));
+	}
+	else{
+		header('HTTP/1.1 500' . $result["status"]);
+		die($result["status"]);
+	}
 }
 
 	function loadprojectFunc(){
@@ -203,12 +210,27 @@ function registerProject(){
 		if($result["status"] == "SUCCESS"){
 			echo json_encode(array("message" => "Projects"));
 		}
-		
-		if ($result["status"] == "DISCONNECTION"){
-			echo json_encode(array("message" => "Error in DB"));
-
-		}
+		else
+			if ($result["status"] == "BADCONN"){
+				header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
+				echo json_encode(array("message" => "Error, something went wrong"));
+		}	
 
 	}
+
+	function checkSessionFunction(){
+
+	$result = attemptCheckSession();
+
+	if($result["status"] == "SUCCESS"){
+		echo json_encode(array("message" => "Session established!"));
+	}
+	else{
+		header('HTTP/1.1 500' . $result["status"]);
+		die($result["status"]);
+	}
+}
+
+
 
 ?>

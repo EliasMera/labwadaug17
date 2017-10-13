@@ -181,43 +181,51 @@
         }
 	}
 
-	function loadProjects(){
-		$results = array();
+	function attemptEditProject($name, $company, $description, $classification, $business, $semester){
+
 		$conn = connectionToDataBase();
 
-		 
-		if ($conn != null){
+		if ($conn != null)
+		{
+			$sql = "UPDATE Projects SET name = '$name', company = '$company', description = '$description', 
+					classification = '$classification', business = '$business', semester = '$semester' 
+					WHERE id = '9'";
+		}
 
+		$result = $conn-> query($sql);
+		if($conn->affected_rows > 0)
+		{
+			$response = array();
+			echo json_encode($response);
+			return array("status" => "SUCCESS");
+		}
+	}
 
-			$sql = "SELECT name, rank, id FROM Projects";
+	function loadProjects(){
 
-			$result = $conn->query($sql);
+		$conn = connectionToDataBase();
+		$results = array();
+
+		$sql = "SELECT company, rank, id FROM Projects";
+
+		$result = $conn->query($sql);
 
 			if ($result->num_rows > 0){
 				 
 				while($row = $result -> fetch_assoc()){
-
-					$response = array('name' => $row['name'], 'rank' => $row['rank'], 'id' => $row['id']);
-
+					$response = array('name' => $row['company'], 'rank' => $row['rank'], 'id' => $row['id']);
 					array_push($results,$response);
 
 
 				}
 				
-				echo json_encode($results);
-
+					echo json_encode($results);
 			}
 			else
 			{
 				$conn -> close();
 				return array("status" => "DISCONNECTION");
-		    	//header('HTTP/1.1 406 User not found');
-		        //die("Wrong credentials provided!");
 			}
-			
-		return array("status" => "SUCCESS");
-
-		}
 
 	}
 
