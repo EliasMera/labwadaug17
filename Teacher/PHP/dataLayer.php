@@ -174,7 +174,7 @@ function loadespProject($projectId){
 		if ($result->num_rows > 0){
 			while($row = $result -> fetch_assoc()){
 				$response = array('name' => $row['name'], 'company' => $row['company'], 'description' => $row['description'],
-					'classification' => $row['classifcation'], 'business' => $row['business'],
+					'classification' => $row['classification'], 'business' => $row['business'],
 					'semester' => $row['semester'], 'recomended' => $row['recomended'],'rank' => $row['rank'], 'active' => $row['active']);
 
 				array_push($results,$response);
@@ -184,12 +184,29 @@ function loadespProject($projectId){
 		else{
 			$conn -> close();
 			return array("status" => "BADCRED");
-		    	//header('HTTP/1.1 406 User not found');
-		        //die("Wrong credentials provided!");
 		}
 		return array("status" => "SESSIONEXP");
 	}
+}
 
+function deleteStudent($matricula){
+	$conn = connectionToDataBase();
+
+	if ($conn != null){
+		$sql = "DELETE FROM Students WHERE studentId = '$matricula'";
+
+		$result = $conn->query($sql);
+
+		if ($result === TRUE){
+			return array("status" => "SUCCESS");
+		}
+		else{
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+
+		return array("status" => "SESSIONEXP");
+	}
 }
 
 function loadStudents($projectId,$grupoId){
@@ -206,7 +223,6 @@ function loadStudents($projectId,$grupoId){
 		if ($result->num_rows > 0){
 
 			while($row = $result -> fetch_assoc()){
-					 //echo $row['name'];
 				$response = array('studentId' => $row['studentId'],
 					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
 
@@ -218,8 +234,6 @@ function loadStudents($projectId,$grupoId){
 		{
 			$conn -> close();
 			return array("status" => "BADCRED");
-		    	//header('HTTP/1.1 406 User not found');
-		        //die("Wrong credentials provided!");
 		}
 
 		return array("status" => "SESSIONEXP");

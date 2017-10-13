@@ -6,23 +6,25 @@
 	$action = $_POST["action"];
 
 	switch($action){
-		case "LOGIN" 		: teacherLoginFunc();
+		case "LOGIN" 			: teacherLoginFunc();
 			break;
-		case "TREGISTER"	: teacherRegisterFunc();
+		case "TREGISTER"		: teacherRegisterFunc();
 			break;
-		case "GETCOOKIE"	: getcookieFunction();
+		case "GETCOOKIE"		: getcookieFunction();
 			break;
-		case "CHECKSESSION"	: checksessionFunction();
+		case "CHECKSESSION"		: checksessionFunction();
 			break;
-		case "GETGROUPS" 	: getgroupsFunction();
+		case "GETGROUPS" 		: getgroupsFunction();
 			break;	
-		case "REGISTERA"	: alumniRegisterFunc();
+		case "REGISTERA"		: alumniRegisterFunc();
 			break;
-		case "LOADPROJECTS"	: loadprojectFunc();
+		case "LOADPROJECTS"		: loadprojectFunc();
 			break;
-		case "LOADESPPROJECT": loadespprojectFunc();
+		case "LOADESPPROJECT"	: loadespprojectFunc();
 			break;
-		case "LOADSTUDENTS"	: loadstudentsFunc();
+		case "LOADSTUDENTS"		: loadstudentsFunc();
+			break;
+		case "DELETESTUDENT"	: deleteStudentFunc();
 			break;
 	}
 
@@ -72,7 +74,6 @@
 
 	function encryptPassword(){
 			$userPassword = $_POST['passwrd'];
-
 		    $key = pack('H*', "bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
 		    $key_size =  strlen($key);
 		    $plaintext = $userPassword;
@@ -169,17 +170,23 @@
 	}
 
 	function loadstudentsFunc(){
-
 		$projectId = $_POST["projectId"];
 		$grupoId = $_POST["grupoId"];
-
 		$result = loadStudents($projectId,$grupoId);
-		
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
-
 		}
+	}
 
+	function deleteStudentFunc(){
+		$matricula = $_POST["matricula"];
+		$result = deleteStudent($matricula);
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+		if($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Login Successful"));
+		}
 	}
 
 
