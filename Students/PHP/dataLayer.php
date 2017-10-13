@@ -206,14 +206,14 @@
 		$conn = connectionToDataBase();
 		$results = array();
 
-		$sql = "SELECT company, rank, id FROM Projects";
+		$sql = "SELECT name, company, description, classification, business, semester FROM Projects";
 
 		$result = $conn->query($sql);
 
 			if ($result->num_rows > 0){
 				 
 				while($row = $result -> fetch_assoc()){
-					$response = array('name' => $row['company'], 'rank' => $row['rank'], 'id' => $row['id']);
+					$response = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'semester' => utf8_encode($row['semester']));
 					array_push($results,$response);
 
 

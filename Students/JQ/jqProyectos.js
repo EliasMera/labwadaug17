@@ -12,16 +12,16 @@ $(document).ready(function() {
 				success: function(jsonResp){
 
 					var newHtml = "";
-					newHtml += "<table>" + "<tr>" + "<th>" + "Nombre" + "</th>"
-					+ "<th>" + "Prioridad" + "</th>" + "<th>" + "Apto" + "</th>" + "</tr>";
+					newHtml += "<table border='1' align='center' width='95%'>" + "<tr>" + "<th>" + "Nombre del proyecto" + "</th>"
+					+ "<th>" + "Compañía" + "</th>" + "<th>" + "Descripción" + "</th>" + "<th>" + "Clasificación" + "</th>" 
+					+ "<th>" + "Giro" + "</th>" + "<th>" + "Semestre" + "</th>" + "</tr>";
 
 					for(i = 0; i < jsonResp.length; i++){
 
-					 newHtml += "<tr>" + "<td>" + jsonResp[i].name + "</td>" + "<td>" + jsonResp[i].rank + "</td>" + "<td>"
-					 + "<select id = 'apto'>" + "<option value='0'>" + "Apto" + "</option>" + "<option value='1'>"
-					 + "SI" + "</option>" + "<option value='2'>" + "NO" + "</option>" + "</select>" + "</td>"
-					 + "<td>" + "<input align='center' class='viewPButton' type='submit' name='View' "  + "</td>" 
-					 + "<td class='hidden'>" + jsonResp[i].id + "</td>" + "</tr>";
+					 newHtml += "<tr>" + "<td align='center'>" + jsonResp[i].name + "</td>" + "<td align='center'>" + jsonResp[i].company + "</td>" 
+					 + "<td width='40%' align='justify'>" + jsonResp[i].description + "</td>" + "<td align='center'>" + jsonResp[i].classification + "</td>" 
+					 + "<td width='30%' align='justify'>" + jsonResp[i].business + "</td>" + "<td align='center'>" + jsonResp[i].semester + "</td>"
+					 + "</tr>";
 					}
 
 					newHtml += "</table>";
