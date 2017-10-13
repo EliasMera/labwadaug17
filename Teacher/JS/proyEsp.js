@@ -90,7 +90,8 @@ $(document).ready(function(){
 	});
 
 	$("#mainBody").on("click",".btnEdit", function(){
-
+		sessionStorage.setItem('matricula', $(this).attr("name"));
+		window.location.replace("EditaAlumnos.html");
 		//saco numero de grupo
 		//var grupo = $(this).closest('td').next().text();
 

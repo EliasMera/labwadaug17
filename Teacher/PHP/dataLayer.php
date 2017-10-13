@@ -48,7 +48,7 @@ function registerTeacher($teacherId, $userPassword, $name){
 
 }
 
-function registerAlum($mat, $userPassword, $grupo, $project){
+function registerAlum($mat, $userPassword, $grupo, $project, $nom, $carr, $acamail, $permail, $cell){
 	$conn = connectionToDataBase();
 	$sql = "SELECT studentId FROM Students WHERE studentId = '$mat'";
 	$result = $conn->query($sql);
@@ -58,10 +58,29 @@ function registerAlum($mat, $userPassword, $grupo, $project){
 		return array("status" => "NAMEINUSE");
 	}
 	else{
-		$sql = "INSERT INTO Students (studentId, group_id, passwrd, project_id) VALUES ('$mat', '$grupo', '$userPassword', '$project')";
+		$sql = "INSERT INTO Students (studentId, group_id, passwrd, project_id, name, bachelor, academicEmail, personalEmail, cellphone) VALUES ('$mat', '$grupo', '$userPassword', '$project', '$nom', '$carr', '$acamail', '$permail', '$cell')";
 		if(mysqli_query($conn, $sql)){
 			return array("status" => "SUCCESS");
 		}
+	}
+}
+
+function editAlumni($mat, $grupo, $project, $nom, $carr, $acamail, $permail, $cell){
+	$conn = connectionToDataBase();
+	if ($conn != null){
+		$sql = "SELECT * FROM Teachers WHERE teacherId = '$teacherId'";
+
+		$sql = "UPDATE Students SET name = '$nom', bachelor = '$carr', academicEmail = '$acamail', personalEmail = '$permail', cellphone = '$cell' WHERE studentId = '$mat'";
+
+		if ($conn->query($sql) === TRUE) {
+			return array("status" => "SUCCESS");
+		    echo "Record updated successfully";
+		} else {
+		    echo "Error updating record: " . $conn->error;
+		}
+	}else{
+		$conn -> close();
+		return array("status" => "Conexion fallida con base de datos");
 	}
 }
 
@@ -164,6 +183,29 @@ function loadProjects(){
 	}
 }
 
+function getAlumni($matricula){
+	$results = array();
+	$conn = connectionToDataBase();
+	if ($conn != null){
+		$sql = "SELECT * FROM Students WHERE studentId = '$matricula'";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0){
+			while($row = $result -> fetch_assoc()){
+				$response = array('studentId' => $row['studentId'],
+					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicEmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
+
+				array_push($results, $response);
+			}
+			echo json_encode($results);
+		}
+		else{
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+		return array("status" => "SESSIONEXP");
+	}
+}
+
 function loadespProject($projectId){
 	$results = array();
 	$conn = connectionToDataBase();
@@ -224,7 +266,7 @@ function loadStudents($projectId,$grupoId){
 
 			while($row = $result -> fetch_assoc()){
 				$response = array('studentId' => $row['studentId'],
-					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
+					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicEmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
 
 				array_push($results,$response);
 			}

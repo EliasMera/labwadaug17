@@ -69,13 +69,5 @@ $(document).ready(function(){
 		sessionStorage.setItem('grupo', $(this).closest('td').next().text());
 		sessionStorage.setItem('grupoId', $(this).closest('td').next().next().text());
 		window.location.replace("Grupo.html");
-		
-
 	});
-
-
-
-
-
-
 });

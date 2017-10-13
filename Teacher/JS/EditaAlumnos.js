@@ -2,38 +2,57 @@ $(document).ready(function(){
     var curso = sessionStorage.getItem("curso");
     var grupo = sessionStorage.getItem("grupoId");
     var project = sessionStorage.getItem("projectId");
+    var matricula = sessionStorage.getItem("matricula");
+    $("#matricula").val(matricula);
+
+    var jsonAlumn = {
+        "action" : "GETALUMNI",
+        "matricula" : matricula
+    };
+
+    $.ajax({
+        url: "PHP/applicationLayer.php",
+        type: "POST",
+        data : jsonAlumn,
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        success: function(jsonResponse){
+            var matricula = jsonResponse[0].studentId;
+            var nombre = jsonResponse[0].name;
+            var carrera = jsonResponse[0].bachelor;
+            var acamail = jsonResponse[0].academicEmail;
+            var permail = jsonResponse[0].personalEmail;
+            var cell = jsonResponse[0].cellphone;
+            $("#nombre").val(nombre);
+            $("#carrera").val(carrera);
+            $("#correoTec").val(acamail);
+            $("#correoX").val(permail);
+            $("#celular").val(cell);
+        },
+        error: function(errorMessage) {
+        }
+    });
 
     $("#btnCancelar").on("click",function(){
         window.location.replace("ProyectoEspecifico.html");
     });
 
-    $("#btnRegAlumno").on("click",function(){
+    $("#btnEditAlumno").on("click",function(){
         var mat = $("#matricula").val();
-        var passwrd = $("#passwrd").val();
-        var passwrd2 = $("#passwrdC").val();
         var nom = $("#nombre").val();
         var carr = $("#carrera").val();
         var acamail = $("#correoTec").val();
         var permail = $("#correoX").val();
         var cell = $("#celular").val();
 
-        if( passwrd == "" ){
-            if(passwrd != passwrd2){
-                alert("Error, no coinciden las contraseñas");
-            }
-            else{
-                alert("Error, llenar los campos de matricula y contraseña usando la matricula del alumno");
-            }
-        }
         var jsonToSend = {
-            "action"    : "REGISTERA",
+            "action"    : "EDITALUMNI",
             "mat"       : mat,
             "nom"       : nom,
             "carr"      : carr,
             "acamail"   : acamail,
             "permail"   : permail,
             "cell"      : cell,
-            "passwrd"   : passwrd,
             "grupoId"   : grupo,
             "projectId" : project
         }
@@ -45,8 +64,8 @@ $(document).ready(function(){
             async: false,
             contentType : "application/x-www-form-urlencoded",
             success: function(jsonResponse){
-                alert("Alumno Registrado");
-                window.location.replace("ProyectoEspecifico.html")
+                alert("Alumno Actualizado");
+                window.location.replace("ProyectoEspecifico.html");
             },
             error : function(errorMessage){
                 alert(errorMessage.responseText);

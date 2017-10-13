@@ -26,6 +26,10 @@
 			break;
 		case "DELETESTUDENT"	: deleteStudentFunc();
 			break;
+		case "EDITALUMNI"		: editAlumniFunc();
+			break;
+		case "GETALUMNI"		: getAlumniFunc();
+			break;
 	}
 
 	function teacherRegisterFunc(){
@@ -123,19 +127,53 @@
 		}
 	}
 
-	function alumniRegisterFunc(){
+	function editAlumniFunc(){
+		$nom = $_POST["nom"];
+        $carr = $_POST["carr"];
+        $acamail = $_POST["acamail"];
+        $permail = $_POST["permail"];
+        $cell = $_POST["cell"];
 		$mat = $_POST["mat"];
-		$userPassword = encryptPassword();
 		$grupo = $_POST["grupoId"];
 		$project = $_POST["projectId"];
 
-		$result = registerAlum($mat, $userPassword, $grupo, $project);
+		$result = editAlumni($mat, $grupo, $project, $nom, $carr, $acamail, $permail, $cell);
 
 		if ($result["status"] == "NAMEINUSE"){
 			header('HTTP/1.1 409 Conflict, Username already in use');
 			echo json_encode(array("message" => "Ese alumno ya existe"));
 		}	
-		else
+		else{
+			if ($result["status"] == "BADCRED"){
+				echo json_encode(array("message" => "Wrong credentials provided"));
+
+			}
+			else{
+				if ($result["status"] == "SUCCESS"){
+					echo json_encode(array("message" => "Registro exitoso"));
+				}
+			}
+		}
+	}
+
+	function alumniRegisterFunc(){
+		$nom = $_POST["nom"];
+        $carr = $_POST["carr"];
+        $acamail = $_POST["acamail"];
+        $permail = $_POST["permail"];
+        $cell = $_POST["cell"];
+		$mat = $_POST["mat"];
+		$userPassword = encryptPassword();
+		$grupo = $_POST["grupoId"];
+		$project = $_POST["projectId"];
+
+		$result = registerAlum($mat, $userPassword, $grupo, $project, $nom, $carr, $acamail, $permail, $cell);
+
+		if ($result["status"] == "NAMEINUSE"){
+			header('HTTP/1.1 409 Conflict, Username already in use');
+			echo json_encode(array("message" => "Ese alumno ya existe"));
+		}	
+		else{
 			if ($result["status"] == "BADCRED"){
 				echo json_encode(array("message" => "Wrong credentials provided"));
 
@@ -148,22 +186,26 @@
 
 			}
 		}
+	}
 
 	function loadprojectFunc(){
-
 		$result = loadProjects();
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+	}
 
+	function getAlumniFunc(){
+		$matricula = $_POST["matricula"];
+		$result = getAlumni($matricula);
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
 		}
 	}
 
 	function loadespprojectFunc(){
-
 		$projectId = $_POST["projectId"];
-
 		$result = loadespProject($projectId);
-
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
 		}

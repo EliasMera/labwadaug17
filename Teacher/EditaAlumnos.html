@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registrar un alumno</title>
+  <meta charset="UTF-8">
+  <link href="CSS/style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="JS/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="JS/EditaAlumnos.js"></script>
+</head>
+<body>
+	<h1>Muestra Empresarial</h1>
+	<ul id="tabBar">
+		<li><input id="homeBtn" type="submit" value="Inicio"></li>
+	</ul>
+	<div id="mainBody">
+	</div>
+
+	<br><br>
+	<form>
+		<fieldset>
+			<legend>Informaci&oacute;n del alumno</legend>
+			Matrícula
+			<input type="text" id="matricula" placeholder="A00000000" disabled>
+			<br><br>
+			Nombre
+			<input type="text" id="nombre" name="name">
+			<br><br>
+			Carrera
+			<input type="text" id="carrera" name="bachelor">
+			<br><br>
+			Correo Institucional
+			<input type="text" id="correoTec" placeholder="a00000000@itesm.mx">
+			<br><br>
+			Correo Personal
+			<input type="text" id="correoX">
+			<br><br>
+			Celular
+			<input type="text" id="celular">
+			<br><br>
+		</fieldset>
+	</form>
+	<br><br>
+	<input type="submit" value="Cancelar" id="btnCancelar">
+	<input type="submit" value="Guardar" id="btnEditAlumno">
+</body>
+</html>
