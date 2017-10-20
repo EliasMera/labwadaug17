@@ -166,12 +166,12 @@ function getcookieFunction(){
 
 function registerProject(){
 
-	$name = $_POST["name"];
-	$company = $_POST["company"];
-	$description = $_POST["description"];
-	$classification = $_POST["classification"];
-    $business = $_POST["business"];
-    $semester = $_POST["semester"];
+	$newName = $_POST["name"];
+	$newCompany = $_POST["company"];
+	$newDescription = $_POST["description"];
+	$newClassification = $_POST["classification"];
+    $newBusiness = $_POST["business"];
+    $newSemester = $_POST["semester"];
 
     $result = attemptRegister($name, $company, $description, $classification, $business, $semester);
 

@@ -182,7 +182,7 @@
 		if ($conn != null)
 		{
 			$sql = "UPDATE Projects SET name = '$name', company = '$company', description = '$description', 
-					classification = '$classification', business = '$business', semester = '$semester' 
+					classification = '$classification', business = '$business', semester = '$semester'
 					WHERE id = '9'";
 		}
 

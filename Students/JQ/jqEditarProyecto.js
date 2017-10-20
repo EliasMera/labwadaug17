@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-          $("#buttonRegister").on("click",function(){
+          $("#buttonSave").on("click",function(){
             var $name = $("#userName");
             var $company = $("#userPassword");
             var $description = $("#description");
@@ -29,7 +29,7 @@ $(document).ready(function() {
                     window.location.replace("base.html");
                 },
                 error : function(errorMessage){
-                    alert("No se asignó");
+                    alert("No se pudo hacer el cambio");
                     window.location.replace("base.html");
                 }
             });
