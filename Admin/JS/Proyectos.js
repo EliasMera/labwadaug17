@@ -5,6 +5,30 @@ $(document).ready(function(){
 		window.location.replace("RegistrarGruposMaestros.html");
 	});
 
+    $('#changePassw').on("click", function() {
+        window.location.replace("CambiarContrasena.html");
+    });
+
+    $('#logoutBtn').on("click", function() {
+        var jsonToSend = {
+            "action" : "LOGOUT"
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.replace("LoginAdmin.html");
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
+
 	$('body').delegate('.cellButton', 'click', function(){
 		var id = $(this).parent().find('td:eq(0)').text();
 		var jsonToSend = {
@@ -58,6 +82,25 @@ $(document).ready(function(){
             }
         });
 	});
+
+    $("#selection").on("click", function() {
+        var jsonToSend = {
+            "action" : "SELECTPROJECTS"
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                alert('success');
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
 });
 
 function loadAllProjects() {

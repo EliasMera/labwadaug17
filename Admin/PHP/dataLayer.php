@@ -176,7 +176,76 @@ function attemptViewProjectDetails($id) {
 		    return $response;
 		}
 	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
 }
 
+function attemptSelectParticipantProjects() {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptGetProjectClassifications() {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT * FROM project_classifications";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			// response json
+			$response = array("status" => "SUCCESS");
+			// query items
+			$resp = array();
+			while ($row = $result->fetch_assoc()) {
+				$project = array('id' => $row['id'], 'name' => utf8_encode($row['val']));
+		    	array_push($resp, $project);
+			}
+			array_push($response, $resp);
+			$conn -> close();
+		    return $response;
+		}
+		else {
+			$conn -> close();
+			return array("status" => "NOT FOUND");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptChangePassword($encPasswd) {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$user = $_SESSION["userId"];
+		$sql = "UPDATE Administrador SET passwrd = '$encPasswd' WHERE adminId = '$user'";
+
+		if (mysqli_query($conn, $sql)) 
+    	{
+		    $conn -> close();
+		    return array("status" => "SUCCESS");
+		} 
+		else 
+		{
+			$conn -> close();
+			return array("status" => "CANNOT UPDATE");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
 
 ?>

@@ -16,13 +16,30 @@
 	<li><input id="homeBtn" type="submit" value="Inicio"></li>
   <li><input id="configureBtn" type="submit" value="Configurar Semestre"></li>
   <li><input id="projectsBtn" type="submit" value="Proyectos"></li>
+  <li><input id="changePassw" type="submit" value="Cambiar Contraseña"></li>
   <li><input id="logoutBtn" type="submit" value="Cerrar sesión"></li>
 </ul>
 <div id="mainBody">
 	<fieldset>
-		<legend>Poblar base de datos</legend>
+		<legend>Registrar grupos del semestre</legend>
 		<input id="fileUp" type="file" value="Subir archivo">
 	</fieldset>
+  <fieldset>
+    <legend>Archivos requisito para la muestra</legend>
+    <table id="files"></table>
+  </fieldset>
+  <fieldset>
+    <legend>Administrar las clasificaciones sectoriales</legend>
+    <input type="submit" id="addClassification" value="Nueva clasificación">
+    <table id="classifications">
+      <thead>
+        <tr>
+          <th>Clasificación Sectorial</th>
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </fieldset>
 </div>
 </body>
 </html>

@@ -17,6 +17,14 @@ switch($action){
 			break;
 	case "PROJECTDETAILS" : viewProjectDetails();
 			break;
+	case "SELECTPROJECTS" : selectParticipantProjects();
+			break;
+	case "GETCLASSIFICATIONS" : getProjectClassifications();
+			break;
+	case "CHANGEPASSWORD" : changePassword();
+			break;
+	case "LOGOUT" : logout();
+			break;
 }
 
 function populateTeachersGroups() {
@@ -207,6 +215,73 @@ function viewProjectDetails() {
 	else {
 		header('HTTP/1.1 500' . "NO SESSION");
 		die("NO SESSION");
+	}
+}
+
+function selectParticipantProjects() {
+	if (isset($_SESSION["userId"])) {
+		$result = attemptSelectParticipantProjects();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function getProjectClassifications() {
+	if (isset($_SESSION["userId"])) {
+		$result = attemptGetProjectClassifications();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function changePassword() {
+	if (isset($_SESSION["userId"])) {
+
+		$data = $_POST["newPassword"];
+		$encPasswd = encryptionPass($data);
+
+		$result = attemptChangePassword($encPasswd);
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function logout() {
+	session_unset();
+	session_destroy();
+	if (isset($_SESSION["userId"])){
+		header('HTTP/1.1 500' . "Logut error");
+		die("Logut error");
+	}
+	else {
+		echo json_encode(array("status" => "SUCCESS"));
 	}
 }
 

@@ -1,10 +1,35 @@
 $(document).ready(function(){
 
-  $("#fileUp").change(handleFile);
+    $("#fileUp").change(handleFile);
 
     $('#projectsBtn').on("click", function() {
         window.location.replace("Proyectos.html");
     });
+
+    $('#changePassw').on("click", function() {
+        window.location.replace("CambiarContrasena.html");
+    });
+
+    $('#logoutBtn').on("click", function() {
+        var jsonToSend = {
+            "action" : "LOGOUT"
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.replace("LoginAdmin.html");
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
+    getClassifications();
 
 });
 
@@ -62,3 +87,30 @@ function handleFile(e) {
 
                        
    }
+
+function getClassifications() {
+    var jsonToSend = {
+        "action" : "GETCLASSIFICATIONS"
+    }
+    $.ajax({
+        url : "../PHP/applicationLayer.php",
+        type : "POST",
+        data : jsonToSend,
+        dataType : "json",
+        contentType : "application/x-www-form-urlencoded",
+        success : function(jsonResponse){
+            for (var i = 0; i <= jsonResponse[0].length; i++) {
+                $(jsonResponse[0][i]).each(function() {
+                    var row = $("<tr>");
+                    row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
+                    row.append( $('<td>').text(jsonResponse[0][i].name));
+                    row.append( $('<td>').append($('<input id="deleteClassification" type="button" data-toggle="modal" data-target="#myModal" value="Eliminar"/>')));
+                    $("#classifications").append(row); 
+                });
+            }
+        },
+        error : function(errorMessage){
+            alert(errorMessage.responseText);
+        }
+    });
+}

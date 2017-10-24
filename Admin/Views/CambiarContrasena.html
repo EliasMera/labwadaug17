@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Muestra Empresarial</title>
+	<meta charset="UTF-8">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../JS/jquery.js"></script>
+	<script type="text/javascript" src="../JS/changePassword.js"></script>
+</head>
+<body>
+	<h1>Muestra Empresarial</h1>
+	<ul id="tabBar">
+		<li><input id="homeBtn" type="submit" value="Inicio"></li>
+		<li><input id="configureBtn" type="submit" value="Configurar Semestre"></li>
+		<li><input id="projectsBtn" type="submit" value="Proyectos"></li>
+		<li><input id="changePassw" type="submit" value="Cambiar Contraseña"></li>
+		<li><input id="logoutBtn" type="submit" value="Cerrar sesión"></li>
+	</ul>
+	<div id="resDiv">
+	</div>
+	<br>
+	<div id="mainBody" style="margin-left:45px; font-size: 20px;" >
+		Contraseña Actual: <br><input type="password" size="30" id="oldPassw"> <br><br>
+		Contraseña Nueva: <br><input type="password" size="30" id="newPassw"> <br><br>
+		Confirmación Nueva Contraseña: <br><input type="password" size="30" id="newPasswConfirm"> <br><br>
+		<input id="changePasswBtn" type="submit" value="Cambiar Contraseña">
+
+	</div>
+</body>
+</html>
