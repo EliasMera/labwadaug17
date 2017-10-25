@@ -11,7 +11,7 @@ CREATE TABLE Groups (
 	id INT NOT NULL AUTO_INCREMENT,
 	groupNumber INT NOT NULL,
 	courseKey VARCHAR(8),
-	teacher_id INT,
+	teacher_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (teacher_id)
         REFERENCES Teachers(id)
@@ -28,7 +28,8 @@ CREATE TABLE Projects (
 	semester VARCHAR(5) NOT NULL,
 	recomended BOOLEAN,
 	rank INT,
-	active BOOLEAN NOT NULL,
+	active BOOLEAN NOT NULL DEFAULT 1,
+	participant BOOLEAN DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -125,7 +126,7 @@ enfoque en las áreas del conocimiento más relevantes para el futuro.", "EM-15"
 ('Guantes electrónicos para TKD', 'Tae Tech',
 'Guantes de taekwondo con un sistema de puntuación electrónico para taekwondoines que compiten en las diversas justas deportivas que se organizan a nivel local, nacional e internacional. La idea es atender tanto al mercado de comisiones y organizaciones de taekwondo, así como a los pequeños gimnasios y entrenadores que desarrollan a los atletas que compiten en estas competencias.',
 'DEPORTIVO Y ELECTRÓNICO', 'Industrial', 'AD-15', 0),
-('Comprando Ando', 'Emprendiendo Andamos',
+(ewei 3'Comprando Ando', 'Emprendiendo Andamos',
 'Una aplicación móvil llamada “Comprando Ando” que funciona como extensión de los escaparates de las tiendas de un centro comercial para hacer llegar publicidad de sus productos y descuentos a las manos de presuntos consumidores en un tiempo estratégico',
 'ELECTRÓNICA Y COMUNICACIONES', 'Servicios', 'AD-15', 0);
 
