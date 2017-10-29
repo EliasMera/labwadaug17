@@ -181,12 +181,15 @@
 
 		if ($conn != null)
 		{
+			$projectId = $_SESSION['projectId'];
+
 			$sql = "UPDATE Projects SET name = '$name', company = '$company', description = '$description', 
 					classification = '$classification', business = '$business', semester = '$semester'
-					WHERE id = '9'";
+					WHERE id = '$projectId'";
+
+					$result = $conn-> query($sql);
 		}
 
-		$result = $conn-> query($sql);
 		if($conn->affected_rows > 0)
 		{
 			$response = array();

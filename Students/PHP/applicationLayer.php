@@ -24,7 +24,6 @@ switch($action){
 					break;
 	case "EDITPROJECT" : editProject();
 					break;
-
 }
 
 function loginFunction(){
@@ -50,7 +49,6 @@ function loginFunction(){
 				die("Wrong credentials");
 			}
 		}
-
 }
 
 function registerFunction(){
@@ -245,7 +243,5 @@ function editProject(){
 		die($result["status"]);
 	}
 }
-
-
 
 ?>
