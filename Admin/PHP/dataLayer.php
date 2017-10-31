@@ -186,9 +186,92 @@ function attemptSelectParticipantProjects() {
 	$conn = connectionToDataBase();
 
 	if ($conn != null) {
+		$sql = "SELECT DISTINCT p.id, p.recomended, t.id AS teacher, p.rank FROM Projects p, Groups g, Students s, Teachers t 
+		WHERE g.id = s.group_id AND p.id = s.project_id AND t.id = g.teacher_id ORDER BY teacher, rank";
 
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0)
+		{
+			$resp = array();
+			$response = array("status" => "SUCCESS");
+			// output data of each row
+		    while($row = $result->fetch_assoc()) 
+		    {
+		    	$aux = array('project' => $row['id'], 'recomended' => $row['recomended'], 'rank' => $row['rank'],
+		    	'teacher' => $row['teacher']);
+
+		    	array_push($resp, $aux);     
+			}
+			// en resp estan todos los proyectos
+
+			$cantProyectosXMaestro = array();
+			$cantidad = 1;
+
+			for ($i = 1; $i < count($resp); $i++) {
+				if ($resp[$i]['teacher'] != $resp[$i-1]['teacher']) {
+					array_push($cantProyectosXMaestro, $cantidad);
+					$cantidad = 1;
+				}
+				else {
+					$cantidad++;
+				}
+			}
+			array_push($cantProyectosXMaestro, $cantidad); // llenar último maestro
+
+			$k = 0; // iterador global de proyectos en resp
+			$seleccionados = array();
+
+			// por cada maestro
+			for ($i = 0; $i < count($cantProyectosXMaestro); $i++) {
+
+				// limite de proyectos que puede seleccionar el maestro actual
+				$lim = round(($cantProyectosXMaestro[$i] / 2), 0, PHP_ROUND_HALF_UP);
+
+				$cantidad = 0; // cantidad de proyectos seleccionados del maestro actual
+
+				// por cada proyecto del maestro actual
+				for ($j = $k; $j < $cantProyectosXMaestro[$i] + $k; $j++) {
+					// si no se ha seleccionado la cantidad limite Y el proyecto fue recomendado
+					if ($cantidad < $lim && $resp[$j]['recomended'] == 1) {
+						// meter proyecto a arreglo de seleccionados
+						array_push($seleccionados, $resp[$j]['project']);
+						$cantidad++;
+					}
+				}
+				$k = $cantProyectosXMaestro[$i];
+			}
+			// en este punto $seleccionados tiene los ids de los proyectos seleccionados
+
+			if (count($seleccionados) > 0) {
+				// hacer update a la DB
+				$sql = "UPDATE Projects SET participant = 1 WHERE id IN(".implode(',',$seleccionados).")";
+
+				if (mysqli_query($conn, $sql)) {
+					$conn -> close();
+			    	return array("status" => "SUCCESS");
+				}
+				else {
+					$conn -> close();
+					return array("status" => "CANNOT UPDATE");
+				}
+				// array_push($response, $seleccionados);
+				// $conn -> close();
+			 	//    return $response;
+			}
+			else {
+				$conn -> close();
+				return array("status" => "NO HAY PROYECTOS RECOMENDADOS");
+			}
+			
+		}
+		else
+		{
+	    	$conn -> close();
+			return array("status" => "NO MATCHES FOUND");
+		}
 	}
-	else {
+	else{
 		$conn -> close();
 		return array("status" => "CONNECTION WITH DB WENT WRONG");
 	}
