@@ -158,6 +158,44 @@ function loginTeacher($teacherId, $save){
 	}
 }
 
+function attemptLogout(){
+
+	session_start();
+ 	//unset session variables
+ 	unset($_SESSION['id']);
+ 	unset($_SESSION['name']);
+ 	session_destroy();
+
+    return array("status" => "SUCCESS");
+
+	
+}
+
+		function attemptchangePassword($newEncrPassword){
+
+		$conn = connectionToDataBase();
+
+		$currentUser = $_SESSION['id'];
+		$sql = "UPDATE Teachers set passwrd = '$newEncrPassword' WHERE teacherId = '$currentUser'";
+		$result = $conn->query($sql);
+
+		if($result->num_rows > 0){
+
+			while($row = $result->fetch_assoc()){
+				$response = array('username' => $row['username'], 'fName' => $row['fName'], 'lName' => $row['lName'], 'email' => $row['email'], 'gender' => $row['gender'], 'country' => $row['country']);
+			}
+
+			echo json_encode($response);
+		}
+		else{
+
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+
+		return array("status" => "SESSIONEXP");
+	}
+
 function attemptGetCookie(){
 	if (isset($_COOKIE["id"])){
 		return array("status" => "SUCCCOOKIE");

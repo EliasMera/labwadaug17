@@ -8,6 +8,8 @@
 	switch($action){
 		case "LOGIN" 			: teacherLoginFunc();
 			break;
+		case "LOGOUT"			: teacherLogOutFunc();
+			break;
 		case "TREGISTER"		: teacherRegisterFunc();
 			break;
 		case "GETCOOKIE"		: getcookieFunction();
@@ -33,6 +35,8 @@
 		case "UPDATERECOMMEND"	: updateRecommendFunc();
 			break;
 		case "UPDATEPRIORITY"	: updatePriorityFunc();
+			break;
+		case "CHANGEPASS" : changePassFunc();
 			break;
 	}
 
@@ -84,6 +88,36 @@
 			header('HTTP/1.1 500' . $result["status"]);
 			die($result["status"]);
 		}	
+	}
+
+	function changePassFunc(){
+
+	session_start();
+	
+	//$newPassword = $_POST['newPassword'];
+	$newEncrPassword = encryptPassword();
+	$result = attemptchangePassword($newEncrPassword);
+
+		if($result["status"] == "BADCRED"){
+			
+			echo json_encode(array("message" => "Wrong credentials provided!"));
+			
+			}
+		}
+	
+
+
+	function teacherLogOutFunc(){
+
+	$result = attemptLogout();
+    
+    if ($result["status"] == "SUCCESS"){
+		echo json_encode(array("message" => "Logout succesfull"));
+	}	
+	else{
+		header('HTTP/1.1 500' . $result["status"]);
+		die($result["status"]);
+		}
 	}
 
 
