@@ -8,6 +8,8 @@ $action = $_POST["action"];
 switch($action){
 	case "LOGIN" : loginFunction();
 					break;
+	case "LOGOUT" : logoutFunction();
+					break;
 	case "REGISTER" : registerFunction();
 					break;
 	case "CHPASSWORD" : chpasswordFunction();
@@ -142,18 +144,6 @@ function encryptionPass($userPassword){
 	return $userPassword;
 }
 
-function logoutFunction(){
-	$result = attemptLogout();
-
-	if($result["status"] == "SUCCESS"){
-		echo json_encode(array("message" => "Logout Succesfully"));
-	}
-	else{
-		header('HTTP/1.1 500' . $result["status"]);
-		die($result["status"]);
-	}
-}
-
 function getcookieFunction(){
 	$result = attemptGetCookie();
 
@@ -189,9 +179,8 @@ function editProject(){
 	$description = $_POST["description"];
 	$classification = $_POST["classification"];
     $business = $_POST["business"];
-    $semester = $_POST["semester"];
     
-	$result = attemptEditProject($name, $company, $description, $classification, $business, $semester);
+	$result = attemptEditProject($name, $company, $description, $classification, $business);
 
     if($result["status"] == "SUCCESS"){
 		echo json_encode(array("message" => "Edit Succesfully!"));
@@ -241,6 +230,18 @@ function editProject(){
 	else{
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
+	}
+}
+
+function logoutFunction(){
+	session_unset();
+	session_destroy();
+	if (isset($_SESSION["studentId"])){
+		header('HTTP/1.1 500' . "Logut error");
+		die("Logut error");
+	}
+	else {
+		echo json_encode(array("status" => "SUCCESS"));
 	}
 }
 

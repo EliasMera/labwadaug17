@@ -175,27 +175,19 @@
         }
 	}
 
-	function attemptEditProject($name, $company, $description, $classification, $business, $semester){
+	function attemptEditProject($name, $company, $description, $classification, $business){
 
 		$conn = connectionToDataBase();
+		session_start();
+		$idProject = $_SESSION['projectId'];
 
 		if ($conn != null)
 		{
-			$projectId = $_SESSION['projectId'];
-
-			$sql = "UPDATE Projects SET name = '$name', company = '$company', description = '$description', 
-					classification = '$classification', business = '$business', semester = '$semester'
-					WHERE id = '$projectId'";
-
-					$result = $conn-> query($sql);
-		}
-
-		if($conn->affected_rows > 0)
-		{
-			$response = array();
-			echo json_encode($response);
+			$sql = "UPDATE Projects set name = '$name', company = '$company', description = '$description', classification ='$classification', business = '$business' WHERE id = '$idProject'";
+			$result = $conn-> query($sql);
 			return array("status" => "SUCCESS");
 		}
+
 	}
 
 	function loadProjects(){

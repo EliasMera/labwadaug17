@@ -26,6 +26,30 @@ $(document).ready(function() {
 
     });
 
+
+/////////////////// CHECA SI TIENE GRUPO
+
+
+    $("#logoutBtn").on("click", function() {
+        var jsonToSend = {
+            "action" : "LOGOUT"
+        }
+        $.ajax({
+            url : "PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.replace("LoginAlumnos.html");
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
+
     $("#homeBtn").on("click",function(){
         window.location.replace("base.html");
     });

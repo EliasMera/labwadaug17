@@ -6,7 +6,6 @@ $(document).ready(function() {
             var $description = $("#description");
             var $classification = $("#classification");
             var $business = $("#business");
-            var $semester = $("#semester");
 
             var jsonToSend = {
             	"action" : "EDITPROJECT",
@@ -14,8 +13,7 @@ $(document).ready(function() {
                 "company" : $("#company").val(),
                 "description" : $("#description").val(),
                 "classification" : $("#classification").val(),
-                "business" : $("#business").val(),
-                "semester" : $("#semester").val()
+                "business" : $("#business").val()
             };
 
             $.ajax({
@@ -25,11 +23,9 @@ $(document).ready(function() {
                 dataType : "json",
                 contentType : "application/x-www-form-urlencoded",
                 success: function(jsonResponse){
-                	alert("Se Guardo correctamente");
                     window.location.replace("base.html");
                 },
                 error : function(errorMessage){
-                    alert("No se pudo hacer el cambio");
                     window.location.replace("base.html");
                 }
             });
