@@ -175,6 +175,35 @@
         }
 	}
 
+	function showProjects(){
+
+		$conn = connectionToDataBase();
+
+		session_start();
+		$idProject = $_SESSION['projectId'];
+
+		$results = array();
+
+		$sql = "SELECT name, company, description, classification, business FROM Projects WHERE id = '$idProject'";
+
+		$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					$response = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']));
+					array_push($results,$response);
+				}
+				
+					echo json_encode($results);
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "DISCONNECTION");
+			}
+	}
+
 	function attemptEditProject($name, $company, $description, $classification, $business){
 
 		$conn = connectionToDataBase();

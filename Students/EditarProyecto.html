@@ -13,12 +13,19 @@
 		<li><input id="homeBtn" type="submit" value="Inicio"> </li>
 		<li><input id="historialBtn" type="submit" value="Historial de Proyectos"> </li>
 		<li><input id="regisBtn" type="submit" value="Registrar Proyecto" style="display: none;"> </li>
-		<li><input id="editProj" type="submit" value="Editar Proyecto" style="display: none;"> </li>
+		<li><input id="editProj" type="submit" value="Ver Proyecto" style="display: none;"> </li>
 		<li><input id="changePassw" type="submit" value="Cambiar Contraseña"> </li>
 		<li><input id="logoutBtn" type="submit" value="Cerrar Sesión"> </li>
 	</ul>
 	<br>
-	<div align="center">
+		</div>
+		<div id="mainBody">
+		</div>
+		<br>
+
+		<input type="submit" id="buttonEdit" value="Editar">
+
+	<div align="center" id="change" class="active">
 			<fieldset align="center" style="width:270px">
 
 			<legend><font size="3"> <b>Modificación de Proyecto</b> </font></legend>
@@ -28,14 +35,13 @@
 			Compañía: <br><input type="text" size="30" id="company"> <span id="errorLabelUserName"></span> <br><br>
 			Descripción: <br><input type="text" size="30" id="description"> <span id="errorLabelUserName"></span> <br><br>
 			Clasificación: <br><input type="text" size="30" id="classification"> <span id="errorLabelUserName"></span> <br><br>
-			Negocio: <br><input type="text" size="30" id="business"> <span id="errorLabelUserName"></span> <br><br>
+			Giro: <br><input type="text" size="30" id="business"> <span id="errorLabelUserName"></span> <br><br>
 			<form action="base.html">
-			<input type="submit" id="buttonCancel" value="Cancelar">
+			<input type="button" id="buttonCancel2" value="Cancelar">
 			<input type="submit" id="buttonSave" value="Guardar">
 
 			</div>
 			</fieldset>
-	</div>
 	</body>
 
 </html>

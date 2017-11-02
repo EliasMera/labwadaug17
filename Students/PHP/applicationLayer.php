@@ -26,6 +26,8 @@ switch($action){
 					break;
 	case "FINDPROJECTS"	: findprojectFunc();
 					break;
+	case "SHOWPROJECT" : showProject();
+					break;
 	case "EDITPROJECT" : editProject();
 					break;
 }
@@ -172,6 +174,20 @@ function registerProject(){
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
 	}
+}
+
+function showProject(){
+
+	$result = showProjects();
+
+		if($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Projects"));
+		}
+		else
+			if ($result["status"] == "BADCONN"){
+				header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
+				echo json_encode(array("message" => "Error, something went wrong"));
+		}	
 }
 
 function editProject(){
