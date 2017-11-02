@@ -122,6 +122,7 @@ function loginTeacher($teacherId, $save){
 	$conn = connectionToDataBase();
 
 	if ($conn != null){
+		
 		$sql = "SELECT * FROM Teachers WHERE teacherId = '$teacherId'";
 
 		$result = $conn->query($sql);
