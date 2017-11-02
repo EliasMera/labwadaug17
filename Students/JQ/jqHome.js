@@ -27,8 +27,27 @@ $(document).ready(function() {
     });
 
 
-/////////////////// CHECA SI TIENE GRUPO
+/////////////////// CHECA SI TIENE PROYECTO
+    var jsonSession = {
+        "action" : "CHECKHASPROYECT"
+    }
 
+    $.ajax({
+            url: "PHP/applicationLayer.php",
+            type: "POST",
+            data: jsonSession,
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(jsonResponse){
+                $("#editProj").show()
+                $("#regisBtn").hide()
+            },
+            error: function(errorMessage){
+                $("#editProj").hide()
+                $("#regisBtn").show()
+            }
+
+    });
 
     $("#logoutBtn").on("click", function() {
         var jsonToSend = {

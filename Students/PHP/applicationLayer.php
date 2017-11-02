@@ -18,6 +18,8 @@ switch($action){
 					break;
 	case "CHECKSESSION" : checksessionFunction();
 					break;
+	case "CHECKHASPROYECT" : checkproyectFunction();
+					break;
 	case "REGISTERPROJECT" : registerProject();
 					break;
 	case "LOADPROJECTS"	: loadprojectFunc();
@@ -230,19 +232,27 @@ function editProject(){
 	else{
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
+		}
 	}
-}
 
-function logoutFunction(){
-	session_unset();
-	session_destroy();
-	if (isset($_SESSION["studentId"])){
-		header('HTTP/1.1 500' . "Logut error");
-		die("Logut error");
+	function checkproyectFunction(){
+		session_start();
+		if($_SESSION["projectId"] != null){
+			echo json_encode(array("status" => "SUCCESS"));
+		}
+
 	}
-	else {
-		echo json_encode(array("status" => "SUCCESS"));
+
+	function logoutFunction(){
+		session_unset();
+		session_destroy();
+		if (isset($_SESSION["studentId"])){
+			header('HTTP/1.1 500' . "Logut error");
+			die("Logut error");
+		}
+		else {
+			echo json_encode(array("status" => "SUCCESS"));
+		}
 	}
-}
 
 ?>
