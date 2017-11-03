@@ -40,7 +40,7 @@ if(isset($_POST["submitBtn1"]))
 {
 	$fnm = $_FILES["subearchivo1"]["name"];
 	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+	move_uploaded_file($_FILES["subearchivo1"]["tmp_name"], $dst);
 
 	if($conn != null)
 	{
@@ -59,7 +59,7 @@ elseif(isset($_POST["submitBtn2"])){
 		
 	$fnm = $_FILES["subearchivo2"]["name"];
 	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+	move_uploaded_file($_FILES["subearchivo2"]["tmp_name"], $dst);
 
 	if($conn != null)
 	{
@@ -79,7 +79,7 @@ elseif(isset($_POST["submitBtn3"])){
 		
 	$fnm = $_FILES["subearchivo3"]["name"];
 	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+	move_uploaded_file($_FILES["subearchivo3"]["tmp_name"], $dst);
 
 	if($conn != null)
 	{
@@ -99,7 +99,7 @@ elseif(isset($_POST["submitBtn4"])){
 		
 	$fnm = $_FILES["subearchivo4"]["name"];
 	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+	move_uploaded_file($_FILES["subearchivo4"]["tmp_name"], $dst);
 
 	if($conn != null)
 	{
