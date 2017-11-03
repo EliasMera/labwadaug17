@@ -204,6 +204,35 @@
 			}
 	}
 
+	function showComments(){
+
+		$conn = connectionToDataBase();
+
+		session_start();
+		$idProject = $_SESSION['projectId'];
+
+		$results = array();
+
+		$sql = "SELECT comment FROM Project_Feedback WHERE project_id = '$idProject'";
+
+		$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					$response = array('comment' => utf8_encode($row['comment']));
+					array_push($results,$response);
+				}
+				
+					echo json_encode($results);
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "DISCONNECTION");
+			}
+	}
+
 	function attemptEditProject($name, $company, $description, $classification, $business){
 
 		$conn = connectionToDataBase();
