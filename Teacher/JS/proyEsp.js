@@ -40,6 +40,40 @@ $(document).ready(function(){
 
 	});
 
+	var jsonToSendF = {
+		"action"	: "LOADFEEDBACK",
+		"projectId"	: sessionStorage.getItem("projectId")
+	}
+
+	$.ajax({
+		url: "PHP/applicationLayer.php",
+		type: "POST",
+		data : jsonToSendF,
+		dataType: "json",
+		async:false,
+		contentType: "application/x-www-form-urlencoded",
+		success: function(jsonResponse){
+			var comentarios = "<br> Comentarios <br>";
+			comentarios += "<textarea id='feed' rows='5' cols='150' disabled>";
+			for(i = 0; i < jsonResponse.length; i++){
+				comentarios += jsonResponse[i].comment;	
+			}
+			comentarios += "</textarea><br>";
+			comentarios += "<input type='submit' id='editaFeed' value='Editar' />  ";
+			comentarios += "<input type='submit' id='guardaFeed' value='Guardar' /><br>";
+			$("#mainBody").append(comentarios);
+		},
+		error: function(errorMessage){
+			var comentarios = "<br> Comentarios <br>";
+			comentarios += "<textarea id='feed' rows='5' cols='150' disabled>";
+			comentarios += ""; //agrega feedback
+			comentarios += "</textarea><br>";
+			comentarios += "<input type='submit' id='editaFeed' value='Editar' />  ";
+			comentarios += "<input type='submit' id='guardaFeed' value='Guardar' /><br>";
+			$("#mainBody").append(comentarios);
+		}
+	});
+
 
 	var jsonToSend2 = {
 		"action" 	: "LOADSTUDENTS",
@@ -76,7 +110,7 @@ $(document).ready(function(){
 				+ "</tr>";	
 			}
 			newHtml += "</table>";
-			var agrega = "<br><input type='submit' id='agregaBtn' value='Agregar integrante' /><br><br>";
+			var agrega = "<br><br><input type='submit' id='agregaBtn' value='Agregar integrante' /><br>";
 			$("#mainBody").append(agrega);
 			$("#mainBody").append(newHtml);	
 		},
@@ -85,23 +119,45 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#editaFeed").on("click", function(){
+		$("#feed").attr("disabled", false); 
+	});
+
+	$("#guardaFeed").on("click", function(){
+		$("#feed").attr("disabled", true);
+		var feed =  $('#feed').val(); 
+
+		var json2Send = {
+			"action"	: "SAVEFEEDBACK",
+			"comment"	: feed,
+			"projectId"	: sessionStorage.getItem("projectId")
+		}
+
+		$.ajax({
+			url: "PHP/applicationLayer.php",
+			type: "POST",
+			data : json2Send,
+			dataType: "json",
+			async : false,
+			contentType: "application/x-www-form-urlencoded",
+			success: function(jsonResponse){
+				location.reload();
+			},
+			error: function(errorMessage){
+				console.log("fallo guardar");
+			}
+		});
+	});	
+
 	$("#agregaBtn").on("click", function(){
-		window.location.replace("RegistroAlumnos.html")
+		window.location.replace("RegistroAlumnos.html");
 	});
 
 	$("#mainBody").on("click",".btnEdit", function(){
 		sessionStorage.setItem('matricula', $(this).attr("name"));
 		window.location.replace("EditaAlumnos.html");
-		//saco numero de grupo
-		//var grupo = $(this).closest('td').next().text();
-
-		/*var grupoId = $(this).closest('td').next().next().text();
-
-		sessionStorage.setItem('curso', $(this).attr("name"));
-		sessionStorage.setItem('grupo', $(this).closest('td').next().text());
-		sessionStorage.setItem('grupoId', $(this).closest('td').next().next().text());
-		window.location.replace("Grupo.html");*/
 	});
+
 
 	$("#mainBody").on("click",".btnBorra", function(){
 		var matr = $(this).attr("name");

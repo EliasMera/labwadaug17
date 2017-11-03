@@ -36,7 +36,11 @@
 			break;
 		case "UPDATEPRIORITY"	: updatePriorityFunc();
 			break;
-		case "CHANGEPASS" : changePassFunc();
+		case "CHANGEPASS" 		: changePassFunc();
+			break;
+		case "LOADFEEDBACK"		: loadFeedbackFunc();
+			break;
+		case "SAVEFEEDBACK"		: saveFeedbackFunc();
 			break;
 	}
 
@@ -303,8 +307,25 @@
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
 		}
-		if($result["status"] == "SUCCESS"){
-			echo json_encode(array("message" => "Login Successful"));
+	}
+
+	function loadFeedbackFunc(){
+		$projectId = $_POST["projectId"];
+		$result = loadFeedback($projectId);
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+	}
+
+	function saveFeedbackFunc(){
+		$comment = $_POST["comment"];
+		$projectId = $_POST["projectId"];
+		$result = saveFeedback($projectId, $comment);
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Registro exitoso"));
+		}
+		else{
+			echo json_encode(array("message" => "Wrong credentials provided"));
 		}
 	}
 

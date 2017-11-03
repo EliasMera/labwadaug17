@@ -68,7 +68,8 @@ CREATE TABLE Project_Feedback (
 	PRIMARY KEY (id),
 	FOREIGN KEY (project_id)
 		REFERENCES Projects(id)
-		ON DELETE CASCADE
+		ON DELETE CASCADE,
+	UNIQUE (project_id)
 );
 
 CREATE TABLE Files (

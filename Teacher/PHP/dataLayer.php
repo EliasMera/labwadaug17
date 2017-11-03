@@ -171,7 +171,7 @@ function attemptLogout(){
 	
 }
 
-		function attemptchangePassword($newEncrPassword){
+	function attemptchangePassword($newEncrPassword){
 
 		$conn = connectionToDataBase();
 
@@ -322,7 +322,43 @@ function deleteStudent($matricula){
 	}
 }
 
-function loadStudents($projectId,$grupoId){
+function loadFeedback($projectId){
+	$conn = connectionToDataBase();
+	$results = array();
+
+	if($conn != null){
+		$sql = "SELECT comment FROM Project_Feedback WHERE project_id = '$projectId'";
+		$result = $conn->query($sql);
+
+		if($result->num_rows > 0){
+			while($row = $result -> fetch_assoc()){
+				$response = array('comment' => $row['comment']);
+				array_push($results, $response);
+			}
+			echo json_encode($results);
+		}
+		else{
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+	}
+}
+
+function saveFeedback($projectId, $comment){
+	$conn = connectionToDataBase();
+
+	if($conn != null){
+		$sql = "INSERT INTO Project_Feedback (project_id, comment) VALUES('$projectId', '$comment') ON DUPLICATE KEY UPDATE project_id = '$projectId', comment = '$comment'";
+		if(mysqli_query($conn, $sql)){
+			return array("status" => "SUCCESS");
+		}
+		else{
+			return array("status" => "ERROR");
+		}
+	}
+}
+
+function loadStudents($projectId, $grupoId){
 	$results = array();
 	$conn = connectionToDataBase();
 
@@ -343,8 +379,7 @@ function loadStudents($projectId,$grupoId){
 			}
 			echo json_encode($results);
 		}
-		else
-		{
+		else{
 			$conn -> close();
 			return array("status" => "BADCRED");
 		}
