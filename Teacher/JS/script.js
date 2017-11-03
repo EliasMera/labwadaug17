@@ -5,7 +5,6 @@ $(document).ready(function(){
 	});
 
         $("#logoutBtn").click(function(){
-        	debugger;
 
         	var jsonLogout = {
             	    "action" : "LOGOUT"
