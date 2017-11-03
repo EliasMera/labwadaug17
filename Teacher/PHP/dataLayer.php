@@ -142,7 +142,7 @@ function loginTeacher($teacherId, $save){
 				setcookie("id", $row['id'], time()+86400*30, "/","", 0);
 			}
 
-			$_SESSION["id"] = $row['id'];
+			$_SESSION["teacherId"] = $row['teacherId'];
 			$_SESSION["name"] = $row['name'];
 			$passwrd = $row['passwrd'];
 			$conn -> close();
@@ -175,7 +175,7 @@ function attemptLogout(){
 
 		$conn = connectionToDataBase();
 
-		$currentUser = $_SESSION['id'];
+		$currentUser = $_SESSION['teacherId'];
 		$sql = "UPDATE Teachers set passwrd = '$newEncrPassword' WHERE teacherId = '$currentUser'";
 		$result = $conn->query($sql);
 

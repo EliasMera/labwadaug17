@@ -52,7 +52,7 @@ $(document).ready(function(){
             contentType: "application/x-www-form-urlencoded",
             success: function(jsonResponse){
                 alert("Contraseña ha sido cambiada exitosamente");
-                window.location.replace("base.html")
+                window.location.replace("home.html")
 
             },
             error: function(errorMessage){
