@@ -32,6 +32,8 @@ switch($action){
 					break;
 	case "EDITPROJECT" : editProject();
 					break;
+	case "ARCHREQ" : showArchReq();
+					break;
 }
 
 function loginFunction(){
@@ -287,4 +289,19 @@ function editProject(){
 		}
 	}
 
+	function showArchReq(){
+		$result = showArchs();
+
+		if($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Projects"));
+		}
+		else
+			if ($result["status"] == "BADCONN"){
+				header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
+				echo json_encode(array("message" => "Error, something went wrong"));
+		}
+
+	}
+
 ?>
+

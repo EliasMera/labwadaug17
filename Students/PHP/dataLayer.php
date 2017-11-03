@@ -305,4 +305,32 @@
 			}
 	}
 
+	function showArchs(){
+
+		$conn = connectionToDataBase();
+		$results = array();
+
+		$sql = "SELECT id, val FROM Required_Files WHERE active = 1";
+
+		$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					$response = array('id' => utf8_encode($row['id']), 'val' => utf8_encode($row['val']));
+					array_push($results,$response);
+				}
+				
+					echo json_encode($results);
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "DISCONNECTION");
+			}
+
+
+	}
+
+
 ?>

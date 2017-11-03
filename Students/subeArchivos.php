@@ -6,6 +6,7 @@
    <link href="CSS/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="JQ/jquery.js"></script>
   <script type="text/javascript" src="JQ/jqHome.js"></script>
+  <script type="text/javascript" src="JQ/jqUpload.js"></script>
 
 </head>
 <body>
@@ -21,27 +22,23 @@
 
 </ul>
 <div id="mainBody">
-	<br>
 	<form name="form1" method="post" action="" enctype="multipart/form-data"/>
-	<span><input id="file" type="file" name="subearchivo"><font color="red"> *  </font></span>
 	<br>
-	<span>Nombre del archivo <input id="name" type="text" name="n"> <font color="red"> *  </font></span>
-	<br>
-	<font color="red"> * Campos obligatorios  </font>
-	<br>
-	<input id="uploadBtn" name="submitBtn" type="submit" value="Subir Archivo">
+		<div id="mainBody2">
+
+
+		</div>
 	</form>
 </div>
 </body>
 
 <?php
 
-$filename = $_POST['n'];
 $conn = new mysqli('localhost','root','root','entrepreneurship');
 
-if(isset($_POST["submitBtn"]))
+if(isset($_POST["submitBtn1"]))
 {
-	$fnm = $_FILES["subearchivo"]["name"];
+	$fnm = $_FILES["subearchivo1"]["name"];
 	$dst = "Archivos/".$fnm;
 	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
 
@@ -50,7 +47,26 @@ if(isset($_POST["submitBtn"]))
 
 		session_start();
 		$idproject = $_SESSION['projectId'];
-		$sql = "INSERT INTO Files(filePath,project_id) values ('$dst','$idproject')";
+		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',1)";
+		$conn -> query($sql);
+	}
+
+	else{
+		echo "No hay conexion";
+	}
+}
+elseif(isset($_POST["submitBtn2"])){
+		
+	$fnm = $_FILES["subearchivo2"]["name"];
+	$dst = "Archivos/".$fnm;
+	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+
+	if($conn != null)
+	{
+
+		session_start();
+		$idproject = $_SESSION['projectId'];
+		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',2)";
 		$conn -> query($sql);
 	}
 
@@ -58,8 +74,48 @@ if(isset($_POST["submitBtn"]))
 		echo "No hay conexion";
 	}
 
+}
+elseif(isset($_POST["submitBtn3"])){
+		
+	$fnm = $_FILES["subearchivo3"]["name"];
+	$dst = "Archivos/".$fnm;
+	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+
+	if($conn != null)
+	{
+
+		session_start();
+		$idproject = $_SESSION['projectId'];
+		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',3)";
+		$conn -> query($sql);
+	}
+
+	else{
+		echo "No hay conexion";
+	}
 
 }
+elseif(isset($_POST["submitBtn4"])){
+		
+	$fnm = $_FILES["subearchivo4"]["name"];
+	$dst = "Archivos/".$fnm;
+	move_uploaded_file($_FILES["subearchivo"]["tmp_name"], $dst);
+
+	if($conn != null)
+	{
+
+		session_start();
+		$idproject = $_SESSION['projectId'];
+		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',4)";
+		$conn -> query($sql);
+	}
+
+	else{
+		echo "No hay conexion";
+	}
+
+}
+
 
 ?>
 
