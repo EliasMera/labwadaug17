@@ -25,6 +25,8 @@ switch($action){
 			break;
 	case "LOGOUT" : logout();
 			break;
+	case "GETPARTICIPANTPROJECTS" : getParticipantProjects();
+			break;
 }
 
 function populateTeachersGroups() {
@@ -282,6 +284,23 @@ function logout() {
 	}
 	else {
 		echo json_encode(array("status" => "SUCCESS"));
+	}
+}
+
+function getParticipantProjects() {
+	if (isset($_SESSION["userId"])) {
+		$result = attemptGetParticipantProjects();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
 	}
 }
 

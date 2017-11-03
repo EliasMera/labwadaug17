@@ -49,4 +49,13 @@ $(document).ready(function(){
         });
     });
 
+    $('#participantsBtn').on("click", function() {
+        window.location.replace("Participantes.html");
+    });
+
+    $('#configureBtn').on("click", function() {
+        window.location.replace("RegistrarGruposMaestros.html");
+    });
+
+
 });

@@ -10,6 +10,10 @@ $(document).ready(function(){
         window.location.replace("CambiarContrasena.html");
     });
 
+    $('#participantsBtn').on("click", function() {
+        window.location.replace("Participantes.html");
+    });
+
     $('#logoutBtn').on("click", function() {
         var jsonToSend = {
             "action" : "LOGOUT"

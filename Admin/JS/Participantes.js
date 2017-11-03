@@ -9,9 +9,10 @@ $(document).ready(function(){
         window.location.replace("CambiarContrasena.html");
     });
 
-    $('#participantsBtn').on("click", function() {
-        window.location.replace("Participantes.html");
+    $('#projectsBtn').on("click", function() {
+        window.location.replace("Proyectos.html");
     });
+
 
     $('#logoutBtn').on("click", function() {
         var jsonToSend = {
@@ -87,29 +88,11 @@ $(document).ready(function(){
         });
 	});
 
-    $("#selection").on("click", function() {
-        var jsonToSend = {
-            "action" : "SELECTPROJECTS"
-        }
-        $.ajax({
-            url : "../PHP/applicationLayer.php",
-            type : "POST",
-            data : jsonToSend,
-            dataType : "json",
-            contentType : "application/x-www-form-urlencoded",
-            success : function(jsonResponse){
-                window.location.replace("Participantes.html");
-            },
-            error : function(errorMessage){
-                alert(errorMessage.responseText);
-            }
-        });
-    });
 });
 
 function loadAllProjects() {
 	var jsonToSend = {
-		"action" : "GETALLPROJECTS"
+		"action" : "GETPARTICIPANTPROJECTS"
 	}
 	$.ajax({
         url : "../PHP/applicationLayer.php",
@@ -121,16 +104,21 @@ function loadAllProjects() {
             for (var i = 0; i <= jsonResponse[0].length; i++) {
             	$(jsonResponse[0][i]).each(function() {
             		var row = $("<tr>");
-            		row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
                     row.append( $('<td>').text(jsonResponse[0][i].teacher));
-                    row.append( $('<td>').text(jsonResponse[0][i].courseKey + '.' + jsonResponse[0][i].groupNumber));
-                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].name));
-                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].company));
-                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].classification));
-                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].business));
-                    row.append( $('<td>').text(jsonResponse[0][i].recomended));
-                    row.append( $('<td>').text(jsonResponse[0][i].rank));
-
+                    row.append( $('<td>').text(jsonResponse[0][i].name));
+                    row.append( $('<td>').text(jsonResponse[0][i].description));
+                    var descarga = $("<a></a>");
+                    if (jsonResponse[0][i][0].length > 0){
+                        descarga.attr("href", "../../Students/" + jsonResponse[0][i][0][0]);
+                        descarga.attr('target',"_blank");
+                        descarga.text("Descargar");
+                    }
+                    
+                    row.append( $('<td>').append(descarga));
+                    //row.append( $('<td class="cellButton">').append('<a href="../../Students/Archivos/REC.docx" target="_blank">Descargar</a>'));
+                    row.append( $('<td >').text('N/A'));
+                    row.append( $('<td >').text('N/A'));
+                    row.append( $('<td >').text('N/A'));
                     $("#projectsList").append(row); 
             	});
             }          

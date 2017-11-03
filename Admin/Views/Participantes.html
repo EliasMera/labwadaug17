@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +5,7 @@
   <meta charset="UTF-8">
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="../JS/jquery.js"></script>
-  <script type="text/javascript" src="../JS/Proyectos.js"></script>
+  <script type="text/javascript" src="../JS/Participantes.js"></script>
 </head>
 <body>
 <h1>Muestra Empresarial</h1>
@@ -21,35 +20,21 @@
 <div id="mainBody">
   <div id="index">
   	<fieldset>
-  		<legend>Proyectos registrados en el semestre</legend>
-      <input type="submit" id="selection" value="Seleccionar participantes">
+  		<legend>Proyectos selecionados para participar en la muestra empresarial</legend>
   		<table id="projectsList">
         <thead>
           <tr>
             <th>Profesor</th>
-            <th>Grupo</th>
             <th>Nombre</th>
-            <th>Empresa</th>
-            <th>Clasificación Sectorial</th>
-            <th>Giro del Negocio</th>
-            <th>Apto</th>
-            <th>Rank</th>
+            <th>Descripción</th>
+            <th>Documento</th>
+            <th>Presentación</th>
+            <th>Poster</th>
+            <th>Comprobante de pago</th>
           </tr>
         </thead>  
       </table>
   	</fieldset>
-  </div>
-  <div id="viewDetails" style="display: none;">
-    <fieldset>
-      <div id="projectDiv" style="display: inline-block;">
-        <table id="project">
-        </table>
-      </div>
-      <div id="team" style="display: inline-block;">
-        Equipo
-        <table id="teamList"></table>
-      </div>
-    </fieldset>
   </div>
 </div>
 </body>

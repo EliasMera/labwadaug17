@@ -331,4 +331,49 @@ function attemptChangePassword($encPasswd) {
 	}
 }
 
+function attemptGetParticipantProjects() {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT DISTINCT p.id, p.name, p.description, r.name AS profesor FROM projects p, groups g, students a, teachers r WHERE p.active = 1 AND g.id = a.group_id AND p.id = a.project_id AND r.id = g.teacher_id ORDER BY profesor";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			$response = array("status" => "SUCCESS");
+			$resp = array();
+			while ($row = $result->fetch_assoc()) {
+				$project = array('id' => $row['id'], 'name' => utf8_encode($row['name']), 'description' => utf8_encode($row['description']),
+				 'teacher' => utf8_encode($row['profesor']));
+		    	array_push($resp, $project);
+			}
+
+			for ($i = 0; $i < count($resp); $i++) {
+				$id = $resp[$i]['id'];
+				$sql = "SELECT filePath, requirement FROM files WHERE project_id = '$id'";
+				$result = $conn->query($sql);
+				$files = array();
+				if ($result->num_rows > 0) {
+					
+					while ($row = $result->fetch_assoc()) {
+						$file = array('filePath' => $row['filePath'], 'requirement' => $row['requirement']);
+						array_push($files, $file);
+					}
+				}
+				array_push($resp[$i], $files);
+			}
+
+			array_push($response, $resp);
+			$conn -> close();
+		    return $response;
+		}
+		else {
+			$conn -> close();
+			return array("status" => "NOT FOUND");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
 ?>
