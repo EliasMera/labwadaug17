@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     $("#btnCancelar").on("click",function(){
         if(source === "GRUPO"){
-            window.location.replace("PaginaGrupos.html");
+            window.location.replace("Grupo.html");
         }
         else{
             window.location.replace("ProyectoEspecifico.html");

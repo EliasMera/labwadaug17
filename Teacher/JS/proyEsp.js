@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$("#grupoEsp").val(sessionStorage.getItem("curso")+ "." + sessionStorage.getItem("grupo"));
+
 	var jsonToSend = {
 		"action"	: "LOADESPPROJECT",
 		"projectId" : sessionStorage.getItem("projectId")
@@ -120,6 +122,10 @@ $(document).ready(function(){
 
 	$("#editaFeed").on("click", function(){
 		$("#feed").attr("disabled", false); 
+	});
+
+	$("#grupoEsp").on("click", function(){
+		window.location.replace("Grupo.html");
 	});
 
 	$("#guardaFeed").on("click", function(){

@@ -46,6 +46,10 @@ $(document).ready(function(){
         }
     });
 
+    $("#grupo").on("click", function(){
+        window.location.replace("Grupo.html");
+    });
+
     $("#mainBody").on("click",".addBtn", function(){
         //debugger;
         var matricula = $(this).attr("name");
