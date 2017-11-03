@@ -132,7 +132,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#groupBtn").val(sessionStorage.getItem("curso")+ "." + sessionStorage.getItem("grupo"));
+	$("#grupoEsp").val(sessionStorage.getItem("curso")+ "." + sessionStorage.getItem("grupo"));
 
 	$("#mainBody").on("click",".viewPButton", function(){
 		//debugger;

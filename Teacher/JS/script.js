@@ -4,7 +4,6 @@ $(document).ready(function(){
 
 	});
 
-
         $("#logoutBtn").click(function(){
         	debugger;
 
