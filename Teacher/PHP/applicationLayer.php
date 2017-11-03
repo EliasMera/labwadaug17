@@ -44,6 +44,10 @@
 			break;
 		case "SAVEFEEDBACK"		: saveFeedbackFunc();
 			break;
+		case "LOADALUMNI"		: loadAlumniFunc();
+			break;
+		case "ADDALUMNI"		: addAlumniFunc();
+			break;
 	}
 
 	function debug_to_console( $data ) {
@@ -305,6 +309,23 @@
 	function getAlumniFunc(){
 		$matricula = $_POST["matricula"];
 		$result = getAlumni($matricula);
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+	}
+
+	function loadAlumniFunc(){
+		$grupo = $_POST["grupo"];
+		$result = loadAlumni($grupo);
+		if ($result["status"] == "BADCRED"){
+			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+	}
+
+	function addAlumniFunc(){
+		$mat = $_POST["mat"];
+		$project = $_POST["project"];
+		$result = addAlumni($mat, $project);
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
 		}

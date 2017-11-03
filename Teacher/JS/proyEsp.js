@@ -95,7 +95,7 @@ $(document).ready(function(){
 			+ "<th>" + "Email academico" + "</th>" 
 			+ "<th>" + "Email personal" + "</th>"
 			+ "<th>" + "Celular" + "</th>" 
-			+ "<th>Editar</th><th>Borrar</th></tr>";	
+			+ "<th>Borrar</th></tr>";	
 
 			for(i = 0; i < jsonResponse.length; i++){
 				var matricula = jsonResponse[i].studentId;
@@ -105,7 +105,6 @@ $(document).ready(function(){
 				+ "<td>" + jsonResponse[i].academicEmail + "</td>"
 				+ "<td>" + jsonResponse[i].personalEmail + "</td>"
 				+ "<td>" + jsonResponse[i].cellphone + "</td>" 
-				+ "<td><input class='btnEdit' type='submit' value='Editar' name='" + matricula + "'/></td>"
 				+ "<td><input class='btnBorra' type='submit' value='Borrar' name='" + matricula + "'/></td>"
 				+ "</tr>";	
 			}
@@ -151,18 +150,13 @@ $(document).ready(function(){
 
 	$("#agregaBtn").on("click", function(){
 		sessionStorage.setItem('source', "PROYECTO");
-		window.location.replace("RegistroAlumnos.html");
-	});
-
-	$("#mainBody").on("click",".btnEdit", function(){
-		sessionStorage.setItem('matricula', $(this).attr("name"));
-		window.location.replace("EditaAlumnos.html");
+		window.location.replace("AgregaAlumnos.html");
 	});
 
 
 	$("#mainBody").on("click",".btnBorra", function(){
 		var matr = $(this).attr("name");
-		if (confirm('Seguro de eliminar alumno con matricula ' + matr + '?')) {
+		if (confirm('Seguro de eliminar alumno con matricula ' + matr + ' del proyecto?')) {
 		    var jsonToSend3 = {
 				"action" 	: "DELETESTUDENT",
 				"matricula" : matr
@@ -179,8 +173,7 @@ $(document).ready(function(){
 					location.reload();
 				},
 				error: function(errorMessage){
-					console.log("fallo");
-					alert(errorMessage.message);
+					location.reload();
 				}
 			});
 		} 

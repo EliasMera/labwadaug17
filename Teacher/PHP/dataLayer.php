@@ -294,6 +294,29 @@ function getAlumni($matricula){
 	}
 }
 
+function loadAlumni($grupo){
+	$results = array();
+	$conn = connectionToDataBase();
+	if ($conn != null){
+		$sql = "SELECT * FROM Students WHERE project_id IS NULL";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0){
+			while($row = $result -> fetch_assoc()){
+				$response = array('studentId' => $row['studentId'],
+					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicEmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
+
+				array_push($results, $response);
+			}
+			echo json_encode($results);
+		}
+		else{
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+		return array("status" => "SESSIONEXP");
+	}
+}
+
 function loadespProject($projectId){
 	$results = array();
 	$conn = connectionToDataBase();
@@ -319,11 +342,32 @@ function loadespProject($projectId){
 	}
 }
 
+function addAlumni($mat, $project){
+	$conn = connectionToDataBase();
+
+	if ($conn != null){
+		$sql = "UPDATE Students SET project_id = '$project' WHERE studentId = '$mat'";
+
+		$result = $conn->query($sql);
+
+		if ($result === TRUE){
+			echo "Record updated successfully";
+			return array("status" => "SUCCESS");
+		}
+		else{
+			$conn -> close();
+			return array("status" => "BADCRED");
+		}
+
+		return array("status" => "SESSIONEXP");
+	}
+}
+
 function deleteStudent($matricula){
 	$conn = connectionToDataBase();
 
 	if ($conn != null){
-		$sql = "DELETE FROM Students WHERE studentId = '$matricula'";
+		$sql = "UPDATE Students SET project_id = NULL WHERE studentId = '$matricula'";
 
 		$result = $conn->query($sql);
 
