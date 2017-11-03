@@ -7,6 +7,7 @@ $(document).ready(function() {
             "action" : "SHOWPROJECT"
         }
 
+        //PROYECTO ACTIVO DEL ALUMNO EN TABLA
         $.ajax({
             url: "PHP/applicationLayer.php",
             type: "POST",
@@ -18,7 +19,7 @@ $(document).ready(function() {
                 var newHtml = "";
                     newHtml += "<table border='1' align='center' width='95%'>" + "<tr>" + "<th>" + "Nombre del proyecto" + "</th>"
                     + "<th>" + "Compañía" + "</th>" + "<th>" + "Descripción" + "</th>" + "<th>" + "Clasificación" + "</th>" 
-                    + "<th>" + "Giro" + "</th>" + "<th>" + "Comentarios" + "</th>" + "</tr>";
+                    + "<th>" + "Giro" + "</th>" + "</tr>";
 
                     for(i = 0; i < jsonResponse.length; i++){
 
@@ -34,7 +35,68 @@ $(document).ready(function() {
             error: function(errorMessage){
                 alert("error");
             }
-        });     
+        });
+
+        //  COMENTARIO DEL PROYECTO
+        var jsonToSend3 = {
+            "action" : "SHOWCOMMENT"
+        }
+
+        $.ajax({
+            url: "PHP/applicationLayer.php",
+            type: "POST",
+            data: jsonToSend3,
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (jsonResponse){
+
+                var comentario = "";
+
+                for(i = 0; i < jsonResponse.length; i++){
+                    comentario += jsonResponse[i].comment;
+                }
+
+                $("#comentario").append(comentario);
+
+            },
+            error: function(errorMessage){
+                
+            }
+
+        });
+
+        //  EDITAR PROYECTO
+          $("#buttonSave").on("click",function(){
+
+            var $name = $("#userName");
+            var $company = $("#userPassword");
+            var $description = $("#description");
+            var $classification = $("#classification");
+            var $business = $("#business");
+
+            var jsonToSend = {
+                "action" : "EDITPROJECT",
+                "name" : $("#name").val(),
+                "company" : $("#company").val(),
+                "description" : $("#description").val(),
+                "classification" : $("#classification").val(),
+                "business" : $("#business").val()
+            };
+
+            $.ajax({
+                url : "PHP/applicationLayer.php",
+                type : "POST",
+                data : jsonToSend,
+                dataType : "json",
+                contentType : "application/x-www-form-urlencoded",
+                success: function(jsonResponse){
+                    window.location.replace("EdiarProyecto.html")
+                },
+                error : function(errorMessage){
+                    
+                }
+            });
+        });    
         
         //  PONER VISTA DE EDITAR
           $("#buttonEdit").on("click", function(){
@@ -50,36 +112,4 @@ $(document).ready(function() {
 
           });
 
-        //  EDITAR PROYECTO
-          $("#buttonSave").on("click",function(){
-
-            var $name = $("#userName");
-            var $company = $("#userPassword");
-            var $description = $("#description");
-            var $classification = $("#classification");
-            var $business = $("#business");
-
-            var jsonToSend = {
-            	"action" : "EDITPROJECT",
-                "name" : $("#name").val(),
-                "company" : $("#company").val(),
-                "description" : $("#description").val(),
-                "classification" : $("#classification").val(),
-                "business" : $("#business").val()
-            };
-
-            $.ajax({
-                url : "PHP/applicationLayer.php",
-                type : "POST",
-                data : jsonToSend,
-                dataType : "json",
-                contentType : "application/x-www-form-urlencoded",
-                success: function(jsonResponse){
-                    window.location.replace("EditarProyecto.html");
-                },
-                error : function(errorMessage){
-                    window.location.replace("EditarProyecto.html");
-                }
-            });
-        });
 });
