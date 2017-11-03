@@ -23,6 +23,7 @@ $(document).ready(function(){
 				type: "POST",
 				data : jsonGroups,
 				dataType: "json",
+				async: false,
 				contentType: "application/x-www-form-urlencoded",
 				success: function(jsonResponse){
 					var newHtml = "";
