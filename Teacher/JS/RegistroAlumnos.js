@@ -2,9 +2,17 @@ $(document).ready(function(){
     var curso = sessionStorage.getItem("curso");
     var grupo = sessionStorage.getItem("grupoId");
     var project = sessionStorage.getItem("projectId");
+    var source = sessionStorage.getItem("source");
+
 
     $("#btnCancelar").on("click",function(){
-        window.location.replace("ProyectoEspecifico.html");
+        if(source === "GRUPO"){
+            window.location.replace("PaginaGrupos.html");
+        }
+        else{
+            window.location.replace("ProyectoEspecifico.html");
+        }
+
     });
 
     $("#btnRegAlumno").on("click",function(){
@@ -26,7 +34,7 @@ $(document).ready(function(){
             }
         }
         var jsonToSend = {
-            "action"    : "REGISTERA",
+            "action"    : (source === "GRUPO")? "REGISTERB" : "REGISTERA",
             "mat"       : mat,
             "nom"       : nom,
             "carr"      : carr,
@@ -46,7 +54,12 @@ $(document).ready(function(){
             contentType : "application/x-www-form-urlencoded",
             success: function(jsonResponse){
                 alert("Alumno Registrado");
-                window.location.replace("ProyectoEspecifico.html")
+                if(source === "GRUPO"){
+                    window.location.replace("PaginaGrupos.html");
+                }
+                else{
+                    window.location.replace("ProyectoEspecifico.html");
+                }
             },
             error : function(errorMessage){
                 alert(errorMessage.responseText);

@@ -150,6 +150,7 @@ $(document).ready(function(){
 	});	
 
 	$("#agregaBtn").on("click", function(){
+		sessionStorage.setItem('source', "PROYECTO");
 		window.location.replace("RegistroAlumnos.html");
 	});
 

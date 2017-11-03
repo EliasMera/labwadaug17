@@ -48,6 +48,23 @@ function registerTeacher($teacherId, $userPassword, $name){
 
 }
 
+function registerAlumB($mat, $userPassword, $grupo, $nom, $carr, $acamail, $permail, $cell){
+	$conn = connectionToDataBase();
+	$sql = "SELECT studentId FROM Students WHERE studentId = '$mat'";
+	$result = $conn->query($sql);
+
+	if($result->num_rows > 0){
+		$conn -> close();
+		return array("status" => "NAMEINUSE");
+	}
+	else{
+		$sql = "INSERT INTO Students (studentId, group_id, passwrd, name, bachelor, academicEmail, personalEmail, cellphone) VALUES ('$mat', '$grupo', '$userPassword', '$nom', '$carr', '$acamail', '$permail', '$cell')";
+		if(mysqli_query($conn, $sql)){
+			return array("status" => "SUCCESS");
+		}
+	}
+}
+
 function registerAlum($mat, $userPassword, $grupo, $project, $nom, $carr, $acamail, $permail, $cell){
 	$conn = connectionToDataBase();
 	$sql = "SELECT studentId FROM Students WHERE studentId = '$mat'";

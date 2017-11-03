@@ -20,6 +20,8 @@
 			break;	
 		case "REGISTERA"		: alumniRegisterFunc();
 			break;
+		case "REGISTERB"		: alumniRegisterFuncB();
+			break;
 		case "LOADPROJECTS"		: loadprojectFunc();
 			break;
 		case "LOADESPPROJECT"	: loadespprojectFunc();
@@ -233,6 +235,37 @@
 				if ($result["status"] == "SUCCESS"){
 					echo json_encode(array("message" => "Registro exitoso"));
 				}
+			}
+		}
+	}
+
+	function alumniRegisterFuncB(){
+		$nom = $_POST["nom"];
+        $carr = $_POST["carr"];
+        $acamail = $_POST["acamail"];
+        $permail = $_POST["permail"];
+        $cell = $_POST["cell"];
+		$mat = $_POST["mat"];
+		$userPassword = encryptPassword();
+		$grupo = $_POST["grupoId"];
+
+		$result = registerAlumB($mat, $userPassword, $grupo, $nom, $carr, $acamail, $permail, $cell);
+
+		if ($result["status"] == "NAMEINUSE"){
+			header('HTTP/1.1 409 Conflict, Username already in use');
+			echo json_encode(array("message" => "Ese alumno ya existe"));
+		}	
+		else{
+			if ($result["status"] == "BADCRED"){
+				echo json_encode(array("message" => "Wrong credentials provided"));
+
+			}
+			else{
+
+				if ($result["status"] == "SUCCESS"){
+					echo json_encode(array("message" => "Registro exitoso"));
+				}
+
 			}
 		}
 	}

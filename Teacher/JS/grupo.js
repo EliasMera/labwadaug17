@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	function updatePriority(prio, projId){
-		console.log("updating " + projId + " with " + prio);
+		//console.log("updating " + projId + " with " + prio);
 
 		var jsonUpdate = {
 			"action" : "UPDATEPRIORITY",
@@ -17,7 +17,7 @@ $(document).ready(function(){
 			async : false,
 			contentType: "application/x-www-form-urlencoded",
 			success: function(jsonResponse){
-				console.log("updated");
+				//console.log("updated");
 			},
 			error: function(errorMessage){
 			}
@@ -139,5 +139,10 @@ $(document).ready(function(){
 		sessionStorage.setItem('projectId', projectId);
 		window.location.replace("ProyectoEspecifico.html");
 	});
+
+	$("#agregaAlumno").on("click", function(){
+		sessionStorage.setItem('source', "GRUPO");
+		window.location.replace("RegistroAlumnos.html");
+    });
 
 });
