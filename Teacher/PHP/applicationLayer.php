@@ -97,47 +97,39 @@
 	}
 
 	function changePassFunc(){
-
-	session_start();
-	
-	//$newPassword = $_POST['newPassword'];
-	$newEncrPassword = encryptPassword();
-	$result = attemptchangePassword($newEncrPassword);
+		session_start();
+		$newEncrPassword = encryptPassword();
+		$result = attemptchangePassword($newEncrPassword);
 
 		if($result["status"] == "BADCRED"){
-			
-			echo json_encode(array("message" => "Wrong credentials provided!"));
-			
-			}
+			echo json_encode(array("message" => "Wrong credentials provided!"));	
 		}
-	
-
+	}
 
 	function teacherLogOutFunc(){
-
-	$result = attemptLogout();
+		$result = attemptLogout();
     
-    if ($result["status"] == "SUCCESS"){
-		echo json_encode(array("message" => "Logout succesfull"));
-	}	
-	else{
-		header('HTTP/1.1 500' . $result["status"]);
-		die($result["status"]);
+	    if ($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Logout succesfull"));
+		}	
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
 		}
 	}
 
 
 	function encryptPassword(){
-			$userPassword = $_POST['passwrd'];
-		    $key = pack('H*', "bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
-		    $key_size =  strlen($key);
-		    $plaintext = $userPassword;
-		    $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-		    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND); 
-		    $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $plaintext, MCRYPT_MODE_CBC, $iv);
-		    $ciphertext = $iv . $ciphertext;
-		    $userPassword = base64_encode($ciphertext);
-		    return $userPassword;
+		$userPassword = $_POST['passwrd'];
+	    $key = pack('H*', "bcb04b7e103a05afe34763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
+	    $key_size =  strlen($key);
+	    $plaintext = $userPassword;
+	    $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+	    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND); 
+	    $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $plaintext, MCRYPT_MODE_CBC, $iv);
+	    $ciphertext = $iv . $ciphertext;
+	    $userPassword = base64_encode($ciphertext);
+	    return $userPassword;
 	}
 
 
@@ -303,7 +295,8 @@
 	}
 
 	function loadprojectFunc(){
-		$result = loadProjects();
+		$grupo = $_POST["grupo"];
+		$result = loadProjects($grupo);
 		if ($result["status"] == "BADCRED"){
 			echo json_encode(array("message" => "Wrong credentials provided"));
 		}

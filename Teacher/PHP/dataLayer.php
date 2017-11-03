@@ -244,13 +244,13 @@ function getGroups($teacherId){
 	}
 }
 
-function loadProjects(){
+function loadProjects($grupo){
 	$results = array();
 	$conn = connectionToDataBase();
 
 	if ($conn != null){
 
-		$sql = "SELECT name, rank, id, recomended FROM Projects";
+		$sql = "SELECT name, rank, id, recomended FROM Projects WHERE id IN (SELECT DISTINCT project_id FROM Students WHERE group_id = '$grupo')";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0){

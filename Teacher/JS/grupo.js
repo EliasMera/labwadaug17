@@ -42,7 +42,8 @@ $(document).ready(function(){
 	}
 	
 	var jsonToSend = {
-		"action"	: "LOADPROJECTS"
+		"action"	: "LOADPROJECTS",
+		"grupo"		: sessionStorage.getItem("grupoId")
 	}
 
 	$.ajax({
