@@ -3,6 +3,8 @@ $(document).ready(function(){
 		"action" : "GETCOOKIE"
 	};
 
+	var id;
+
 	$.ajax({
 		url: "PHP/applicationLayer.php",
 		type: "POST",
@@ -11,47 +13,48 @@ $(document).ready(function(){
 		async: false,
 		contentType: "application/x-www-form-urlencoded",
 		success: function(jsonResponse){
-
-
 			id = jsonResponse.id;
-			var jsonGroups = {
-				"action" : "GETGROUPS",
-				"teacherId" : id
-			};	    		
-			$.ajax({
-				url: "PHP/applicationLayer.php",
-				type: "POST",
-				data : jsonGroups,
-				dataType: "json",
-				async: false,
-				contentType: "application/x-www-form-urlencoded",
-				success: function(jsonResponse){
-					var newHtml = "";
-					newHtml += "<table>" + "<thead><tr>" + "<th>" + "Course Key" + "</th>" +
-					"<th>" + "group Number" + "</th>" + "</tr></thead><tbody>";
-					for(i = 0; i < jsonResponse.length; i++){
-						var key = jsonResponse[i].courseKey;
-						newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' value='" +
-						key + "' name = '" + key + "'>" + "</a>" + "</td>" +
-						"<td>"+ jsonResponse[i].groupNumber +
-						"</td>" + "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
-					}
-
-
-					newHtml += "</tbody></table>";
-
-					$("#resDiv").append(newHtml);
-				},
-				error: function(errorMessage){
-					console.log(errorMessage)
-				}
-
-			});
-
+			console.log("cookie bien");
 		},
 		error: function(errorMessage) {
 			console.log(errorMessage);
 		}
+	});
+	
+	var jsonGroups = {
+		"action" : "GETGROUPS",
+		"teacherId" : id
+	};
+
+	$.ajax({
+		url: "PHP/applicationLayer.php",
+		type: "POST",
+		data : jsonGroups,
+		dataType: "json",
+		async: false,
+		contentType: "application/x-www-form-urlencoded",
+		success: function(jsonResponse){
+			var newHtml = "";
+			newHtml += "<table>" + "<thead><tr>" + "<th>" + "Course Key" + "</th>" +
+			"<th>" + "group Number" + "</th>" + "</tr></thead><tbody>";
+			for(i = 0; i < jsonResponse.length; i++){
+				var key = jsonResponse[i].courseKey;
+				newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' value='" +
+				key + "' name = '" + key + "'>" + "</a>" + "</td>" +
+				"<td>"+ jsonResponse[i].groupNumber +
+				"</td>" + "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
+			}
+
+
+			newHtml += "</tbody></table>";
+
+			$("#resDiv").append(newHtml);
+		}
+		,
+		error: function(errorMessage){
+			console.log(errorMessage)
+		}
+
 	});
 
 	$("#resDiv").on("click",".grupoBtn", function(){
