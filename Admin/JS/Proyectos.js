@@ -32,6 +32,7 @@ $(document).ready(function(){
         });
     });
 
+    
 
 	$('body').delegate('.cellButton', 'click', function(){
 		var id = $(this).parent().find('td:eq(0)').text();
@@ -105,6 +106,7 @@ $(document).ready(function(){
             }
         });
     });
+
 });
 
 function loadAllProjects() {
@@ -118,8 +120,10 @@ function loadAllProjects() {
         dataType : "json",
         contentType : "application/x-www-form-urlencoded",
         success : function(jsonResponse){
+            var body = $("<tbody>");
             for (var i = 0; i <= jsonResponse[0].length; i++) {
             	$(jsonResponse[0][i]).each(function() {
+                    
             		var row = $("<tr>");
             		row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
                     row.append( $('<td>').text(jsonResponse[0][i].teacher));
@@ -131,9 +135,11 @@ function loadAllProjects() {
                     row.append( $('<td>').text(jsonResponse[0][i].recomended));
                     row.append( $('<td>').text(jsonResponse[0][i].rank));
 
-                    $("#projectsList").append(row); 
+                    body.append(row);
             	});
-            }          
+            }
+            $("#projectsList").append(body);
+            //$('#projectsList').DataTable();
         },
         error : function(errorMessage){
             alert(errorMessage.responseText);

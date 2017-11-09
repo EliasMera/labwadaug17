@@ -109,7 +109,7 @@ function loadAllProjects() {
                     row.append( $('<td>').text(jsonResponse[0][i].description));
                     var descarga = $("<a></a>");
                     if (jsonResponse[0][i][0].length > 0){
-                        descarga.attr("href", "../../Students/" + jsonResponse[0][i][0][0]);
+                        descarga.attr("href", "../../Students/" + jsonResponse[0][i][0][0]['filePath']);
                         descarga.attr('target',"_blank");
                         descarga.text("Descargar");
                     }

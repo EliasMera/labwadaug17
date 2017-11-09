@@ -7,50 +7,109 @@
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="../JS/jquery.js"></script>
   <script type="text/javascript" src="../JS/Proyectos.js"></script>
-</head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../../DataTables/datatables.min.css"/>
+  <script type="text/javascript" src="../../DataTables/datatables.min.js"></script>
+
+  </head>
 <body>
-<h1>Muestra Empresarial</h1>
-<ul id="tabBar">
-	<li><input id="homeBtn" type="submit" value="Inicio"></li>
-  <li><input id="configureBtn" type="submit" value="Configurar Semestre"></li>
-  <li><input id="projectsBtn" type="submit" value="Proyectos"></li>
-  <li><input id="participantsBtn" type="submit" value="Participantes"></li>
-  <li><input id="changePassw" type="submit" value="Cambiar Contraseña"></li>
-  <li><input id="logoutBtn" type="submit" value="Cerrar sesión"></li>
-</ul>
-<div id="mainBody">
-  <div id="index">
-  	<fieldset>
-  		<legend>Proyectos registrados en el semestre</legend>
-      <input type="submit" id="selection" value="Seleccionar participantes">
-  		<table id="projectsList">
-        <thead>
-          <tr>
-            <th>Profesor</th>
-            <th>Grupo</th>
-            <th>Nombre</th>
-            <th>Empresa</th>
-            <th>Clasificación Sectorial</th>
-            <th>Giro del Negocio</th>
-            <th>Apto</th>
-            <th>Rank</th>
-          </tr>
-        </thead>  
-      </table>
-  	</fieldset>
-  </div>
-  <div id="viewDetails" style="display: none;">
-    <fieldset>
-      <div id="projectDiv" style="display: inline-block;">
-        <table id="project">
-        </table>
-      </div>
-      <div id="team" style="display: inline-block;">
-        Equipo
-        <table id="teamList"></table>
-      </div>
-    </fieldset>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container">
+  <a class="navbar-brand" href="#">Muestra Empresarial</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="Inicio.html">Inicio </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="RegistrarGruposMaestros.html">Configurar Semestre</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Proyectos <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Participantes</a>
+      </li>
+      <li class="nav-item dropdown my-2 my-sm-0">
+        <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="CambiarContrasena.html">Cambiar contraseña</a>
+          <a id="logoutBtn" class="dropdown-item" href="#">Cerrar sesión</a>
+        </div>
+      </li>
+    </ul>
+    
   </div>
 </div>
+</nav>
+
+<main role="main" class="container">
+
+      
+
+        <div id="mainBody">
+
+          <div id="index">
+            <fieldset>
+              <legend>Proyectos registrados en el semestre</legend>
+              
+              <div class="scrollable">
+                <table id="projectsList" class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Profesor</th>
+                      <th>Grupo</th>
+                      <th>Nombre</th>
+                      <th>Empresa</th>
+                      <th>Clasificación Sectorial</th>
+                      <th>Giro del Negocio</th>
+                      <th>Apto</th>
+                      <th>Rank</th>
+                    </tr>
+                  </thead>  
+                </table>
+              </div>
+
+              <input type="submit" class="btn btn-primary" id="selection" value="Seleccionar participantes">
+              
+            </fieldset>
+          </div>
+
+          <div id="viewDetails" class="row" style="display: none;">
+            
+              <div id="projectDiv" class="col-8">
+                <fieldset>
+                  <legend>Detalles del proyecto</legend>
+                  <table id="project">
+                  </table>
+                </fieldset>
+              </div>
+
+              <div id="team" class="col-4">
+                <fieldset>
+                  <legend>Integrantes del Equipo</legend>
+                  <table id="teamList"></table>
+                </fieldset>
+                
+              </div>
+            
+          </div>
+
+        </div>
+      
+
+    </main><!-- /.container -->
+    <footer>
+      <p>
+        
+      </p>
+    </footer>
 </body>
 </html>

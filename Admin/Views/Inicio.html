@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,13 +6,16 @@
   <meta charset="UTF-8">
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="../JS/jquery.js"></script>
-  <script type="text/javascript" src="../JS/Participantes.js"></script>
+  <script type="text/javascript" src="../JS/Proyectos.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-</head>
+
+  </head>
 <body>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+
   <div class="container">
     <a class="navbar-brand" href="#">Muestra Empresarial</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,17 +24,17 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="Inicio.html">Inicio </a>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Inicio </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="RegistrarGruposMaestros.html">Configurar Semestre </a>
+          <a class="nav-link" href="RegistrarGruposMaestros.html">Configurar Semestre</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Proyectos.html">Proyectos </a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">Participantes </a>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Participantes</a>
         </li>
         <li class="nav-item dropdown my-2 my-sm-0">
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
@@ -46,30 +50,16 @@
   
 </nav>
 
-<main role="main" class="container">
+  <main role="main" class="container">
 
-<div id="mainBody">
-  <div id="index">
-  	<fieldset>
-  		<legend>Proyectos selecionados para participar en la muestra empresarial</legend>
-  		<table id="projectsList">
-        <thead>
-          <tr>
-            <th>Profesor</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Documento</th>
-            <th>Presentación</th>
-            <th>Poster</th>
-            <th>Comprobante de pago</th>
-          </tr>
-        </thead>  
-      </table>
-  	</fieldset>
-  </div>
-</div>
+    <fieldset>
+      <legend>
+        Instrucciones
+      </legend>
+      <p>Una vez seleccionados los proyectos participantes no será posible hacer cambios</p>
+    </fieldset>      
 
-</main><!-- /.container -->
+  </main><!-- /.container -->
 
 </body>
 </html>
