@@ -4,6 +4,11 @@ $(document).ready(function(){
 
 	});
 
+        $("#homeBtn").on("click", function(){
+        window.location.replace("Inicio.html");
+
+    });
+
         $("#logoutBtn").click(function(){
 
         	var jsonLogout = {

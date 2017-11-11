@@ -132,7 +132,8 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#grupoEsp").val(sessionStorage.getItem("curso")+ "." + sessionStorage.getItem("grupo"));
+	$("#grupoEsp").text(sessionStorage.getItem("curso"));
+
 
 	$("#mainBody").on("click",".viewPButton", function(){
 		//debugger;

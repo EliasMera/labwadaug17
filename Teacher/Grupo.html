@@ -8,19 +8,64 @@
 	<script type="text/javascript" src="JS/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="JS/script.js"></script>
 	<script type="text/javascript" src="JS/grupo.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	
 </head>
 <body>
-	<h1>Muestra Empresarial</h1>
+<!-- 	<h1>Muestra Empresarial</h1>
 	<ul id="tabBar">
 		<li><input id="homeBtn" type="submit" value="Inicio"></li>
 		<li><input id="groupBtn" type="submit" value="Grupos"></li>	
 		<li><input id="grupoEsp" type="submit" value=""></li>
 		<li><input id="logoutBtn" type="submit" value="LogOut"></li>	
-	</ul>
-	<br>
-	<input type="submit" id="agregaAlumno" value="Agregar alumno"/><br><br>
-	<div id="mainBody">
+	</ul> -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+
+  <div class="container">
+    <a class="navbar-brand" href="#">Muestra Empresarial</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a id="homeBtn"class="nav-link" href="">Inicio </a>
+        </li>
+        <li class="nav-item">
+          <a id="groupBtn"class="nav-link">Grupos</a>
+        </li>
+        <li class="nav-item">
+          <a id="grupoEsp"class="nav-link"></a>
+        </li>
+        <li class="nav-item dropdown my-2 my-sm-0">
+          <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a id="changePass"class="dropdown-item">Cambiar contraseña</a>
+            <a id="logoutBtn" class="dropdown-item" href="#">Cerrar sesión</a>
+          </div>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+  
+</nav>
+<main role="main" class="container">
+
+	   <fieldset>
+      <legend>
+        Proyectos del grupo
+      </legend>
+      <p></p>
+      <input type="submit" id="agregaAlumno" value="Agregar alumno"/><br><br>
+      <div id="mainBody">
 	</div>
+    </fieldset> 
+</main>
+
 </body>
 </html>

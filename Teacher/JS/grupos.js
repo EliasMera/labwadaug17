@@ -35,14 +35,13 @@ $(document).ready(function(){
 		contentType: "application/x-www-form-urlencoded",
 		success: function(jsonResponse){
 			var newHtml = "";
-			newHtml += "<table>" + "<thead><tr>" + "<th>" + "Course Key" + "</th>" +
-			"<th>" + "group Number" + "</th>" + "</tr></thead><tbody>";
+			newHtml += "<table id='groupList' class='table table-hover'>" + "<thead><tr>" + "<th>" + "Claves de grupos" + "</th>" + "</tr></thead><tbody>";
 			for(i = 0; i < jsonResponse.length; i++){
 				var key = jsonResponse[i].courseKey;
-				newHtml +=  "<tr>" + "<td>" + "<input align='center' id='cursoBtn' class='grupoBtn' type='submit' value='" +
-				key + "' name = '" + key + "'>" + "</a>" + "</td>" +
-				"<td>"+ jsonResponse[i].groupNumber +
-				"</td>" + "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
+				newHtml +=  "<tr>" + "<td class='cellButton'>" + key +"." + jsonResponse[i].groupNumber  + "<input align='center' id='cursoBtn' class='hidden' type='submit' value='" +
+				key + "." + jsonResponse[i].groupNumber + "' name = '" + key +"." + jsonResponse[i].groupNumber + "'>" + "</a>" + "</td>" 
+				+ "<td class='hidden'>"+ jsonResponse[i].groupNumber +
+				"</td>"+ "<td class='hidden'>" + jsonResponse[i].id + "</td>" + "</tr>";
 			}
 
 
@@ -57,16 +56,17 @@ $(document).ready(function(){
 
 	});
 
-	$("#resDiv").on("click",".grupoBtn", function(){
+	$("#resDiv").on("click",".cellButton", function(){
 		
 		//sacar nombre de curso
-		var curso = $(this).attr("name");
+		var curso = $(this).text()
+
 		//saco numero de grupo
 		var grupo = $(this).closest('td').next().text();
 
 		var grupoId = $(this).closest('td').next().next().text();
 
-		sessionStorage.setItem('curso', $(this).attr("name"));
+		sessionStorage.setItem('curso', $(this).text());
 		sessionStorage.setItem('grupo', $(this).closest('td').next().text());
 		sessionStorage.setItem('grupoId', $(this).closest('td').next().next().text());
 		window.location.replace("Grupo.html");
