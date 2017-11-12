@@ -4,7 +4,6 @@ LOADESPPROJECT<?php
 	require_once __DIR__ . '/dataLayer.php';
 
 	$action = $_POST["action"];
-LOADESPPROJECT
 	switch($action){
 		case "LOGIN" 			: teacherLoginFunc();
 			break;
