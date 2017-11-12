@@ -433,7 +433,7 @@ function loadStudents($projectId, $grupoId){
 
 			while($row = $result -> fetch_assoc()){
 				$response = array('studentId' => $row['studentId'],
-					'name' => $row['name'], 'bachelor' => $row['bachelor'],'academicEmail' => $row['academicEmail'], 'personalEmail' => $row['personalEmail'], 'cellphone' => $row['cellphone']);
+					'name' => $row['name']);
 
 				array_push($results,$response);
 			}

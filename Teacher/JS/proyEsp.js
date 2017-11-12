@@ -89,20 +89,13 @@ $(document).ready(function(){
 		success: function(jsonResponse){
 			var newHtml = "";
 			newHtml += "<table>" + "<tr>" + "<th>" + "Matricula" + "</th>"
-			+ "<th>" + "Nombre" + "</th>" + "<th>" + "Carrera" + "</th>"
-			+ "<th>" + "Email academico" + "</th>" 
-			+ "<th>" + "Email personal" + "</th>"
-			+ "<th>" + "Celular" + "</th>" 
+			+ "<th>" + "Nombre" + "</th>"  
 			+ "<th>Borrar</th></tr>";	
 
 			for(i = 0; i < jsonResponse.length; i++){
 				var matricula = jsonResponse[i].studentId;
 				newHtml += "<tr>" + "<td>" + matricula + "</td>"
 				+ "<td>" + jsonResponse[i].name + "</td>"
-				+ "<td>" + jsonResponse[i].bachelor + "</td>"
-				+ "<td>" + jsonResponse[i].academicEmail + "</td>"
-				+ "<td>" + jsonResponse[i].personalEmail + "</td>"
-				+ "<td>" + jsonResponse[i].cellphone + "</td>" 
 				+ "<td><input class='btnBorra btn btn-primary' type='submit' value='Borrar' name='" + matricula + "'/></td>"
 				+ "</tr>";	
 			}
