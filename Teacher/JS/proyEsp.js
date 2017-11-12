@@ -17,20 +17,14 @@ $(document).ready(function(){
 		success: function(jsonResponse){
 			var newHtml = "";
 			newHtml += "<table>" + "<tr>" + "<th>" + "name" + "</th>" 
-			+ "<th>" + "company" + "</th>" + "<th>" + "description" + "</th>" + 
+			+ "<th>" + "company" + "</th>" + 
 			"<th>" + "classification" + "</th>" + "<th>" + "business" + "</th>" + 
-			"<th>" + "semester" + "</th>" + "<th>" + "recomended" + "</th>" + "<th>" 
-			+ "rank" + "</th>" + "<th>" + "active" + "</th>" +  "</tr>";
+		  "</tr>";
 			for(i = 0; i < jsonResponse.length; i++){
 				newHtml += "<tr>" + "<td>" + jsonResponse[i].name + "</td>" +
 				"<td>" + jsonResponse[i].company + "</td>" +
-				"<td>" + jsonResponse[i].description + "</td>" +
 				"<td>" + jsonResponse[i].classification + "</td>" +
-				"<td>" + jsonResponse[i].business + "</td>" + 
-				"<td>" + jsonResponse[i].semester + "</td>" +
-				"<td>" + jsonResponse[i].recomended + "</td>" +
-				"<td>" + jsonResponse[i].rank + "</td>" +
-				"<td>" + jsonResponse[i].active + "</td>" + "</tr>";
+				"<td>" + jsonResponse[i].business + "</td>" + "</tr>";
 			}
 
 			newHtml += "</table>";
@@ -41,6 +35,8 @@ $(document).ready(function(){
 		}
 
 	});
+
+	$("#grupoEsp").text(sessionStorage.getItem("curso"));
 
 	var jsonToSendF = {
 		"action"	: "LOADFEEDBACK",
@@ -56,22 +52,22 @@ $(document).ready(function(){
 		contentType: "application/x-www-form-urlencoded",
 		success: function(jsonResponse){
 			var comentarios = "<br> Comentarios <br>";
-			comentarios += "<textarea id='feed' rows='5' cols='150' disabled>";
+			comentarios += "<textarea id='feed' rows='5' cols='100' disabled>";
 			for(i = 0; i < jsonResponse.length; i++){
 				comentarios += jsonResponse[i].comment;	
 			}
 			comentarios += "</textarea><br>";
-			comentarios += "<input type='submit' id='editaFeed' value='Editar' />  ";
-			comentarios += "<input type='submit' id='guardaFeed' value='Guardar' /><br>";
-			$("#mainBody").append(comentarios);
+			comentarios += "<input type='submit' class='btn btn-primary' id='editaFeed' value='Editar' />  ";
+			comentarios += "<input type='submit' class='btn btn-primary' id='guardaFeed' value='Guardar' /><br>";
+			$("#resDiv").append(comentarios);
 		},
 		error: function(errorMessage){
 			var comentarios = "<br> Comentarios <br>";
 			comentarios += "<textarea id='feed' rows='5' cols='150' disabled>";
 			comentarios += ""; //agrega feedback
 			comentarios += "</textarea><br>";
-			comentarios += "<input type='submit' id='editaFeed' value='Editar' />  ";
-			comentarios += "<input type='submit' id='guardaFeed' value='Guardar' /><br>";
+			comentarios += "<input type='submit' class='btn btn-primary' id='editaFeed' value='Editar' />  ";
+			comentarios += "<input type='submit' class='btn btn-primary' id='guardaFeed' value='Guardar' /><br>";
 			$("#mainBody").append(comentarios);
 		}
 	});
@@ -107,11 +103,11 @@ $(document).ready(function(){
 				+ "<td>" + jsonResponse[i].academicEmail + "</td>"
 				+ "<td>" + jsonResponse[i].personalEmail + "</td>"
 				+ "<td>" + jsonResponse[i].cellphone + "</td>" 
-				+ "<td><input class='btnBorra' type='submit' value='Borrar' name='" + matricula + "'/></td>"
+				+ "<td><input class='btnBorra btn btn-primary' type='submit' value='Borrar' name='" + matricula + "'/></td>"
 				+ "</tr>";	
 			}
 			newHtml += "</table>";
-			var agrega = "<br><br><input type='submit' id='agregaBtn' value='Agregar integrante' /><br>";
+			var agrega = "<br><br><input type='submit' id='agregaBtn' class='btn btn-primary' value='Agregar integrante' /><br>";
 			$("#mainBody").append(agrega);
 			$("#mainBody").append(newHtml);	
 		},

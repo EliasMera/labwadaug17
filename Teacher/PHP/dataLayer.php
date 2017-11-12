@@ -326,9 +326,8 @@ function loadespProject($projectId){
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0){
 			while($row = $result -> fetch_assoc()){
-				$response = array('name' => $row['name'], 'company' => $row['company'], 'description' => $row['description'],
-					'classification' => $row['classification'], 'business' => $row['business'],
-					'semester' => $row['semester'], 'recomended' => $row['recomended'],'rank' => $row['rank'], 'active' => $row['active']);
+				$response = array('name' => $row['name'], 'company' => $row['company'], 
+					'classification' => $row['classification'], 'business' => $row['business']);
 
 				array_push($results,$response);
 			}

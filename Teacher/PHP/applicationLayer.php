@@ -1,10 +1,10 @@
-<?php
+LOADESPPROJECT<?php
 
 	header('Content-type: application/json');
 	require_once __DIR__ . '/dataLayer.php';
 
 	$action = $_POST["action"];
-
+LOADESPPROJECT
 	switch($action){
 		case "LOGIN" 			: teacherLoginFunc();
 			break;
