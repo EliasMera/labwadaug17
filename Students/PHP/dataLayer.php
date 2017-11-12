@@ -253,7 +253,7 @@
 		$conn = connectionToDataBase();
 		$results = array();
 
-		$sql = "SELECT name, company, description, classification, business, semester FROM Projects";
+		$sql = "SELECT name, company, description, classification, business, semester FROM Projects WHERE active = 0";
 
 		$result = $conn->query($sql);
 
