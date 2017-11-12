@@ -107,18 +107,37 @@ function loadAllProjects() {
                     row.append( $('<td>').text(jsonResponse[0][i].teacher));
                     row.append( $('<td>').text(jsonResponse[0][i].name));
                     row.append( $('<td>').text(jsonResponse[0][i].description));
-                    var descarga = $("<a></a>");
-                    if (jsonResponse[0][i][0].length > 0){
-                        descarga.attr("href", "../../Students/" + jsonResponse[0][i][0][0]['filePath']);
-                        descarga.attr('target',"_blank");
-                        descarga.text("Descargar");
-                    }
                     
-                    row.append( $('<td>').append(descarga));
-                    //row.append( $('<td class="cellButton">').append('<a href="../../Students/Archivos/REC.docx" target="_blank">Descargar</a>'));
-                    row.append( $('<td >').text('N/A'));
-                    row.append( $('<td >').text('N/A'));
-                    row.append( $('<td >').text('N/A'));
+                    var j = 0;
+                    var r = 1;
+                    if (jsonResponse[0][i][0].length > 0){
+
+                        while (r <= 4){
+                            if (jsonResponse[0][i][0][j]['requirement'] == r) {
+                                var descarga = $("<a></a>");
+                                descarga.attr("href", "../../Students/" + jsonResponse[0][i][0][j]['filePath']);
+                                descarga.attr('target',"_blank");
+                                descarga.text("Descargar");
+                                row.append( $('<td>').append(descarga));
+                                r++;
+                                if (j+1 < jsonResponse[0][i][0].length)
+                                    j++;
+                            }
+                            else {
+                                r++;
+                                row.append( $('<td >').text('N/A'));
+                            }
+                        }
+                        // 
+                    }    
+                        
+                    
+                    else {
+                        row.append( $('<td >').text('N/A'));
+                        row.append( $('<td >').text('N/A'));
+                        row.append( $('<td >').text('N/A'));
+                        row.append( $('<td >').text('N/A'));
+                    }
                     $("#projectsList").append(row); 
             	});
             }          

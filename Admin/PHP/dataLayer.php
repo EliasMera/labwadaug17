@@ -348,7 +348,7 @@ function attemptGetParticipantProjects() {
 
 			for ($i = 0; $i < count($resp); $i++) {
 				$id = $resp[$i]['id'];
-				$sql = "SELECT filePath, requirement FROM files WHERE project_id = '$id'";
+				$sql = "SELECT filePath, requirement FROM files WHERE project_id = '$id' ORDER BY requirement";
 				$result = $conn->query($sql);
 				$files = array();
 				if ($result->num_rows > 0) {
