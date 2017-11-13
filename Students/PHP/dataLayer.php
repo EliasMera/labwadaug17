@@ -183,15 +183,23 @@
 		$idProject = $_SESSION['projectId'];
 
 		$results = array();
+		$results2 = array();
 
 		$sql = "SELECT name, company, description, classification, business FROM Projects WHERE id = '$idProject'";
+		$sql2 = "SELECT val FROM Project_Classifications";
 
 		$result = $conn->query($sql);
+		$result2 = $conn->query($sql2);
 
 			if ($result->num_rows > 0){
+
+				while($rowC = $result2 -> fetch_assoc()){
+					$arrClassif = utf8_encode($rowC['val']);
+					array_push($results2,$arrClassif);
+				}
 				 
 				while($row = $result -> fetch_assoc()){
-					$response = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']));
+					$response = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'classifications' => $results2);
 					array_push($results,$response);
 				}
 				
