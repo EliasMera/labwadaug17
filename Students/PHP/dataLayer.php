@@ -305,6 +305,51 @@
 			}
 	}
 
+
+	function attemptshowAccount(){
+
+		$conn = connectionToDataBase();
+		$results = array();
+        
+        session_start();
+        $studentId = $_SESSION['studentId'];
+		$sql = "SELECT name, bachelor, academicEmail, personalEmail, cellphone FROM Students WHERE studentId = '$studentId'";
+
+		$result = $conn->query($sql);
+
+			if ($result->num_rows > 0){
+				 
+				while($row = $result -> fetch_assoc()){
+					$response = array('name' => utf8_encode($row['name']), 'bachelor' => utf8_encode($row['bachelor']), 'academicEmail' => utf8_encode($row['academicEmail']), 'personalEmail' => utf8_encode($row['personalEmail']), 'cellphone' => utf8_encode($row['cellphone']));
+					array_push($results,$response);
+
+
+				}
+				
+				echo json_encode($results);
+			}
+			else
+			{
+				$conn -> close();
+				return array("status" => "DISCONNECTION");
+			}
+	}
+
+	function attemptEditAccount($name, $bachelor, $acEmail, $persEmail, $phone){
+
+		$conn = connectionToDataBase();
+		session_start();
+		$studentId = $_SESSION['studentId'];
+
+		if ($conn != null)
+		{
+			$sql = "UPDATE Students set name = '$name', bachelor = '$bachelor', academicEmail = '$acEmail', personalEmail ='$persEmail', cellphone = '$phone' WHERE studentId = '$studentId'";
+			$result = $conn-> query($sql);
+			return array("status" => "SUCCESS");
+		}		
+	}
+
+
 	function showArchs(){
 
 		$conn = connectionToDataBase();

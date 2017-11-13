@@ -32,6 +32,10 @@ switch($action){
 					break;
 	case "EDITPROJECT" : editProject();
 					break;
+	case "SHOWACCOUNT" : showAccount();
+					break;
+	case "EDITACCOUNT" : editAccount();
+					break;
 	case "ARCHREQ" : showArchReq();
 					break;
 }
@@ -287,6 +291,41 @@ function editProject(){
 		else {
 			echo json_encode(array("status" => "SUCCESS"));
 		}
+	}
+
+	function showAccount(){
+
+		$result = attemptshowAccount();
+
+		if($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Student"));
+		}
+		else
+			if ($result["status"] == "BADCONN"){
+				header('HTTP/1.1 500 Bad connection, something went wrong while saving your data, please try again later');
+				echo json_encode(array("message" => "Error, something went wrong"));
+		}		
+
+	}
+
+	function editAccount(){
+
+		$name = $_POST["name"];
+		$bachelor = $_POST["bachelor"];
+		$acEmail = $_POST["academicEmail"];
+		$persEmail = $_POST["personalEmail"];
+	    $phone = $_POST["phone"];
+	    
+		$result = attemptEditAccount($name, $bachelor, $acEmail, $persEmail, $phone);
+
+	    if($result["status"] == "SUCCESS"){
+			echo json_encode(array("message" => "Edit Succesfully!"));
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+
 	}
 
 	function showArchReq(){
