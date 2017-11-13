@@ -199,7 +199,7 @@ function attemptSelectParticipantProjects() {
 		    while($row = $result->fetch_assoc()) 
 		    {
 		    	$aux = array('project' => $row['id'], 'recomended' => $row['recomended'], 'rank' => $row['rank'],
-		    	'teacher' => $row['teacher']);
+		    	'teacher' => utf8_encode($row['teacher']));
 
 		    	array_push($resp, $aux);     
 			}

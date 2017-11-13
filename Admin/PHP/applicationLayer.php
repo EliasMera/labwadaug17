@@ -59,16 +59,19 @@ function populateTeachersGroups() {
 				if ($pos === false) {
 					array_push($encPasswd, encryptionPass($data[$iCourses+1][$i]['Nomina']));
 					array_push($nominaArr, $data[$iCourses+1][$i]['Nomina']);
-					array_push($nameArr, $data[$iCourses+1][$i]['Profesor']);
+					array_push($nameArr, utf8_decode($data[$iCourses+1][$i]['Profesor']));
 					array_push($groupNumberArr, $data[$iCourses+1][$i]['Gpo']);
 				}
-				else {
+				else { // si el grupo tiene 2 profesores
 					$nomina1 = substr($data[$iCourses+1][$i]['Nomina'], 0, 9);
 					$nomina2 = substr($data[$iCourses+1][$i]['Nomina'], 11, 9);
 
 					$pos = strpos($data[$iCourses+1][$i]['Profesor'], "/");
-					$profesor1 = substr($data[$iCourses+1][$i]['Profesor'], 0, $pos);
-					$profesor2 = substr($data[$iCourses+1][$i]['Profesor'], $pos+1);
+					$profesor1 = substr(utf8_decode($data[$iCourses+1][$i]['Profesor']), 0, $pos);
+					$profesor2 = substr(utf8_decode($data[$iCourses+1][$i]['Profesor']), $pos+1);
+
+					// meter solamente al profesor 1
+
 				}
 				$i += 1;
 			}

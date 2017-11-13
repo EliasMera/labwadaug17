@@ -1,9 +1,9 @@
-INSERT INTO required_files (val, active)
+INSERT INTO required_files (id, val, active)
 VALUES 
-('Documento word/pdf', 1),
-('Presentacion', 1),
-('Poster', 1),
-('Comprobante pago',1);
+(1, 'Documento word/pdf', 1),
+(2, 'Presentacion', 1),
+(3, 'Poster', 1),
+(4, 'Comprobante pago',1);
 
 ALTER TABLE files ADD requirement INT NOT NULL AFTER project_id;
 
