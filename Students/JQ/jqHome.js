@@ -89,6 +89,14 @@ $(document).ready(function() {
         window.location.replace("changePassw.html");
     });
 
+    $("#uploadFiles").on("click",function(){
+        window.location.replace("subeArchivos.php");
+    });
+
+    $("#myInfo").on("click",function(){
+        window.location.replace("EditarCuenta.html");
+    });
+
 ////////////////// Change Password
     $("#changePasswBtn").on("click",function(){
     

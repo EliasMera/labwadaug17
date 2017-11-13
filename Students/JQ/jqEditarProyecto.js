@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-        // DESCRIPCION MAX LENGTH 600 CHARS
-        $("#description").attr('maxlength','600');
 
         var jsonToSend2 = {
             "action" : "SHOWPROJECT"
@@ -20,15 +18,15 @@ $(document).ready(function() {
                     newHtml += 
                     "<tr>" + "<th>" + "Nombre" + "</th>" + "<td>" + "<input id='editName' type='text' value='" + jsonResponse[0].name + "'>" + "</td>" + "</tr>" +
                     "<tr>" + "<th>" + "Compañia" + "</th>" + "<td>" + "<input id='editCompany' type='text' value='" + jsonResponse[0].company + "'>" + "</td>" + "</tr>" +
-                    "<tr>" + "<th>" + "Descripción" + "</th>" + "<td>" + "<textarea id='editDescription' rows='10' cols='60'>" + jsonResponse[0].description + "</textarea>" + "</td>" + "</tr>" +
-                    "<tr>" + "<th>" + "Clasificación" + "</th>" + "<td>" + "<select>";
+                    "<tr>" + "<th>" + "Descripción" + "</th>" + "<td>" + "<textarea id='editDescription' rows='10' cols='60' minlength='10' maxlength='600'>" + jsonResponse[0].description + "</textarea>" + "</td>" + "</tr>" +
+                    "<tr>" + "<th>" + "Clasificación" + "</th>" + "<td>" + "<select id='editClassification'>";
                     for(i = 0; i < jsonResponse[0].classifications.length ; i++){
 
                         if(jsonResponse[0].classifications[i] != jsonResponse[0].classification){
                             newHtml += "<option value='" + jsonResponse[0].classifications[i] + "'>" + jsonResponse[0].classifications[i] + "</option>";
                         }
                         else{
-                            newHtml += "<option selected='selected' value='" + jsonResponse[0].classifications[i] + "'>" + jsonResponse[0].classifications[i] + "</option>";
+                            newHtml += "<option selected = 'selected' value='" + jsonResponse[0].classifications[i] + "'>" + jsonResponse[0].classifications[i] + "</option>";
                         }
                     }
                     newHtml += "</select>";
@@ -72,21 +70,15 @@ $(document).ready(function() {
         });
 
         //  EDITAR PROYECTO
-          $("#buttonSave").on("click",function(){
-
-            var $name = $("#userName");
-            var $company = $("#userPassword");
-            var $description = $("#description");
-            var $classification = $("#classification");
-            var $business = $("#business");
+          $("#btnEdit").on("click",function(){
 
             var jsonToSend = {
                 "action" : "EDITPROJECT",
-                "name" : $("#name").val(),
-                "company" : $("#company").val(),
-                "description" : $("#description").val(),
-                "classification" : $("#classification").val(),
-                "business" : $("#business").val()
+                "name" : $("#editName").val(),
+                "company" : $("#editCompany").val(),
+                "description" : $("#editDescription").val(),
+                "classification" : $("#editClassification").val(),
+                "business" : $("#editBusiness").val()
             };
 
             $.ajax({
@@ -96,26 +88,12 @@ $(document).ready(function() {
                 dataType : "json",
                 contentType : "application/x-www-form-urlencoded",
                 success: function(jsonResponse){
-                    window.location.replace("EdiarProyecto.html")
+                    window.location.replace("EditarProyecto.html")
                 },
                 error : function(errorMessage){
                     
                 }
             });
         });    
-        
-        //  PONER VISTA DE EDITAR
-          $("#buttonEdit").on("click", function(){
-
-                $("#change").removeClass("active");
-
-          });
-
-        //  QUITAR VISTA DE EDITAR
-          $("#buttonCancel2").on("click", function(){
-
-                $("#change").addClass("active");
-
-          });
 
 });
