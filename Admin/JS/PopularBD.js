@@ -1,6 +1,16 @@
 $(document).ready(function(){
 
-    $("#fileUp").change(handleFile);
+    //$("#fileUp").change(handleFile);
+
+    $('#sendFile').on("click", function() {
+        if ($("#fileUp").get(0).files.length === 0){
+            $('#noFileAlert').show();
+        }
+        else {
+            //type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            handleFile($("#fileUp").get(0).files);
+        }
+    });
 
     $('#projectsBtn').on("click", function() {
         window.location.replace("Proyectos.html");
@@ -35,22 +45,36 @@ $(document).ready(function(){
 
     getClassifications();
 
+    $('#fileErrorAlertClose').on("click", function() {
+        $('#fileErrorAlert').hide();
+    });
+
+    $('#noFileAlertClose').on("click", function() {
+        $('#noFileAlert').hide();
+    });
+
 });
 
-function handleFile(e) {
+function handleFile(files) {
      //Get the files from Upload control
-     var files = e.target.files;
+     //var files = e.target.files;
      // var to store data
      var jsonToLoadDB = new Array();
      
      //Loop through files
      var i, f;
-     for (i = 0, f = files[i]; i != files.length; ++i) {
+     i = 0;
+    f = files[i];
         var reader = new FileReader();
         var name = f.name;
+        
+        // leer el archivo
+        reader.readAsArrayBuffer(f);
+
         reader.onload = function (e) {
             var data = e.target.result;
 
+            try {
             
             var workbook = XLSX.read(data, { type: 'binary' });
 
@@ -64,6 +88,7 @@ function handleFile(e) {
                         jsonToLoadDB.push(roa);
                     }
                 });
+            // build json to send
             var jsonToSend = {
                 "action" : "POPULATETEACHERSGROUPS",
                 "data" : jsonToLoadDB
@@ -83,11 +108,15 @@ function handleFile(e) {
                     alert(errorMessage.responseText);
                 }
             });
-           };
-           reader.readAsArrayBuffer(f);
-           // build json to send
+        }
+        catch(error)
+        {
+            $("#fileErrorAlert").show();
+        }
+
+        };
+           
        
-       }
 
                        
    }

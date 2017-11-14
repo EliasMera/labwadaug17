@@ -80,6 +80,7 @@ th {
     font-size: 12px;
 }
 
-.cellButton:hover, .cellProject:hover{
+.cellButton:hover, .cellProject:hover, .close:hover{
     cursor: pointer;
 }
+

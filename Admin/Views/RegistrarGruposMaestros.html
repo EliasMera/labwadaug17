@@ -4,7 +4,7 @@
 <head>
   <title>Muestra Empresarial</title>
   <meta charset="UTF-8">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../Resources/css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="../JS/jquery.js"></script>
   <script type="text/javascript" src="../JS/PopularBD.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -53,10 +53,28 @@
 
 <main role="main" class="container">
 
+  <div id="alertDiv">
+    <div class="alert alert-danger" role="alert" style="display: none;" id="fileErrorAlert">
+      <strong>¡Error!</strong> El archivo no tiene el formato correcto.
+      <button type="button" class="close" aria-label="Close" id="fileErrorAlertClose">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-warning" role="alert" style="display: none;" id="noFileAlert">
+      <strong>Advertencia</strong> No has seleccionado ningún archivo.
+      <button type="button" class="close" aria-label="Close" id="noFileAlertClose">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
   <div id="mainBody">
   	<fieldset>
   		<legend>Registrar grupos del semestre</legend>
-  		<input id="fileUp" type="file" value="Subir archivo">
+      <span>
+        <input id="fileUp" type="file" value="Seleccionar archivo">
+        <input type="submit" id="sendFile" value="Subir archivo" class="btn btn-primary">
+      </span>
   	</fieldset>
     <fieldset>
       <legend>Archivos requisito para la muestra</legend>
