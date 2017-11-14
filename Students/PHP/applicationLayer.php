@@ -214,11 +214,11 @@ function showComment(){
 
 function editProject(){
 
-	$name = $_POST["name"];
-	$company = $_POST["company"];
-	$description = $_POST["description"];
-	$classification = $_POST["classification"];
-    $business = $_POST["business"];
+	$name = utf8_decode($_POST["name"]);
+	$company = utf8_decode($_POST["company"]);
+	$description = utf8_decode($_POST["description"]);
+	$classification = utf8_decode($_POST["classification"]);
+    $business = utf8_decode($_POST["business"]);
     
 	$result = attemptEditProject($name, $company, $description, $classification, $business);
 
