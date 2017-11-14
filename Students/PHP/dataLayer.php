@@ -268,13 +268,13 @@
 			if ($result->num_rows > 0){
 				 
 				while($row = $result -> fetch_assoc()){
-					$response = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'semester' => utf8_encode($row['semester']));
-					array_push($results,$response);
+					/*$response = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'semester' => utf8_encode($row['semester']));
+					array_push($results,$response);*/
 
-
+					$response["data"][] = array_map("utf8_encode", $row);
 				}
 				
-					echo json_encode($results);
+					echo json_encode($response);
 			}
 			else
 			{
