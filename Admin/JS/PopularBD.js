@@ -45,12 +45,18 @@ $(document).ready(function(){
 
     getClassifications();
 
+    // ---- Cerrar alertas ----
+
     $('#fileErrorAlertClose').on("click", function() {
         $('#fileErrorAlert').hide();
     });
 
     $('#noFileAlertClose').on("click", function() {
         $('#noFileAlert').hide();
+    });
+
+    $('#successAlertClose').on("click", function() {
+        $('#successAlert').hide();
     });
 
 });
@@ -102,7 +108,7 @@ function handleFile(files) {
                 dataType : "json",
                 contentType : "application/x-www-form-urlencoded",
                 success : function(jsonResponse){
-                    alert("success");
+                    $("#successAlert").show();
                 },
                 error : function(errorMessage){
                     alert(errorMessage.responseText);
