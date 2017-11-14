@@ -16,19 +16,43 @@
 </head>
 
 <body>
-	<h1>Muestra Empresarial</h1>
-	<ul id="tabBar">
-		<li><input id="homeBtn" type="submit" value="Inicio"> </li>
-		<li><input id="historialBtn" type="submit" value="Historial de Proyectos"> </li>
-		<li><input id="regisBtn" type="submit" value="Registrar Proyecto" style="display: none;"> </li>
-		<li><input id="editProj" type="submit" value="Ver Proyecto" style="display: none;"> </li>
-		<li><input id="changePassw" type="submit" value="Cambiar Contraseña"> </li>
-		<li><input id="uploadFiles" type="submit" value="Subir Archivos"></li>
-		<li><input id="myInfo" type="submit" value="Mi información"> </li>
-		<li><input id="logoutBtn" type="submit" value="Cerrar Sesión"> </li>
-	</ul>
-	<div id="resDiv">
-	</div>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Muestra Empresarial</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="base.html">Inicio</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Historial Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="RegistroProyecto.html" style="display:none;" id="regisBtn">Registrar Proyecto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="EditarProyecto.html" style="display:none;" id="editProj">Ver Proyecto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="subeArchivos.php">Subir Archivos </a>
+        </li>
+        <li class="nav-item dropdown my-2 my-sm-0">
+          <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+          	<a class="dropdown-item" href="EditarCuenta.html">Mi información</a>
+            <a class="dropdown-item" href="CambiarContrasena.html">Cambiar contraseña</a>
+            <a id="logoutBtn" class="dropdown-item" href="#">Cerrar sesión</a>
+          </div>
+        </li>
+      </ul>     
+    </div>
+  </div> 
+</nav>
 
 <div class="scrollable">
 	<div id="mainBody">
