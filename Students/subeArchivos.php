@@ -3,15 +3,13 @@
 <head>
   <title>Muestra Empresarial</title>
   <meta charset="UTF-8">
-   <link href="CSS/style.css" rel="stylesheet" type="text/css">
+  <link href="../Resources/css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="JQ/jquery.js"></script>
   <script type="text/javascript" src="JQ/jqHome.js"></script>
   <script type="text/javascript" src="JQ/jqUpload.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="../DataTables/datatables.min.css"/>
-  <script type="text/javascript" src="../DataTables/datatables.min.js"></script>
 
 </head>
 <body>
@@ -44,7 +42,7 @@
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
           	<a class="dropdown-item" href="EditarCuenta.html">Mi información</a>
-            <a class="dropdown-item" href="CambiarContrasena.html">Cambiar contraseña</a>
+            <a class="dropdown-item" href="changePassw.html">Cambiar contraseña</a>
             <a id="logoutBtn" class="dropdown-item" href="#">Cerrar sesión</a>
           </div>
         </li>
@@ -53,7 +51,7 @@
   </div> 
 </nav>
 
-
+<main role="main" class="container">
 
 
 <div id="mainBody">
@@ -65,6 +63,16 @@
 		</div>
 	</form>
 </div>
+
+</main>
+
+    <footer>
+      <p>
+        
+      </p>
+    </footer>
+
+
 </body>
 
 <?php
