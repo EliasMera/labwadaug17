@@ -126,20 +126,20 @@ function loadAllProjects() {
                     
             		var row = $("<tr>");
             		row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
-                    row.append( $('<td>').text(jsonResponse[0][i].teacher));
-                    row.append( $('<td>').text(jsonResponse[0][i].courseKey + '.' + jsonResponse[0][i].groupNumber));
+                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].teacher));
+                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].courseKey + '.' + jsonResponse[0][i].groupNumber));
                     row.append( $('<td class="cellButton">').text(jsonResponse[0][i].name));
                     row.append( $('<td class="cellButton">').text(jsonResponse[0][i].company));
                     row.append( $('<td class="cellButton">').text(jsonResponse[0][i].classification));
                     row.append( $('<td class="cellButton">').text(jsonResponse[0][i].business));
-                    row.append( $('<td>').text(jsonResponse[0][i].recomended));
-                    row.append( $('<td>').text(jsonResponse[0][i].rank));
+                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].recomended));
+                    row.append( $('<td class="cellButton">').text(jsonResponse[0][i].rank));
 
                     body.append(row);
             	});
             }
             $("#projectsList").append(body);
-            //$('#projectsList').DataTable();
+            $("#projectsList").DataTable();
         },
         error : function(errorMessage){
             alert(errorMessage.responseText);
