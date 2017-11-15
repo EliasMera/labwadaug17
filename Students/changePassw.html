@@ -52,6 +52,31 @@
 
 
 <main role="main" class="container">
+
+  <div id="alertDiv"> 
+    <div class="alert alert-success" role="alert" style="display: none;" id="successAlert"> 
+      La contraseña se ha actualizado exitosamente.
+      <button type="button" class="close" aria-label="Close" id="successAlertClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorCamposDiferentes"> 
+      <strong>¡Oops!</strong> Los campos ingresados no coinciden, intente llenarlos de nuevo. 
+      <button type="button" class="close" aria-label="Close" id="errorCamposDiferentesClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+    <div class="alert alert-warning" role="alert" style="display: none;" id="campoVacio"> 
+      <strong>Advertencia</strong> Llene ambos campos. 
+      <button type="button" class="close" aria-label="Close" id="campoVacioClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+  </div> 
+
+
+
+
 	<div id="mainBody" style="margin-left:45px; font-size: 20px;" >
 		
 		Contraseña Nueva: <br><input type="password" size="30" id="newPassw"> <br><br>

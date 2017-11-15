@@ -135,11 +135,10 @@ $(document).ready(function(){
 	$("#grupoEsp").text(sessionStorage.getItem("curso"));
 
 
-	$("#mainBody").on("click",".cellButton", function(){
+	$("#mainBody").on("click",'tr', function(){
 		//debugger;
-		var projectId = $('tr:last td:last').text();
-		
-		sessionStorage.setItem('projectId', projectId);
+		var td = this.cells[3];  // the first <td>
+		sessionStorage.setItem('projectId', $(td).text() );
 		window.location.replace("ProyectoEspecifico.html");
 	});
 

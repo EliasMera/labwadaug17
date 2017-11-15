@@ -98,10 +98,32 @@ $(document).ready(function() {
     });
 
 ////////////////// Change Password
+    $('#campoVacioClose').on("click", function() {
+        $('#campoVacio').hide();
+    });
+
+    $('#errorCamposDiferentesClose').on("click", function() {
+        $('#errorCamposDiferentes').hide();
+    });
+
+    $('#successAlertClose').on("click", function() {
+        $('#successAlert').hide();
+    });
+
+
     $("#changePasswBtn").on("click",function(){
-    
-    if($("#newPassw").val() != $("#newPasswConfirm").val()){
-        alert("Las contraseñas nuevas no coinciden");
+
+    if($("#newPassw").val() == "" || $("#newPasswConfirm").val() == ""){
+        $('#campoVacio').hide();
+        $('#errorCamposDiferentes').hide();
+        $('#successAlert').hide();
+        $("#campoVacio").show();
+    }
+    else if($("#newPassw").val() != $("#newPasswConfirm").val()){
+        $('#campoVacio').hide();
+        $('#errorCamposDiferentes').hide();
+        $('#successAlert').hide();
+        $("#errorCamposDiferentes").show();
     }
     else{
 
@@ -117,8 +139,11 @@ $(document).ready(function() {
             dataType: "json",
             contentType: "application/x-www-form-urlencoded",
             success: function(jsonResponse){
-                alert("Contraseña ha sido cambiada exitosamente");
-                window.location.replace("base.html")
+                $('#campoVacio').hide();
+                $('#errorCamposDiferentes').hide();
+                $('#successAlert').hide();
+                $("#successAlert").show();
+                //window.location.replace("base.html")
 
             },
             error: function(errorMessage){
