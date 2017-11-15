@@ -27,6 +27,10 @@ switch($action){
 			break;
 	case "GETPARTICIPANTPROJECTS" : getParticipantProjects();
 			break;
+	case "GETREQUIREDFILES" : getRequiredFiles();
+			break;
+	case "SAVEREQUIREDFILES" : saveRequiredFiles();
+			break;
 }
 
 function populateTeachersGroups() {
@@ -83,8 +87,7 @@ function populateTeachersGroups() {
 			array_push($groupArr, $groupNumberArr);
 			array_push($dataArr, $groupArr);
 		}
-		//$puta = $dataArr[0][1][0];
-		//echo json_encode($puta);
+		
 		$result = attemptPopulateTeachersGroups($dataArr);
 
 		if ($result["status"] == "SUCCESS"){
@@ -293,6 +296,41 @@ function logout() {
 function getParticipantProjects() {
 	if (isset($_SESSION["userId"])) {
 		$result = attemptGetParticipantProjects();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function getRequiredFiles() {
+	if (isset($_SESSION["userId"])) {
+		$result = attemptGetRequiredFiles();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function saveRequiredFiles() {
+	if (isset($_SESSION["userId"])) {
+		$data = $_POST["data"];
+		$result = attemptSaveRequiredFiles($data);
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result);
 		}

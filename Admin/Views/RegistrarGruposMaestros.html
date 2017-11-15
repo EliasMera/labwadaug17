@@ -60,6 +60,12 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+    <div class="alert alert-success" role="alert" style="display: none;" id="successAlert2">
+      Se han guardado los cambios exitosamente
+      <button type="button" class="close" aria-label="Close" id="successAlertClose2">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <div class="alert alert-danger" role="alert" style="display: none;" id="fileErrorAlert">
       <strong>¡Error!</strong> El archivo no tiene el formato correcto.
       <button type="button" class="close" aria-label="Close" id="fileErrorAlertClose">
@@ -84,7 +90,8 @@
   	</fieldset>
     <fieldset>
       <legend>Archivos requisito para la muestra</legend>
-      <table id="files"></table>
+      <table id="requiredFiles"></table>
+      <input type="submit" id="saveRequirements" value="Guardar" class="btn btn-primary">
     </fieldset>
     <fieldset>
       <legend>Administrar las clasificaciones sectoriales</legend>

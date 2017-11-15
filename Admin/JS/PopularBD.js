@@ -44,6 +44,35 @@ $(document).ready(function(){
     });
 
     getClassifications();
+    getRequiredFiles();
+
+    // Guardar checkboxes de archivos requisito
+    $("#saveRequirements").on("click", function() {
+        var arrChecked = []; // arreglo con ids de requisitos 'checked'
+        $("#requiredFiles tr").each(function(item) {
+            if ($(this).find('input[type="checkbox"]').is(':checked')) {
+                arrChecked.push($(this).find('td:eq(0)').text());
+            }
+        });
+        // ajax call para guardar info
+        var jsonToSend = {
+            "action" : "SAVEREQUIREDFILES",
+            "data" : arrChecked
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                $("#successAlert2").show();
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
 
     // ---- Cerrar alertas ----
 
@@ -57,6 +86,10 @@ $(document).ready(function(){
 
     $('#successAlertClose').on("click", function() {
         $('#successAlert').hide();
+    });
+
+    $('#successAlertClose2').on("click", function() {
+        $('#successAlert2').hide();
     });
 
 });
@@ -145,6 +178,36 @@ function getClassifications() {
                     row.append( $('<td>').text(jsonResponse[0][i].name));
                     row.append( $('<td>').append($('<input id="deleteClassification" type="button" data-toggle="modal" data-target="#myModal" value="Eliminar"/>')));
                     $("#classifications").append(row); 
+                });
+            }
+        },
+        error : function(errorMessage){
+            alert(errorMessage.responseText);
+        }
+    });
+}
+
+function getRequiredFiles() {
+    var jsonToSend = {
+        "action" : "GETREQUIREDFILES"
+    }
+    $.ajax({
+        url : "../PHP/applicationLayer.php",
+        type : "POST",
+        data : jsonToSend,
+        dataType : "json",
+        contentType : "application/x-www-form-urlencoded",
+        success : function(jsonResponse){
+            for (var i = 0; i <= jsonResponse[0].length; i++) {
+                $(jsonResponse[0][i]).each(function() {
+                    var row = $("<tr>");
+                    row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
+                    row.append( $('<td>').text(jsonResponse[0][i].name));
+                    var check = $('<input type="checkbox">');
+                    if (jsonResponse[0][i].active == 1)
+                        check.attr("checked", true); 
+                    row.append( $('<td>').append(check));
+                    $("#requiredFiles").append(row); 
                 });
             }
         },

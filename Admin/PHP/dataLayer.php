@@ -376,4 +376,71 @@ function attemptGetParticipantProjects() {
 	}
 }
 
+function attemptGetRequiredFiles() {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT * FROM required_files";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			// response json
+			$response = array("status" => "SUCCESS");
+			$resp = array();
+			while ($row = $result->fetch_assoc()) {
+				$aux = array('id' => $row['id'], 'name' => utf8_encode($row['val']), 'active' => $row['active']);
+		    	array_push($resp, $aux);
+			}
+			array_push($response, $resp);
+			$conn -> close();
+		    return $response;
+		}
+		else {
+			$conn -> close();
+			return array("status" => "NOT FOUND");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptSaveRequiredFiles($data) {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		// primero desactivar todos
+		$sql = "UPDATE required_files SET active = 0 WHERE 1";
+
+		if (mysqli_query($conn, $sql)) {
+			// ahora activar solo los activos, si los hay
+			if (count($data) > 0) {
+				$sql = "UPDATE required_files SET active = 1 WHERE id IN(".implode(',',$data).")";
+
+				if (mysqli_query($conn, $sql)) {
+					$conn -> close();
+			    	return array("status" => "SUCCESS");
+				}
+				else {
+					$conn -> close();
+					return array("status" => "CANNOT UPDATE");
+				}
+			}
+			else {
+				$conn -> close();
+			    return array("status" => "SUCCESS");
+			}
+		}
+		else {
+			$conn -> close();
+			return array("status" => "CANNOT UPDATE");
+		}
+				
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
 ?>
