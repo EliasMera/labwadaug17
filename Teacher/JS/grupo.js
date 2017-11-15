@@ -56,8 +56,8 @@ $(document).ready(function(){
 		success: function(jsonResponse){
 			var newHtml = "";
 			var nums = [];
-			newHtml += "<table id='caltbl' class='table table-hover'><thead>" + "<tr>" + "<th>" + "Prioridad" + "</th>"
-			+ "<th>" + "Nombre" + "</th>" + "<th>" + "Apto" + "</th></tr></thead><tbody>";
+			newHtml += "<table id='caltbl' class='table table-hover'><thead>" + "<tr>" + "<th>" + "Nombre" + "</th>"
+			+ "<th>" + "Prioridad" + "</th>" + "<th>" + "Apto" + "</th></tr></thead><tbody>";
 			for(i = 0; i < jsonResponse.length; i++){
 				var recommended = jsonResponse[i].recomended == 1;
 				var opcion1 = (recommended ? "SI" : "NO");
@@ -76,7 +76,7 @@ $(document).ready(function(){
 					nums.push(prioridad);
 				}
 				updatePriority(prioridad, projId);
-				newHtml += "<tr name='"+projId+"'>" + "<td class='cellButton'>" + prioridad + "</td>" + "<td class='cellButton'>" + jsonResponse[i].name + "</td>" + "<td>"
+				newHtml += "<tr name='"+projId+"'>" + "<td class='cellButton'>" + jsonResponse[i].name + "</td>" + "<td class='cellButton'>" + prioridad  + "</td>" + "<td>"
 				+ "<select name='" + projId + "' id='apto'>" + "<option value='" + opcion1 + "'>" + opcion1 + "</option>" + "<option value='" + opcion2 + "'>"
 				+ opcion2 + "</option>" + "</select>" + "</td>"
 				

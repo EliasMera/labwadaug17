@@ -1,4 +1,15 @@
 $(document).ready(function(){
+
+
+
+    $('#errorCamposVaciosClose').on("click", function() {
+        $('#errorCamposVacios').hide();
+    });
+
+    $('#successAlertClose').on("click", function() {
+        $('#successAlert').hide();
+    });
+
     var curso = sessionStorage.getItem("curso");
     var grupo = sessionStorage.getItem("grupoId");
     var project = sessionStorage.getItem("projectId");
@@ -17,22 +28,28 @@ $(document).ready(function(){
 
     $("#btnRegAlumno").on("click",function(){
         var mat = $("#matricula").val();
-        var passwrd = $("#passwrd").val();
-        var passwrd2 = $("#passwrdC").val();
         var nom = $("#nombre").val();
         var carr = $("#carrera").val();
         var acamail = $("#correoTec").val();
         var permail = $("#correoX").val();
         var cell = $("#celular").val();
 
-        if( passwrd == "" ){
-            if(passwrd != passwrd2){
-                alert("Error, no coinciden las contraseñas");
-            }
-            else{
-                alert("Error, llenar los campos de matricula y contraseña usando la matricula del alumno");
-            }
+        // if( passwrd == "" ){
+        //     if(passwrd != passwrd2){
+        //         alert("Error, no coinciden las contraseñas");
+        //     }
+        //     else{
+        //         alert("Error, llenar los campos de matricula y contraseña usando la matricula del alumno");
+        //     }
+        // }
+
+        if(mat == "" || nom == "" || acamail == "" ){
+
+            //alert("Error, porfavor llenar los campos de Matricula, Nombre y Correo Institucional");
+            $("#errorCamposVacios").show();
         }
+        else {
+
         var jsonToSend = {
             "action"    : (source === "GRUPO")? "REGISTERB" : "REGISTERA",
             "mat"       : mat,
@@ -41,7 +58,7 @@ $(document).ready(function(){
             "acamail"   : acamail,
             "permail"   : permail,
             "cell"      : cell,
-            "passwrd"   : passwrd,
+            "passwrd"   : mat,
             "grupoId"   : grupo,
             "projectId" : project
         }
@@ -53,9 +70,10 @@ $(document).ready(function(){
             async: false,
             contentType : "application/x-www-form-urlencoded",
             success: function(jsonResponse){
-                alert("Alumno Registrado");
+                //alert("Alumno Registrado");
+                $('#successAlert').show();
                 if(source === "GRUPO"){
-                    window.location.replace("PaginaGrupos.html");
+                    window.location.replace("Grupo.html");
                 }
                 else{
                     window.location.replace("ProyectoEspecifico.html");
@@ -66,6 +84,10 @@ $(document).ready(function(){
             }
 
         });
+
+
+        }
+
     });
 
 

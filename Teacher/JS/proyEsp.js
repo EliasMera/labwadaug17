@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    $('#successAlertClose').on("click", function() {
+        $('#successAlert').hide();
+    });
 	$("#grupoEsp").val(sessionStorage.getItem("curso")+ "." + sessionStorage.getItem("grupo"));
 
 	var jsonToSend = {

@@ -3,52 +3,131 @@
 <head>
   <title>Registrar un alumno</title>
   <meta charset="UTF-8">
-  <link href="CSS/style.css" rel="stylesheet" type="text/css">
+  <link href="../Resources/css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="JS/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="JS/RegistroAlumnos.js"></script>
   <script type="text/javascript" src="JS/script.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+ 
 </head>
 <body>
-	<h1>Muestra Empresarial</h1>
-	<ul id="tabBar">
-		<li><input id="homeBtn" type="submit" value="Inicio"></li>
-		<li><input id="logoutBtn" type="submit" value="LogOut"></li>
-	</ul>
-	<div id="mainBody">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+
+  <div class="container">
+    <a class="navbar-brand" href="#">Muestra Empresarial</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+ 	</div>
+</nav>
+
+<main role="main" class="container">
+
+
+  <div id="alertDiv">
+    <div class="alert alert-success" role="alert" style="display: none;" id="successAlert">
+      Alumno registrado con exito.
+      <button type="button" class="close" aria-label="Close" id="successAlertClose">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorCamposVacios">
+      <strong>¡Error!</strong> porfavor llenar los campos de Matricula, Nombre y Correo Institucional.
+      <button type="button" class="close" aria-label="Close" id="errorCamposVaciosClose">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-warning" role="alert" style="display: none;" id="noFileAlert">
+      <strong>Advertencia</strong> No has seleccionado ningún archivo.
+      <button type="button" class="close" aria-label="Close" id="noFileAlertClose">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+	<form class="form-horizontal">
+	<fieldset>
+
+	<!-- Form Name -->
+	<legend>Informacion del Alumno</legend>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="matricula">Matricula</label>  
+	  <div class="col-md-4">
+	  <input id="matricula" name="matricula" type="text" placeholder="A00000000" class="form-control input-md" required="">
+	    
+	  </div>
 	</div>
 
-	<br><br>
-	<form>
-		<fieldset>
-			<legend>Informaci&oacute;n del alumno</legend>
-			Matrícula
-			<input type="text" id="matricula" placeholder="A00000000">
-			<br><br>
-			Nombre
-			<input type="text" id="nombre" name="name">
-			<br><br>
-			Carrera
-			<input type="text" id="carrera" name="bachelor">
-			<br><br>
-			Contraseña de acceso
-			<input type="password" id="passwrd" name="pass">
-			<br><br>
-			Repetir contraseña
-			<input type="password" id="passwrdC">
-			<br><br>
-			Correo Institucional
-			<input type="text" id="correoTec" placeholder="a00000000@itesm.mx">
-			<br><br>
-			Correo Personal
-			<input type="text" id="correoX">
-			<br><br>
-			Celular
-			<input type="text" id="celular">
-			<br><br>
-		</fieldset>
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="nombre">Nombre</label>  
+	  <div class="col-md-4">
+	  <input id="nombre" name="nombre" type="text" placeholder="" class="form-control input-md">
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="carrera">Carrera</label>  
+	  <div class="col-md-4">
+	  <input id="carrera" name="carrera" type="text" placeholder="" class="form-control input-md">
+	    
+	  </div>
+	</div>
+
+	
+<!-- 	<div class="form-group">
+	  <label class="col-md-4 control-label" for="passwrd">Contraseña de acceso</label>  
+	  <div class="col-md-4">
+	  <input id="passwrd" name="passwrd" type="text" placeholder="" class="form-control input-md" required="">
+	    
+	  </div>
+	</div>
+
+	
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="passwrdC">Repetir contraseña</label>  
+	  <div class="col-md-4">
+	  <input id="passwrdC" name="passwrdC" type="text" placeholder="" class="form-control input-md" required="">
+	    
+	  </div>
+	</div> -->
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="correoTec">Correo Institucional</label>  
+	  <div class="col-md-4">
+	  <input id="correoTec" name="correoTec" type="text" placeholder="a00000000@itesm.mx" class="form-control input-md" required="">
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="correoX">Correo Personal</label>  
+	  <div class="col-md-4">
+	  <input id="correoX" name="correoX" type="text" placeholder="" class="form-control input-md">
+	    
+	  </div>
+	</div>
+
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="celular">Celular</label>  
+	  <div class="col-md-4">
+	  <input id="celular" name="celular" type="text" placeholder="" class="form-control input-md">
+	    
+	  </div>
+	</div>
+
+	</fieldset>
 	</form>
-	<br><br>
-	<input type="submit" value="Cancelar" id="btnCancelar">
-	<input type="submit" value="Registrar" id="btnRegAlumno">
+		<input type="submit" class="btn btn-secondary" value="Cancelar" id="btnCancelar">
+		<input type="submit" class="btn btn-success" value="Registrar" id="btnRegAlumno">
+	</main>
 </body>
 </html>

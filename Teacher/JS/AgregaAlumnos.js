@@ -33,7 +33,7 @@ $(document).ready(function(){
                 newHtml += "<tr name='"+mat+"'>" + "<td>" + mat + "</td>"
                 + "<td>" + name + "</td>"
                 + "<td>" 
-                + "<input name ='" + mat + "' align='center' class='addBtn' type='submit' value='Agrega' name/>"  
+                + "<input name ='" + mat + "' align='center' class='addBtn btn btn-primary' type='submit' value='Agrega' name/>"  
                 + "</td>" + "</tr>";
             }
             newHtml += "</tbody></table>";
