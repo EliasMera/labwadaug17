@@ -31,6 +31,12 @@ switch($action){
 			break;
 	case "SAVEREQUIREDFILES" : saveRequiredFiles();
 			break;
+	case "ADDANOUNCE" : addAnounce();
+			break;
+	case "LOADANOUNCEMENTS" : loadAnouncements();
+			break;
+	case "DELETEANOUNCE" : deleteAnounce();
+			break;
 }
 
 function populateTeachersGroups() {
@@ -331,6 +337,59 @@ function saveRequiredFiles() {
 	if (isset($_SESSION["userId"])) {
 		$data = $_POST["data"];
 		$result = attemptSaveRequiredFiles($data);
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function addAnounce() {
+	if (isset($_SESSION["userId"])) {
+		$data = $_POST["data"];
+		$result = attemptAddAnounce($data);
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function loadAnouncements() {
+	if (isset($_SESSION["userId"])) {
+		$result = attemptLoadAnouncements();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function deleteAnounce() {
+	if (isset($_SESSION["userId"])) {
+		$id = $_POST["id"];
+		$result = attemptDeleteAnounce($id);
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result);
 		}

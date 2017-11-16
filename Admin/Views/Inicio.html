@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <link href="../../Resources/css/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="../JS/jquery.js"></script>
-  <script type="text/javascript" src="../JS/Proyectos.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
@@ -52,14 +51,169 @@
 
   <main role="main" class="container">
 
+    <div id="alertDiv">
+      <div class="alert alert-success" role="alert" style="display: none;" id="successAlert">
+        El anuncio ha sido publicado exitosamente
+        <button type="button" class="close" aria-label="Close" id="successAlertClose">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-danger" role="alert" style="display: none;" id="fileErrorAlert">
+        <strong>¡Error!</strong> El archivo no tiene el formato correcto.
+        <button type="button" class="close" aria-label="Close" id="fileErrorAlertClose">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-warning" role="alert" style="display: none;" id="noTextAlert">
+        <strong>Advertencia</strong> No has escrito nada en el nuevo anuncio.
+        <button type="button" class="close" aria-label="Close" id="noTextAlertClose">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
     <fieldset>
       <legend>
         Instrucciones
       </legend>
-      <p>Una vez seleccionados los proyectos participantes no será posible hacer cambios</p>
-    </fieldset>      
+      <p>Una vez seleccionados los proyectos participantes no será posible hacer cambios </p>
+      <p>1) Inicio: En esta sección se encuentra las instrucciones acerca de cómo utilizar el sistema. También podrás publicar anuncios que los profesores y los alumnos podrán ver en su página de inicio</p>
+    </fieldset>
+    <div id="anounceDiv">
+      <fieldset>
+        <legend>Anuncios</legend>
+        <table id="anounceTable"></table>
+      </fieldset>
+      <fieldset>
+        <legend>Publicar nuevo anuncio</legend>
+        <textarea id="anouncement" cols="90" rows="3"></textarea>
+        <br>
+        <input type="submit" value="Publicar Anuncio" id="newAnounce">
+      </fieldset>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Eliminar Anuncio</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas eliminar el anuncio?
+            <p><strong></strong><sub></sub></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmDelete">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>      
 
   </main><!-- /.container -->
 
 </body>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    loadAnouncements();
+
+    $("#newAnounce").on("click", function() {
+      if ($("#anouncement").val() != "") {
+        var jsonToSend = {
+            "action" : "ADDANOUNCE",
+            "data" : $("#anouncement").val()
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.reload();
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+      }
+      else {
+        $('#noTextAlert').show();
+      }
+    });
+
+    $('body').delegate("#delete", "click", function() {
+      var id = $(this).parent().parent().find('td:eq(0)').text();
+      var text = $(this).parent().parent().find('td:eq(2)').text();
+      $(".modal-body p strong").text(text);
+      $(".modal-body p sub").text(id);
+      $(".modal-body p sub").hide();
+    });
+
+    $("#confirmDelete").on("click", function() {
+      var id = $(".modal-body p sub").text();
+      var jsonToSend = {
+            "action" : "DELETEANOUNCE",
+            "id" : id
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.reload();
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
+    $('#noTextAlertClose').on("click", function() {
+        $('#noTextAlert').hide();
+    });
+
+    $('#successAlertClose').on("click", function() {
+        $('#successAlert').hide();
+    });
+
+  });
+
+  function loadAnouncements() {
+    var jsonToSend = {
+        "action" : "LOADANOUNCEMENTS"
+    }
+    $.ajax({
+        url : "../PHP/applicationLayer.php",
+        type : "POST",
+        data : jsonToSend,
+        dataType : "json",
+        contentType : "application/x-www-form-urlencoded",
+        success : function(jsonResponse){
+          for (var i = 0; i <= jsonResponse[0].length; i++) {
+              $(jsonResponse[0][i]).each(function() {
+                  var row = $("<tr>");
+                  row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
+                  row.append( $('<td>').text(jsonResponse[0][i].date_time));
+                  row.append( $('<td>').text(jsonResponse[0][i].val));
+                  row.append( $('<td>').append($('<input id="delete" type="button" data-toggle="modal" data-target="#myModal" value="Eliminar"/>')));
+                  $("#anounceTable").append(row); 
+              });
+          }
+        },
+        error : function(errorMessage){
+            alert(errorMessage.responseText);
+        }
+    });    
+  }
+</script>
+
 </html>

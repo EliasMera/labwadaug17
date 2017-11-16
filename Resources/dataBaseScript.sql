@@ -99,6 +99,17 @@ CREATE TABLE Project_Classifications (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE Anouncements (
+	id INT NOT NULL AUTO_INCREMENT,
+	val VARCHAR(150), NOT NULL,
+	date_time DATETIME,
+	PRIMARY KEY (id)
+);
+
+INSERT INTO Anouncements (val, date_time) VALUES 
+('Primer anuncio del semestre, sean bienvenidos.', now()),
+('El respeto al derecho ajeno es la paz. - Benito Juárez', now()),
+('La tarea es para mañana señores.', now());
 
 INSERT INTO Project_Classifications (val)
 VALUES ("ABONOS Y FERTILIZANTES"), ("ACEITES Y GRASAS VEGETALES"),

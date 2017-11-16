@@ -114,7 +114,7 @@ function loadAllProjects() {
 
                         while (r <= 4){
                             if (jsonResponse[0][i][0][j]['requirement'] == r) {
-                                var descarga = $("<a></a>");
+                                var descarga = $("<a download></a>");
                                 descarga.attr("href", "../../Students/" + jsonResponse[0][i][0][j]['filePath']);
                                 descarga.attr('target',"_blank");
                                 descarga.text("Descargar");
