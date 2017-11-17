@@ -448,4 +448,33 @@ function loadStudents($projectId, $grupoId){
 	}
 }
 
+function attemptLoadAnouncements() {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "SELECT * FROM Anouncements";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+
+			$response = array("status" => "SUCCESS");
+			$resp = array();
+			while ($row = $result->fetch_assoc()) {
+				$aux = array('id' => $row['id'], 'val' => utf8_encode($row['val']), 'date_time' => $row['date_time']);
+		    	array_push($resp, $aux);
+			}
+			array_push($response, $resp);
+			$conn -> close();
+		    return $response;
+		}
+		else {
+			$conn -> close();
+			return array("status" => "NOT FOUND");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
 ?>

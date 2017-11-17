@@ -80,10 +80,52 @@
       <legend>
         Instrucciones
       </legend>
-      <p>Recuerden seleccionar el mejor proyecto de todos los disponibles para la muestra</p>
+      <p>Se seleccionaran los mejores proyectos, de acuerdo a su ranking, siempre y cuando el profesor lo haya recomendado</p>
+      <p>La cantidad máxima de proyectos a seleccionar por cada profesor es equivalente a la mitad de los proyectos a su cargo.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>
+        Anuncios
+      </legend>
+      <table id="anounceTable"></table>
     </fieldset>      
 
   </main><!-- /.container -->
 
 </body>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    loadAnouncements();
+
+  });
+
+  function loadAnouncements() {
+    var jsonToSend = {
+        "action" : "LOADANOUNCEMENTS"
+    }
+    $.ajax({
+        url : "PHP/applicationLayer.php",
+        type : "POST",
+        data : jsonToSend,
+        dataType : "json",
+        contentType : "application/x-www-form-urlencoded",
+        success : function(jsonResponse){
+          for (var i = 0; i <= jsonResponse[0].length; i++) {
+              $(jsonResponse[0][i]).each(function() {
+                  var row = $("<tr>");
+                  row.append( $('<td>').text(jsonResponse[0][i].val));
+                  row.append( $('<td>').text(jsonResponse[0][i].date_time));
+                  $("#anounceTable").append(row); 
+              });
+          }
+        },
+        error : function(errorMessage){
+        }
+    });    
+  }
+</script>
+
 </html>

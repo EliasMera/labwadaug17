@@ -47,6 +47,8 @@
 			break;
 		case "ADDALUMNI"		: addAlumniFunc();
 			break;
+		case "LOADANOUNCEMENTS" : loadAnouncements();
+			break;
 	}
 
 	function debug_to_console( $data ) {
@@ -372,6 +374,17 @@
 		}
 		else{
 			echo json_encode(array("message" => "Wrong credentials provided"));
+		}
+	}
+
+	function loadAnouncements() {
+		$result = attemptLoadAnouncements();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
 		}
 	}
 
