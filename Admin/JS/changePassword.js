@@ -4,7 +4,10 @@ $(document).ready(function(){
 		if($("#newPassw").val() != $("#newPasswConfirm").val()){
 	        alert("Las contraseñas nuevas no coinciden");
 	    }
-	    else{
+	    else if ($("#newPassw").val() == "" || $("#newPasswConfirm").val() == ""){
+            alert("llena los campos");
+        }
+        else {
 
 	    var jsonToSend = {
 	        "action" : "CHANGEPASSWORD",

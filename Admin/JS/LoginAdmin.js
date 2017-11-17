@@ -13,7 +13,7 @@ $(document).ready(function(){
 	            dataType : "json",
 	            contentType : "application/x-www-form-urlencoded",
 	            success : function(jsonResponse){
-	                window.location.assign("Proyectos.html");
+	                window.location.assign("Inicio.html");
 	            },
 	            error : function(errorMessage){
 	                alert(errorMessage.responseText);

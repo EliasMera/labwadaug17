@@ -6,26 +6,87 @@
 	<link href="../../Resources/css/style.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="../JS/jquery.js"></script>
 	<script type="text/javascript" src="../JS/changePassword.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>Muestra Empresarial</h1>
-	<ul id="tabBar">
-		<li><input id="homeBtn" type="submit" value="Inicio"></li>
-		<li><input id="configureBtn" type="submit" value="Configurar Semestre"></li>
-		<li><input id="projectsBtn" type="submit" value="Proyectos"></li>
-		<li><input id="participantsBtn" type="submit" value="Participantes"></li>
-		<li><input id="changePassw" type="submit" value="Cambiar Contraseña"></li>
-		<li><input id="logoutBtn" type="submit" value="Cerrar sesión"></li>
-	</ul>
-	<div id="resDiv">
-	</div>
-	<br>
+	
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Muestra Empresarial</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  </div> 
+</nav>
+
+
+<main role="main" class="container">
+
+  <div id="alertDiv"> 
+    <div class="alert alert-success" role="alert" style="display: none;" id="successAlert"> 
+      La contraseña se ha actualizado exitosamente.
+      <button type="button" class="close" aria-label="Close" id="successAlertClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorCamposDiferentes"> 
+      <strong>¡Oops!</strong> Los campos ingresados no coinciden, intente llenarlos de nuevo. 
+      <button type="button" class="close" aria-label="Close" id="errorCamposDiferentesClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+    <div class="alert alert-warning" role="alert" style="display: none;" id="campoVacio"> 
+      <strong>Advertencia</strong> Llene ambos campos. 
+      <button type="button" class="close" aria-label="Close" id="campoVacioClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+  </div> 
+
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+  <legend>Cambio de contraseña</legend>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="matricula">Contraseña Nueva</label>  
+    <div class="col-md-4">
+    <input id="newPassw" name="matricula" type="password" placeholder="" class="form-control input-md" required="">
+      
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="nombre">Confirmación de contraseña</label>  
+    <div class="col-md-4">
+    <input id="newPasswConfirm" name="nombre" type="password" placeholder="" class="form-control input-md">
+    <br>
+    <input id="changePasswBtn" type="submit" value="Cambiar Contraseña" class="btn btn-primary">
+    </div>
+  </div>
+  </fieldset>
+</form>
+
+
+
+
 	<div id="mainBody" style="margin-left:45px; font-size: 20px;" >
-		Contraseña Actual: <br><input type="password" size="30" id="oldPassw"> <br><br>
-		Contraseña Nueva: <br><input type="password" size="30" id="newPassw"> <br><br>
-		Confirmación Nueva Contraseña: <br><input type="password" size="30" id="newPasswConfirm"> <br><br>
-		<input id="changePasswBtn" type="submit" value="Cambiar Contraseña">
+
+		
 
 	</div>
+</main>
+
+    <footer>
+      <p>
+        
+      </p>
+    </footer>
 </body>
 </html>
