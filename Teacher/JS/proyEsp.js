@@ -11,6 +11,8 @@ $(document).ready(function(){
 
 	}
 
+	console.log(sessionStorage.getItem("projectId"));
+
 	$.ajax({
 		url: "PHP/applicationLayer.php",
 		type: "POST",
@@ -35,7 +37,7 @@ $(document).ready(function(){
 			$("#resDiv").append(newHtml);
 		},
 		error: function(errorMessage){
-			alert(errorMessage);
+			//alert(errorMessage);
 		}
 
 	});
@@ -100,8 +102,9 @@ $(document).ready(function(){
 				var matricula = jsonResponse[i].studentId;
 				newHtml += "<tr>" + "<td>" + matricula + "</td>"
 				+ "<td>" + jsonResponse[i].name + "</td>"
-				+ "<td><input class='btnBorra btn btn-primary' type='submit' value='Borrar' name='" + matricula + "'/></td>"
-				+ "</tr>";	
+				+ "<td><input id='delete' name='" + matricula 
+				+ "' type='button' data-toggle='modal'"
+				+ "class='btn btn-primary' data-target='#myModal' value='-'/></td></tr>";
 			}
 			newHtml += "</table>";
 			var agrega = "<br><br><input type='submit' id='agregaBtn' class='btn btn-primary' value='Agregar integrante' /><br>";
@@ -109,7 +112,7 @@ $(document).ready(function(){
 			$("#mainBody").append(newHtml);	
 		},
 		error: function(errorMessage){
-			alert(errorMessage);
+			//alert(errorMessage);
 		}
 	});
 
@@ -153,29 +156,41 @@ $(document).ready(function(){
 	});
 
 
-	$("#mainBody").on("click",".btnBorra", function(){
-		var matr = $(this).attr("name");
-		if (confirm('Seguro de eliminar alumno con matricula ' + matr + ' del proyecto?')) {
-		    var jsonToSend3 = {
-				"action" 	: "DELETESTUDENT",
-				"matricula" : matr
-			}
+	/*$("#mainBody").on("click","#delete", function(){
+		
+	});*/
 
-			$.ajax({
-				url: "PHP/applicationLayer.php",
-				type: "POST",
-				data : jsonToSend3,
-				dataType: "json",
-				async : false,
-				contentType: "application/x-www-form-urlencoded",
-				success: function(jsonResponse){
-					location.reload();
-				},
-				error: function(errorMessage){
-					location.reload();
-				}
-			});
-		} 
-	});
+	$('body').delegate("#delete", "click", function() {
+		console.log("click");
+      	var id = $(this).parent().parent().find('td:eq(0)').text();
+      	var text = $(this).parent().parent().find('td:eq(1)').text();
+      	text += " con matricula " + id;
+		$(".modal-body p strong").text(text);
+		$(".modal-body p sub").text(id);
+		$(".modal-body p sub").hide();
+    });
+
+    $("#confirmDelete").on("click", function() {
+    	var matr = $(".modal-body p sub").text();
+	    var jsonToSend3 = {
+			"action" 	: "DELETESTUDENT",
+			"matricula" : matr
+		}
+
+		$.ajax({
+			url: "PHP/applicationLayer.php",
+			type: "POST",
+			data : jsonToSend3,
+			dataType: "json",
+			async : false,
+			contentType: "application/x-www-form-urlencoded",
+			success: function(jsonResponse){
+				location.reload();
+			},
+			error: function(errorMessage){
+				location.reload();
+			}
+		});
+    });
 
 });
