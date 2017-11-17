@@ -38,6 +38,8 @@ switch($action){
 					break;
 	case "ARCHREQ" : showArchReq();
 					break;
+	case "LOADANOUNCEMENTS" : loadAnouncements();
+			break;
 }
 
 function loginFunction(){
@@ -341,6 +343,20 @@ function editProject(){
 		}
 
 	}
+
+	function loadAnouncements() {
+
+		$result = attemptLoadAnouncements();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+		
+	}
+
 
 ?>
 
