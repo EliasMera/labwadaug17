@@ -101,7 +101,7 @@ CREATE TABLE Project_Classifications (
 
 CREATE TABLE Anouncements (
 	id INT NOT NULL AUTO_INCREMENT,
-	val VARCHAR(150), NOT NULL,
+	val VARCHAR(150) NOT NULL,
 	date_time DATETIME,
 	PRIMARY KEY (id)
 );
