@@ -357,7 +357,7 @@ function saveRequiredFiles() {
 
 function addAnounce() {
 	if (isset($_SESSION["userId"])) {
-		$data = $_POST["data"];
+		$data = utf8_decode($_POST["data"]);
 		$result = attemptAddAnounce($data);
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result);
@@ -410,7 +410,7 @@ function deleteAnounce() {
 
 function newClassification() {
 	if (isset($_SESSION["userId"])) {
-		$data = $_POST["data"];
+		$data = utf8_decode($_POST["data"]);
 		$result = attemptNewClassification($data);
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result);
