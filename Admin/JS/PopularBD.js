@@ -74,6 +74,58 @@ $(document).ready(function(){
         });
     });
 
+    // Guardar nueva clasificacion sectorial
+    $("#save").on("click", function() {
+        var name = $("#newClassification").val().toUpperCase();
+        
+        var jsonToSend = {
+            "action" : "NEWCLASSIFICATION",
+            "data" : name
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.reload();
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
+    // borrar clasificación sectorial
+    $('body').delegate("#deleteClassification", "click", function() {
+        var id = $(this).parent().parent().find('td:eq(0)').text();
+        var text = $(this).parent().parent().find('td:eq(1)').text();
+        $("#myModal .modal-body p strong").text(text);
+        $("#myModal .modal-body p sub").text(id);
+        $("#myModal .modal-body p sub").hide();
+    });
+    $("#confirmDelete").on("click", function() {
+        var id = $("#myModal .modal-body p sub").text();
+        var jsonToSend = {
+            "action" : "DELETECLASSIFICATION",
+            "id" : id
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.reload();
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
     // ---- Cerrar alertas ----
 
     $('#fileErrorAlertClose').on("click", function() {
@@ -176,7 +228,7 @@ function getClassifications() {
                     var row = $("<tr>");
                     row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
                     row.append( $('<td>').text(jsonResponse[0][i].name));
-                    row.append( $('<td>').append($('<input id="deleteClassification" type="button" data-toggle="modal" data-target="#myModal" value="Eliminar"/>')));
+                    row.append( $('<td>').append($('<a id="deleteClassification" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o fa-lg"></i></a>')));
                     $("#classifications").append(row); 
                 });
             }

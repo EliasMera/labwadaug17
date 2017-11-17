@@ -503,7 +503,47 @@ function attemptDeleteAnounce($id) {
 		}
 		else {
 			$conn -> close();
+			return array("status" => "BAD DELETE");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptNewClassification($data) {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "INSERT INTO project_classifications (val) VALUES ('$data')";
+		if (mysqli_query($conn, $sql)) {
+			$conn -> close();
+    		return array("status" => "SUCCESS");
+		}
+		else {
+			$conn -> close();
 			return array("status" => "BAD INSERT");
+		}
+	}
+	else {
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
+function attemptDeleteClassification($id) {
+	$conn = connectionToDataBase();
+
+	if ($conn != null) {
+		$sql = "DELETE FROM project_classifications WHERE id = '$id'";
+		if (mysqli_query($conn, $sql)) {
+			$conn -> close();
+    		return array("status" => "SUCCESS");
+		}
+		else {
+			$conn -> close();
+			return array("status" => "BAD DELETE");
 		}
 	}
 	else {

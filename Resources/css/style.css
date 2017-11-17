@@ -6,7 +6,7 @@ body{
   padding-top: 5rem;
   margin: 0;
   background: white;
-  color: #003399;
+  color: #007bff;
 }
 
 h1{
@@ -16,32 +16,6 @@ h1{
   color: white;
 }
 
-ul#tabBar{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background-color: #CCC;
-    overflow:hidden;
-}
-ul#tabBar li{
-    float: left;
-    padding: 0px;
-}
-
-#tabBar li > input[type=submit]:hover{
-    background-color: #999;
-    color : white;
-    cursor: pointer;
-}
-
-#tabBar li > input[type=submit]{
-    padding: 20px;
-    font-size: 1.3em;
-    color: #003399;
-    margin: 0;
-    border: 1px 2px 1px 1px;
-    cursor:pointer;
-}
 
 fieldset{
   border: 2px dashed #dddddd;
@@ -60,7 +34,7 @@ table {
     margin: 10px;
     border-collapse: collapse;
     border: 1px solid #eee;
-    border-bottom: 2px solid #003399;
+    border-bottom: 2px solid #007bff;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
      0px 10px 20px rgba(0,0,0,0.05),
      0px 20px 20px rgba(0,0,0,0.05),
@@ -74,7 +48,7 @@ th, td {
     border-collapse: collapse;
 }
 th {
-    background: #003399;
+    background: #007bff;
     color: #fff;
     text-transform: uppercase;
     font-size: 12px;

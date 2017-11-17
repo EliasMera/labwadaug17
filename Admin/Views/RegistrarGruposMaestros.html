@@ -13,7 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../../DataTables/datatables.min.css"/>
-
+  <link rel="stylesheet" href="../../Resources/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -95,16 +95,65 @@
     </fieldset>
     <fieldset>
       <legend>Administrar las clasificaciones sectoriales</legend>
-      <input type="submit" id="addClassification" value="Nueva clasificación">
+      
       <table id="classifications">
         <thead>
           <tr>
             <th>Clasificación Sectorial</th>
-            <th></th>
+            <th><a class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+                <i class="fa fa-plus fa-lg"></i></a></th>
           </tr>
         </thead>
       </table>
     </fieldset>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Anuncio</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar el anuncio?
+          <p><strong></strong><sub></sub></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmDelete">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear clasificación sectorial</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label" for="name">Nueva clasificación sectorial</label>  
+            <div >
+            <input id="newClassification" name="name" type="text" placeholder="" class="form-control input-md" required="">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Guardar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </main>

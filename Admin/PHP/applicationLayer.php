@@ -37,6 +37,10 @@ switch($action){
 			break;
 	case "DELETEANOUNCE" : deleteAnounce();
 			break;
+	case "NEWCLASSIFICATION" : newClassification();
+			break;
+	case "DELETECLASSIFICATION" : deleteClassification();
+			break;
 }
 
 function populateTeachersGroups() {
@@ -390,6 +394,42 @@ function deleteAnounce() {
 	if (isset($_SESSION["userId"])) {
 		$id = $_POST["id"];
 		$result = attemptDeleteAnounce($id);
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function newClassification() {
+	if (isset($_SESSION["userId"])) {
+		$data = $_POST["data"];
+		$result = attemptNewClassification($data);
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 500' . "NO SESSION");
+		die("NO SESSION");
+	}
+}
+
+function deleteClassification() {
+	if (isset($_SESSION["userId"])) {
+		$id = $_POST["id"];
+		$result = attemptDeleteClassification($id);
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result);
 		}
