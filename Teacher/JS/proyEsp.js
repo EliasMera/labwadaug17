@@ -44,39 +44,9 @@ $(document).ready(function(){
 
 	$("#grupoEsp").text(sessionStorage.getItem("curso"));
 
-	var jsonToSendF = {
-		"action"	: "LOADFEEDBACK",
-		"projectId"	: sessionStorage.getItem("projectId")
-	}
-
-	$.ajax({
-		url: "PHP/applicationLayer.php",
-		type: "POST",
-		data : jsonToSendF,
-		dataType: "json",
-		async:false,
-		contentType: "application/x-www-form-urlencoded",
-		success: function(jsonResponse){
-			var comentarios = "<br> Comentarios <br>";
-			comentarios += "<textarea id='feed' rows='5' cols='100' disabled>";
-			for(i = 0; i < jsonResponse.length; i++){
-				comentarios += jsonResponse[i].comment;	
-			}
-			comentarios += "</textarea><br>";
-			comentarios += "<input type='submit' class='btn btn-primary' id='editaFeed' value='Editar' />  ";
-			comentarios += "<input type='submit' class='btn btn-primary' id='guardaFeed' value='Guardar' /><br>";
-			$("#resDiv").append(comentarios);
-		},
-		error: function(errorMessage){
-			var comentarios = "<br> Comentarios <br>";
-			comentarios += "<textarea id='feed' rows='5' cols='150' disabled>";
-			comentarios += ""; //agrega feedback
-			comentarios += "</textarea><br>";
-			comentarios += "<input type='submit' class='btn btn-primary' id='editaFeed' value='Editar' />  ";
-			comentarios += "<input type='submit' class='btn btn-primary' id='guardaFeed' value='Guardar' /><br>";
-			$("#mainBody").append(comentarios);
-		}
-	});
+	var comentarios = "<br> Comentarios <br>";
+	comentarios += '<a class="btn btn-primary" data-toggle="modal" data-target="#formModal">Agregar Feedback</a>';
+	$("#resDiv").append(comentarios);
 
 
 	var jsonToSend2 = {
@@ -116,18 +86,13 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#editaFeed").on("click", function(){
-		$("#feed").attr("disabled", false); 
-	});
+	$('#successAlertClose').on("click", function() {
+        $('#successAlert').hide();
+    });
 
-	$("#grupoEsp").on("click", function(){
-		window.location.replace("Grupo.html");
-	});
-
-	$("#guardaFeed").on("click", function(){
-		$("#feed").attr("disabled", true);
-		var feed =  $('#feed').val(); 
-
+	// Guardar nueva clasificacion sectorial
+    $("#save").on("click", function() {
+		var feed =  $("#newClassification").val().toUpperCase();
 		var json2Send = {
 			"action"	: "SAVEFEEDBACK",
 			"comment"	: feed,
@@ -142,23 +107,25 @@ $(document).ready(function(){
 			async : false,
 			contentType: "application/x-www-form-urlencoded",
 			success: function(jsonResponse){
-				location.reload();
+				$('#successAlert').show();
+				$("#newClassification").val("");
 			},
 			error: function(errorMessage){
 				console.log("fallo guardar");
 			}
 		});
-	});	
+    });
+
+
+	$("#grupoEsp").on("click", function(){
+		window.location.replace("Grupo.html");
+	});
+
 
 	$("#agregaBtn").on("click", function(){
 		sessionStorage.setItem('source', "PROYECTO");
 		window.location.replace("AgregaAlumnos.html");
 	});
-
-
-	/*$("#mainBody").on("click","#delete", function(){
-		
-	});*/
 
 	$('body').delegate("#delete", "click", function() {
 		console.log("click");
