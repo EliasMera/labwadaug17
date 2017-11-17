@@ -32,7 +32,7 @@ $(document).ready(function(){
                 row.append( $("<th>").text("Teléfono"));
                 row.append( $('<td>').append($('<input id="editPhone" type="text">').val(jsonResponse[0].cellphone)));
                 $("#editAccountTable").append(row); // agregar renglon a la tabla
-                $("#btnsave").append('<input type="submit" id="buttonLogin" value="Guardar Cambios">');
+                $("#btnsave").append('<input type="submit" id="buttonLogin" value="Guardar Cambios" class="btn btn-primary">');
 
         },
         error : function(errorMessage){

@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 					 newHtml += "<td align='center'>" +  "<input id='file' type='file' name='subearchivo" + (jsonResp[i].id).toString() + "''>" + "<br>" +  
 
-					 "<input id='uploadBtn' name='submitBtn" + (jsonResp[i].id).toString() + "' type='submit' value='Subir Archivo'>" + "</td>";
+					 "<input id='uploadBtn' name='submitBtn" + (jsonResp[i].id).toString() + "' type='submit' value='Subir Archivo' class='btn btn-primary'>" + "</td>";
 					
 					}
 
@@ -40,4 +40,5 @@ $(document).ready(function() {
 				}
 
 		});
+
 });

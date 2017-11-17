@@ -73,15 +73,39 @@
       </button> 
     </div> 
   </div> 
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+  <legend>Cambio de contraseña</legend>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="matricula">Contraseña Nueva</label>  
+    <div class="col-md-4">
+    <input id="newPassw" name="matricula" type="password" placeholder="" class="form-control input-md" required="">
+      
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="nombre">Confirmación de contraseña</label>  
+    <div class="col-md-4">
+    <input id="newPasswConfirm" name="nombre" type="password" placeholder="" class="form-control input-md">
+    <br>
+    <input id="changePasswBtn" type="submit" value="Cambiar Contraseña" class="btn btn-primary">
+    </div>
+  </div>
+  </fieldset>
+</form>
 
 
 
 
 	<div id="mainBody" style="margin-left:45px; font-size: 20px;" >
+
 		
-		Contraseña Nueva: <br><input type="password" size="30" id="newPassw"> <br><br>
-		Confirmación Nueva Contraseña: <br><input type="password" size="30" id="newPasswConfirm"> <br><br>
-		<input id="changePasswBtn" type="submit" value="Cambiar Contraseña">
 
 	</div>
 </main>

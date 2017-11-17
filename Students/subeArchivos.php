@@ -53,6 +53,28 @@
 
 <main role="main" class="container">
 
+  <div id="alertDiv"> 
+    <div class="alert alert-success" role="alert" style="display: none;" id="successAlert"> 
+      Se ha ha cargado el archivo correctamente.
+      <button type="button" class="close" aria-label="Close" id="successAlertClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorCamposDiferentes"> 
+      <strong>¡Oops!</strong> No ha seleccionado el archivo a cargar. 
+      <button type="button" class="close" aria-label="Close" id="errorCamposDiferentesClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+    <div class="alert alert-warning" role="alert" style="display: none;" id="campoVacio"> 
+      <strong>Advertencia</strong> No ha seleccionado el archivo a cargar. 
+      <button type="button" class="close" aria-label="Close" id="campoVacioClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+  </div> 
+
+
 
 <div id="mainBody">
 	<form name="form1" method="post" action="" enctype="multipart/form-data"/>
@@ -74,7 +96,7 @@
 
 
 </body>
-
+<script>
 <?php
 
 $conn = new mysqli('localhost','root','root','entrepreneurship');
@@ -82,84 +104,98 @@ $conn = new mysqli('localhost','root','root','entrepreneurship');
 if(isset($_POST["submitBtn1"]))
 {
 	$fnm = $_FILES["subearchivo1"]["name"];
-	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo1"]["tmp_name"], $dst);
 
-	if($conn != null)
+	if($fnm)
 	{
+		$dst = "Archivos/".$fnm;
+		move_uploaded_file($_FILES["subearchivo1"]["tmp_name"], $dst);
 
-		session_start();
-		$idproject = $_SESSION['projectId'];
-		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',1)";
-		$conn -> query($sql);
-	}
+		if($conn != null)
+		{
 
-	else{
-		echo "No hay conexion";
+			session_start();
+			$idproject = $_SESSION['projectId'];
+			$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',1)";
+			$conn -> query($sql);
+
+		}
+
+		else{
+			echo "No hay conexion";
+		}
 	}
 }
 elseif(isset($_POST["submitBtn2"])){
 		
 	$fnm = $_FILES["subearchivo2"]["name"];
-	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo2"]["tmp_name"], $dst);
 
-	if($conn != null)
-	{
+	if($fnm){
+		$dst = "Archivos/".$fnm;
+		move_uploaded_file($_FILES["subearchivo2"]["tmp_name"], $dst);
 
-		session_start();
-		$idproject = $_SESSION['projectId'];
-		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',2)";
-		$conn -> query($sql);
-	}
+		if($conn != null)
+		{
 
-	else{
-		echo "No hay conexion";
+			session_start();
+			$idproject = $_SESSION['projectId'];
+			$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',2)";
+			$conn -> query($sql);
+		}
+
+		else{
+			echo "No hay conexion";
+		}
 	}
 
 }
 elseif(isset($_POST["submitBtn3"])){
 		
 	$fnm = $_FILES["subearchivo3"]["name"];
-	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo3"]["tmp_name"], $dst);
 
-	if($conn != null)
-	{
+	if($fnm){
+		$dst = "Archivos/".$fnm;
+		move_uploaded_file($_FILES["subearchivo3"]["tmp_name"], $dst);
 
-		session_start();
-		$idproject = $_SESSION['projectId'];
-		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',3)";
-		$conn -> query($sql);
-	}
+		if($conn != null)
+		{
 
-	else{
-		echo "No hay conexion";
+			session_start();
+			$idproject = $_SESSION['projectId'];
+			$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',3)";
+			$conn -> query($sql);
+		}
+
+		else{
+			echo "No hay conexion";
+		}
 	}
 
 }
 elseif(isset($_POST["submitBtn4"])){
 		
 	$fnm = $_FILES["subearchivo4"]["name"];
-	$dst = "Archivos/".$fnm;
-	move_uploaded_file($_FILES["subearchivo4"]["tmp_name"], $dst);
 
-	if($conn != null)
-	{
+	if($fnm){
+		$dst = "Archivos/".$fnm;
+		move_uploaded_file($_FILES["subearchivo4"]["tmp_name"], $dst);
 
-		session_start();
-		$idproject = $_SESSION['projectId'];
-		$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',4)";
-		$conn -> query($sql);
-	}
+		if($conn != null)
+		{
 
-	else{
-		echo "No hay conexion";
+			session_start();
+			$idproject = $_SESSION['projectId'];
+			$sql = "INSERT INTO Files(filePath,project_id,requirement) values ('$dst','$idproject',4)";
+			$conn -> query($sql);
+		}
+
+		else{
+			echo "No hay conexion";
+		}
 	}
 
 }
 
 
 ?>
-
+</script>
 </html>
