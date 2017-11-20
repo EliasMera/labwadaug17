@@ -4,6 +4,12 @@ $(document).ready(function(){
 
 	});
 
+        $("#btnCancelar").on("click",function(){
+
+            window.location.replace("Inicio.html");
+
+    });
+
         $("#homeBtn").on("click", function(){
         window.location.replace("Inicio.html");
 

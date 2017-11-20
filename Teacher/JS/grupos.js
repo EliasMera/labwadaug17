@@ -20,7 +20,7 @@ $(document).ready(function(){
 			console.log(errorMessage);
 		}
 	});
-	
+
 	var jsonGroups = {
 		"action" : "GETGROUPS",
 		"teacherId" : id

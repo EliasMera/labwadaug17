@@ -1,9 +1,9 @@
 $(document).ready(function(){
 	$("#login").on("click",function(){
-		checked = false;
-		if($("#rememberme").is(":checked")){
-			checked = true;
-		}
+		checked = true;
+		// if($("#rememberme").is(":checked")){
+		// 	checked = true;
+		// }
 
 		var jsonToSend = {
 			"action" : "LOGIN",

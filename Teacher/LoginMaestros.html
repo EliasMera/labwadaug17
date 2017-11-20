@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login de Maestros</title>
-
+<meta charset="UTF-8">
+<link href="css/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="JS/LoginMaestros.js"></script>
-<script type="text/javascript" src="JS/RegistroMaestros.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 
 </head>
 <body>
 
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
 
-<div align="right" id="registerLink"><a href="RegistroMaestros.html">No tienes cuenta? crea una para obtener acceso</a></div>
-<div class="headerStyle"> 
-<h1 align="center"> Login de Maestros</h1>
-</div>
+  <div class="container">
+    <a class="navbar-brand" href="#">Muestra Empresarial</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      
+  </div>
+  
+</nav>
+<main role="main" class="container">
 
-<div align=justify>
-<fieldset>
-	<legend>Login</legend>
+    <fieldset>
+      <legend>
+        Login de Maestros
+      </legend>
+      <p>Ingrese su numero de Nomina y contraseña (por default su numero de nomina).</p>
+    	Usuario:
+		<input align="center" id="teacherId" type="text" name="TeacherId"><br><br>
 
-Usuario:
-	<input align="center" id="teacherId" type="text" name="TeacherId"><br><br>
+		Contraseña:
+		<input align="center" id="passwrd" type="password" name="Password"><br><br>
 
-Contrasena:
-	<input align="center" id="passwrd" type="password" name="Password"><br><br>
+		<input align="center" id="login" class="btn btn-primary" type="submit" value="Login">
 
-<input align="center" id="rememberme" type="checkbox" value="0" name="Remember me">Recuerdame<br><br>
+      
+    </fieldset>
 
-<input align="center" id="login" type="submit" value="Login">
+  
 
-
-	</fieldset>
-    </div>
-
-
+</main>
 
 
 </body>
