@@ -94,7 +94,7 @@ $(document).ready(function(){
 			    	var tbl = document.getElementById("caltbl").tBodies[0];
 				    for(var i=0, len=tbl.rows.length; i<len; i++){
 				        var row = tbl.rows[i];
-				        row.cells[0].innerHTML = (i + 1);
+				        row.cells[1].innerHTML = (i + 1);
 				        var projId = row.getAttribute('name');
 				        updatePriority(i + 1, projId);
 				    }
