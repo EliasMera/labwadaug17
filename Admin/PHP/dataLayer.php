@@ -131,6 +131,10 @@ function attemptGetAllProjects() {
 			while ($row = $result->fetch_assoc()) {
 				$project = array('name' => utf8_encode($row['name']), 'company' => utf8_encode($row['company']), 'description' => utf8_encode($row['description']), 'id' => $row['id'], 
 		    		'classification' => utf8_encode($row['classification']), 'business' => utf8_encode($row['business']), 'courseKey' => $row['courseKey'], 'groupNumber' => $row['groupNumber'], 'teacher' => utf8_encode($row['profesor']), 'recomended' => $row['recomended'], 'rank' => $row['rank']);
+				if ($row['recomended'] == 1)
+					$project['recomended'] = "Sí";
+				else
+					$project['recomended'] = "No";
 		    	array_push($resp, $project);
 			}
 			array_push($response, $resp);

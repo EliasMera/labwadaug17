@@ -33,7 +33,7 @@
           <a class="nav-link" href="Proyectos.html">Proyectos </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Participantes</a>
+          <a class="nav-link" href="Participantes.html">Participantes</a>
         </li>
         <li class="nav-item dropdown my-2 my-sm-0">
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
@@ -171,6 +171,25 @@
             contentType : "application/x-www-form-urlencoded",
             success : function(jsonResponse){
                 window.location.reload();
+            },
+            error : function(errorMessage){
+                alert(errorMessage.responseText);
+            }
+        });
+    });
+
+    $('#logoutBtn').on("click", function() {
+        var jsonToSend = {
+            "action" : "LOGOUT"
+        }
+        $.ajax({
+            url : "../PHP/applicationLayer.php",
+            type : "POST",
+            data : jsonToSend,
+            dataType : "json",
+            contentType : "application/x-www-form-urlencoded",
+            success : function(jsonResponse){
+                window.location.replace("LoginAdmin.html");
             },
             error : function(errorMessage){
                 alert(errorMessage.responseText);
