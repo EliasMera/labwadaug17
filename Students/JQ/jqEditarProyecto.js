@@ -16,9 +16,9 @@ $(document).ready(function() {
 
                     var newHtml = "";
                     newHtml += 
-                    "<tr>" + "<th>" + "Nombre" + "</th>" + "<td>" + "<input id='editName' type='text' value='" + jsonResponse[0].name + "'>" + "</td>" + "</tr>" +
-                    "<tr>" + "<th>" + "Compañia" + "</th>" + "<td>" + "<input id='editCompany' type='text' value='" + jsonResponse[0].company + "'>" + "</td>" + "</tr>" +
-                    "<tr>" + "<th>" + "Descripción" + "</th>" + "<td>" + "<textarea id='editDescription' rows='10' cols='60' minlength='10' maxlength='600'>" + jsonResponse[0].description + "</textarea>" + "</td>" + "</tr>" +
+                    "<tr>" + "<th>" + "Nombre" + "</th>" + "<td>" + "<input id='editName' size='50' type='text' value='" + jsonResponse[0].name + "'>" + "</td>" + "</tr>" +
+                    "<tr>" + "<th>" + "Compañia" + "</th>" + "<td>" + "<input id='editCompany' size='50' type='text' value='" + jsonResponse[0].company + "'>" + "</td>" + "</tr>" +
+                    "<tr>" + "<th>" + "Descripción" + "</th>" + "<td>" + "<textarea id='editDescription' rows='10' cols='60'>" + jsonResponse[0].description + "</textarea>" + "</td>" + "</tr>" +
                     "<tr>" + "<th>" + "Clasificación" + "</th>" + "<td>" + "<select id='editClassification'>";
                     for(i = 0; i < jsonResponse[0].classifications.length ; i++){
 
@@ -30,8 +30,7 @@ $(document).ready(function() {
                         }
                     }
                     newHtml += "</select>";
-                    newHtml += 
-                    "<tr>" + "<th>" + "Giro" + "</th>" + "<td>" + "<input id='editBusiness' type='text' value='" + jsonResponse[0].business+ "'>" + "</td>" + "</tr>";
+                    newHtml += "<tr>" + "<th>" + "Giro" + "</th>" + "<td>" + "<textarea id='editBusiness' rows='3' cols='60'>" + jsonResponse[0].business + "</textarea>" + "</td>" + "</tr>";
 
                     $("#editProjectTable").append(newHtml);
 
