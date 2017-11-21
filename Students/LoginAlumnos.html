@@ -1,28 +1,47 @@
 	<!DOCTYPE HTML>
 	<html>
-	<title>Inicio Sesi&oacute;n Alumnos</title>
-	<body>
-
+	<head>
 	<meta charset="UTF-8">
-	<link href="CSS/style.css" rel="stylesheet" type="text/css">
+	<link href="../Resources/css/style.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="JQ/jquery.js"></script>
 	<script type="text/javascript" src="JQ/jqLogin.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	</head>
 
-	<h1>Muestra Empresarial</h1>
+	<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
 
-	<div>
-			<fieldset>
+	  <div class="container">
+	    <a class="navbar-brand" href="#">Muestra Empresarial</a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>	      
+	  </div>
+	</nav>
+	
+  <div id="alertDiv"> 
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorCamposDiferentes"> 
+      <strong>¡Oops!</strong> El usuario o contraseña no son correctos, intente de nuevo. 
+      <button type="button" class="close" aria-label="Close" id="errorCamposDiferentesClose"> 
+        <span aria-hidden="true">&times;</span> 
+      </button> 
+    </div> 
+  </div> 
 
-			<legend>Login Alumnos</legend>
 
-			<div style="color:#0000FF">
-			ID Estudiante: <br><input type="text" size="30" id="userName"> <span id="errorLabelUserName"></span> <br><br>
+	<main role="main" class="container">
+
+	    <fieldset>
+	      <legend> Login de Alumnos </legend>
+			Matricula: <br><input type="text" size="30" id="userName"> <span id="errorLabelUserName"></span> <br><br>
 			Contraseña: <br><input type="password" size="30" id="userPassword"> <span id="errorLabelPassword"></span> <br><br>
+			<input type="submit" id="buttonLogin"  class="btn btn-primary" value="Iniciar Sesi&oacute;n">
+	    </fieldset>
 
-			<input type="submit" id="buttonLogin" value="Iniciar Sesi&oacute;n">
-			</div>
-			</fieldset>
-	</div>
+	</main>
+
 	</body>
 
 </html>

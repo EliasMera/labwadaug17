@@ -312,11 +312,11 @@ function editProject(){
 
 	function editAccount(){
 
-		$name = $_POST["name"];
-		$bachelor = $_POST["bachelor"];
-		$acEmail = $_POST["academicEmail"];
-		$persEmail = $_POST["personalEmail"];
-	    $phone = $_POST["phone"];
+		$name = utf8_decode($_POST["name"]);
+		$bachelor = utf8_decode($_POST["bachelor"]);
+		$acEmail = utf8_decode($_POST["academicEmail"]);
+		$persEmail = utf8_decode($_POST["personalEmail"]);
+	    $phone = utf8_decode($_POST["phone"]);
 	    
 		$result = attemptEditAccount($name, $bachelor, $acEmail, $persEmail, $phone);
 

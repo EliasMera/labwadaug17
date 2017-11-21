@@ -85,7 +85,6 @@ $(document).ready(function() {
                   row.append( $('<td style="display: none;">').text(jsonResponse[0][i].id)); 
                   row.append( $('<td>').text(jsonResponse[0][i].date_time));
                   row.append( $('<td>').text(jsonResponse[0][i].val));
-                  row.append( $('<td>').append($('<input id="delete" type="button" data-toggle="modal" data-target="#myModal" value="Eliminar"/>')));
                   $("#anounceTable").append(row); 
               });
           }

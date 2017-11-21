@@ -52,8 +52,8 @@ $(document).ready(function(){
         });
     });
 
-    $('#participantsBtn').on("click", function() {
-        window.location.replace("Participantes.html");
+    $('#cancel').on("click", function() {
+        window.location.replace("Inicio.html");
     });
 
     $('#configureBtn').on("click", function() {
