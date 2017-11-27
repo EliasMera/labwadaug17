@@ -165,15 +165,4 @@ enfoque en las áreas del conocimiento más relevantes para el futuro.", "EM-15"
 ('KKK', 'kkk', 'kkk k kkkkk kkkkk kkkk kkkkk kkkkk kkkk kkkkk', 'EDUCACIÓN', 'kkkkk', 'AD-16', 0);
 
 
-INSERT INTO Students (name, studentId, bachelor, passwrd, academicEmail, personalEmail, cellphone, group_id) VALUES
-("Persona Alumno 1", 'A00000001', 'ABC', 'ivan54', 'emailAcademico1', 'emailPersonal1', '000000001', 31),
-("Persona Alumno 2", 'A00000002', 'ABC', 'ivan54', 'emailAcademico2', 'emailPersonal2', '000000002', 31),
-("Persona Alumno 3", 'A00000003', 'ABC', 'ivan54', 'emailAcademico3', 'emailPersonal3', '000000003', 30),
-("Persona Alumno 4", 'A00000004', 'ABC', 'ivan54', 'emailAcademico4', 'emailPersonal4', '000000004', 30),
-("Persona Alumno 5", 'A00000005', 'ABC', 'ivan54', 'emailAcademico5', 'emailPersonal5', '000000005', 30),
-("Persona Alumno 6", 'A00000006', 'ABC', 'ivan54', 'emailAcademico6', 'emailPersonal6', '000000006', 28),
-("Persona Alumno 7", 'A00000007', 'ABC', 'ivan54', 'emailAcademico7', 'emailPersonal7', '000000007', 20),
-("Persona Alumno 8", 'A00000008', 'ABC', 'ivan54', 'emailAcademico8', 'emailPersonal8', '000000008', 22),
-("Persona Alumno 9", 'A00000009', 'ABC', 'ivan54', 'emailAcademico9', 'emailPersonal9', '000000009', 22);
-
 
