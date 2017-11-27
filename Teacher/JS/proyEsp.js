@@ -66,7 +66,7 @@ $(document).ready(function(){
 			var newHtml = "";
 			newHtml += "<table>" + "<tr>" + "<th>" + "Matricula" + "</th>"
 			+ "<th>" + "Nombre" + "</th>"  
-			+ "<th>Borrar</th></tr>";	
+			+ "<th>Quitar</th></tr>";	
 
 			for(i = 0; i < jsonResponse.length; i++){
 				var matricula = jsonResponse[i].studentId;
