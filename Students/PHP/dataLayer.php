@@ -155,24 +155,62 @@
 		}
 	}
 
-	function attemptRegister($name, $company, $description, $classification, $business, $semester){
-
+	function attemptRegisterProject($grupo, $nombre, $empresa, $descripcion, $clasificacion, $giro, $integrantes, $nombreA, $matriculaA, $carreraA, $emailAcademicoA,
+	$emailPersonalA, $celularA, $encPasswd)
+	{
 		$conn = connectionToDataBase();
-        
-        if ($conn != null)
-        {
-        	$sql = "INSERT INTO Projects(name, company, description, classification, business, semester) 
-        			VALUES ('$name', '$company','$description','$classification', '$business', '$semester')";
-        }
 
-        $result = $conn-> query($sql);
-        
-        if($conn->affected_rows > 0)
-        {
-            $response = array();
-            echo json_encode($response);
-            return array("status" => "SUCCESS");
-        }
+		if ($conn != null){
+			$i = 0;
+			$error = false;
+			while ($i <= $integrantes - 1 && !$error) {
+				$sql = "INSERT IGNORE INTO Students (studentId, name, bachelor, passwrd, academicEmail, personalEmail, cellphone, group_id) VALUES 
+				('$matriculaA[$i]', '$nombreA[$i]', '$carreraA[$i]', '$encPasswd[$i]', '$emailAcademicoA[$i]', '$emailPersonalA[$i]', '$celularA[$i]', '$grupo')";
+
+				if (mysqli_query($conn, $sql) == false){
+					$error = true;
+				}
+				$i += 1; 
+			}
+			if ($error){
+				$conn -> close();
+				return array("status" => "BADCONN INSERT Alumnos");
+			}
+			else{
+				$sql ="INSERT INTO Projects (name, company, description, classification, business, semester, active)
+				VALUES ('$nombre', '$empresa', '$descripcion', '$clasificacion', '$giro', 'AD-17', 1)";
+				if (mysqli_query($conn, $sql)){
+					$id = mysqli_insert_id($conn);
+					$i = 0;
+					$error = false;
+					while ($i <= $integrantes - 1 && !$error) {
+						$sql = "UPDATE Students SET project_id = '$id' WHERE studentId = '$matriculaA[$i]'";
+						if (mysqli_query($conn, $sql) == false){
+							$error = true;
+						}
+						$i += 1; 
+					}
+					if (!$error){
+						$conn -> close();
+						session_start();
+						$_SESSION['projectId'] = $id;
+			    		return array("status" => "SUCCESS");
+					}
+					else{
+						$conn -> close();
+						return array("status" => "BADCONN UPDATE");
+					}
+				}
+				else{
+					$conn -> close();
+					return array("status" => "BADCONN INSERT");
+				}
+			}
+		}
+		else{
+			$conn -> close();
+			return array("status" => "CONNECTION WITH DB WENT WRONG");
+		}
 	}
 
 	function showProjects(){
@@ -399,6 +437,36 @@
 				while ($row = $result->fetch_assoc()) {
 					$aux = array('id' => $row['id'], 'val' => utf8_encode($row['val']), 'date_time' => $row['date_time']);
 			    	array_push($resp, $aux);
+				}
+				array_push($response, $resp);
+				$conn -> close();
+			    return $response;
+			}
+			else {
+				$conn -> close();
+				return array("status" => "NOT FOUND");
+			}
+		}
+		else {
+			$conn -> close();
+			return array("status" => "CONNECTION WITH DB WENT WRONG");
+		}
+	}
+
+	function attemptGetProjectClassifications() {
+		$conn = connectionToDataBase();
+
+		if ($conn != null) {
+			$sql = "SELECT * FROM project_classifications";
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				// response json
+				$response = array("status" => "SUCCESS");
+				// query items
+				$resp = array();
+				while ($row = $result->fetch_assoc()) {
+					$project = array('id' => $row['id'], 'name' => utf8_encode($row['val']));
+			    	array_push($resp, $project);
 				}
 				array_push($response, $resp);
 				$conn -> close();

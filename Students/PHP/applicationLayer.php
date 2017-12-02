@@ -40,6 +40,8 @@ switch($action){
 					break;
 	case "LOADANOUNCEMENTS" : loadAnouncements();
 			break;
+	case "GETCLASSIFICATIONS" : getProjectClassifications();
+			break;
 }
 
 function loginFunction(){
@@ -167,20 +169,36 @@ function getcookieFunction(){
 }
 
 function registerProject(){
+	session_start();
 
-	$newName = $_POST["name"];
-	$newCompany = $_POST["company"];
-	$newDescription = $_POST["description"];
-	$newClassification = $_POST["classification"];
-    $newBusiness = $_POST["business"];
-    $newSemester = $_POST["semester"];
+	$grupo = $_SESSION["groupId"];
+	$nombre = utf8_decode($_POST["nombre"]);
+	$empresa = utf8_decode($_POST["empresa"]);
+	$descripcion = utf8_decode($_POST["descripcion"]);
+	$clasificacion = utf8_decode($_POST["clasificacion"]);
+	$giro = utf8_decode($_POST["giro"]);
+	$integrantes = $_POST["integrantes"];
+	$nombreA = $_POST["nombreArr"];
+	$matriculaA = $_POST["matriculaArr"];
+	$carreraA = $_POST["carreraArr"];
+	$emailAcademicoA = $_POST["emailAcademicoArr"];
+	$emailPersonalA = $_POST["emailPersonalArr"];
+	$celularA = $_POST["celularArr"];
 
-    $result = attemptRegister($name, $company, $description, $classification, $business, $semester);
-
-    if($result["status"] == "SUCCESS"){
-		echo json_encode(array("message" => "Register Succesfully!"));
+	// encriptar contraseñas de alumnos (contraseña es su matricula)
+	$encPasswd = array();
+	for ($i = 0; $i < count($matriculaA); $i++) {
+		array_push($encPasswd, encryptionPass($matriculaA[$i]));
+		$nombreA[$i] = utf8_decode($nombreA[$i]);
 	}
-	else{
+
+	$result = attemptRegisterProject($grupo, $nombre, $empresa, $descripcion, $clasificacion, $giro, $integrantes, $nombreA, $matriculaA, $carreraA,
+		$emailAcademicoA, $emailPersonalA, $celularA, $encPasswd);
+
+	if ($result["status"] == "SUCCESS"){
+		echo json_encode($result);
+	}
+	else {
 		header('HTTP/1.1 500' . $result["status"]);
 		die($result["status"]);
 	}
@@ -355,6 +373,17 @@ function editProject(){
 			die($result["status"]);
 		}
 		
+	}
+
+	function getProjectClassifications() {
+		$result = attemptGetProjectClassifications();
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result);
+		}
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
 	}
 
 

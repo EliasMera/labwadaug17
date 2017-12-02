@@ -53,34 +53,128 @@
   </div> 
 </nav>
 
-	<br>
-	<div id="mainBody" align="center">
-			<fieldset align="center" style="width:270px">
+<main role="main" class="container">
 
-			<legend><font size="3"> <b>Registro de Proyecto</b> </font></legend>
-
-			<div style="color:#0000FF">
-			Nombre: <br><input type="text" size="30" id="name"> <span id="errorLabelUserName"></span> <br><br>
-			Compañía: <br><input type="text" size="30" id="company"> <span id="errorLabelUserName"></span> <br><br>
-			Descripción: <br><input type="text" size="30" id="description"> <span id="errorLabelUserName"></span> <br><br>
-			Clasificación: <br><input type="text" size="30" id="classification"> <span id="errorLabelUserName"></span> <br><br>
-			Negocio: <br><input type="text" size="30" id="business"> <span id="errorLabelUserName"></span> <br><br>
-			Semestre: <br><input type="text" size="30" id="semester"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 1: <br><input type="text" size="30" id="student1"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 2: <br><input type="text" size="30" id="student2"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 3: <br><input type="text" size="30" id="student3"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 4: <br><input type="text" size="30" id="student4"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 5: <br><input type="text" size="30" id="student5"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 6 : <br><input type="text" size="30" id="student6"> <span id="errorLabelUserName"></span> <br><br>
-			Alumno 7 : <br><input type="text" size="30" id="student7"> <span id="errorLabelUserName"></span> <br><br>
-
-			<form action="base.html">
-			<input type="submit" id="buttonCancel" value="Cancelar">
-			<input type="submit" id="buttonRegister" value="Registrarme">
-
-			</div>
-			</fieldset>
+	<div id="mainBody">
+		<fieldset>
+			<legend>Forma de Registro</legend>
+			<p>Nombre del Proyecto:<br>
+			<input id="nombreProyecto" class="formElement" type="text"></p>
+			<p>Nombre de la Empresa:<br>
+			<input id="nombreEmpresa" class="formElement" type="text"></p>
+			<p>Descripcion del Negocio:<br>
+			<textarea id="descripcion" cols="60" rows="10"></textarea></p>
+			<p>Clasificacion Sectorial:<br>
+			<select id="clasificacion">
+				<option value="0">Seleccione una</option>
+			</select></p>
+			<p>Giro de la empresa:<br>
+			<textarea id="giro" cols="60" rows="6"></textarea></p>
+			<p>Número de integrantes del equipo:<br>
+			<input id="numIntegrantes" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 1):<br>
+			<input id="nombreIntegrante1" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula1" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera1" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre1" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico1" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal1" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular1" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 2):<br>
+			<input id="nombreIntegrante2" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula2" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera2" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre2" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico2" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal2" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular2" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 3):<br>
+			<input id="nombreIntegrante3" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula3" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera3" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre3" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico3" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal3" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular3" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 4):<br>
+			<input id="nombreIntegrante4" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula4" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera4" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre4" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico4" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal4" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular4" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 5):<br>
+			<input id="nombreIntegrante5" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula5" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera5" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre5" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico5" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal5" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular5" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 6):<br>
+			<input id="nombreIntegrante6" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula6" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera6" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre6" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico6" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal6" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular6" class="formElement" type="text"></p>
+			<p>Nombre completo (Integrante 7):<br>
+			<input id="nombreIntegrante7" class="formElement" type="text"></p>
+			<p>Matricula:<br>
+			<input id="matricula7" class="formElement" type="text"></p>
+			<p>Carrera:<br>
+			<input id="carrera7" class="formElement" type="text"></p>
+			<p>Semestre:<br>
+			<input id="semestre7" class="formElement" type="text"></p>
+			<p>Email Academico:<br>
+			<input id="emailAcademico7" class="formElement" type="text"></p>
+			<p>Email Personal:<br>
+			<input id="emailPersonal7" class="formElement" type="text"></p>
+			<p>Celular:<br>
+			<input id="celular7" class="formElement" type="text"></p>
+			<input id="registerBtn" type="submit" value="Registrar">
+		</fieldset>
 	</div>
-	</body>
+</main>
+
+</body>
 
 </html>
